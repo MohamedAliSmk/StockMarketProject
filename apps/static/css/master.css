@@ -5,6 +5,13 @@
     --red-color:#f44336;
     --grey-color:#888 ;
     --green-color: #22c55e;
+
+
+    --dark-color:#19283f;
+    --green-color: #33d1cc;
+    --red-color: #ff3150;
+    --yellow-color: #ffc400;
+    --section-color: #eff7fa;
 }
 
 *{
@@ -850,3 +857,30 @@ body {
 .carousel-item {
    
 }
+/*  start footer */
+.footer{
+    background-color: var(--dark-color);
+}
+.footer .copyright > span{
+    color: var(--green-color);
+}
+.footer .copyright div span {
+    color: var(--yellow-color);
+}
+.footer .contact svg{
+    width: 20px;
+    height: 20px;
+}
+.footer .facebook{
+    background-color: #1877f2;
+}
+.footer  .twitter{
+    background-color:#1da1f2 ;
+}
+.footer  .linkedin{
+    background-color: #0077b5;
+}
+.footer  .youtube{
+    background-color: #ff0000;
+}
+/*   end footer */
