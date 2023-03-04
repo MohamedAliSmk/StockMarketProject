@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Dashboard  </title>
+
+    <!--  boostrap link  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <!--  boostrap  icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <!-- css link  framework -->
+    
+    
+    <!--  all link   -->
+    <link rel="stylesheet" href="../static/css/all.min.css">
+    <!-- css link  framework -->
+    <link rel="stylesheet" href="../static/css/framework.css">
+    <!--  css link  master -->
+    <link rel="stylesheet" href="../static/css/master.css">
+    <!--  normalize link -->
+    <link rel="stylesheet" href="../static/css/normalise.css">
+    <!--  font link  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&#038;display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="page d-flex">
+        <div class="sidebar   p-15  p-relative ">
+            <!--<h3  class="p-relative   text-center mt-0 pt-15" > 
+                <img src="./logo/logo/logo.png" class="one"   alt="">
+                <img src="../FRONT-END/imgs/logo (1)/logo/logo.png" class="two"  alt="">
+            </h3>-->
+            <br>
+            <br>
+            <br>
+            <br>
+            <ul class="  list-none  ">
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="index.html" >  
+                        <i class="fa-solid fa-chart-simple  fa-fw"></i>
+                        <span class="hide-mobile" > Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class=" d-flex  align-center  fs-20     rad-6  p-10 " href="setting.html" >  
+                        <i class="fa-solid fa-gear fa-fw "></i>
+                        <span class="hide-mobile" > Setting </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="active   d-flex  align-center  fs-20    rad-6  p-10 " href="profile.html" >  
+                        <i class="fa-regular fa-user  fa-fw"></i>
+                        <span class="hide-mobile"> Profile </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- start content  -->
+        <div class="content w-full  ">
+            <!--   start head  -->
+
+            <div class="head   fixed-top    between-flex   ">
+        
+                <nav class="navbar navbar-expand-lg stiky-top   fixed-top   bg-black  w-full  ">
+                    <div class="container ">
+                        <ul>
+                            <li>
+                                <div>
+                                    <img src="../static/images/logo (1)/logo/logo.png"  class="bg-black  logo p-relative" alt="">
+                                    </div>
+                            </li>
+                            <li>
+                                <div class="search mt-2 p-relative">
+                                    <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                                    </div>  </span>
+                                    <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler  bg-eee" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon ">
+                                
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li>
+                                    <div class="icons  fs-20  d-flex  space-between">
+                                    
+                                        <div class=" p-relative mt-2  align-items-center   notification ">
+                                            <i class="fa-regular fa-bell fa-lg c-gray ">   </i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="mr-10 mt-2 " >
+                                        <div class="dropdown ">
+                                            <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Get start
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_up.html"> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
+                                                <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="#"> 
+                                                    <span> MODE </span>
+                                                    <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center  " id="toggleDark">   </i> 
+                                                    </a>
+                                                </li>
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_in.html"> </a> </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="mr-10 mt-2 " >
+                                        <div class="dropdown ">
+                                            <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Language
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="#">  <span> English  </span> </a> </li>
+                                                <li > <a class="dropdown-item between-flex   fs-20" href="#">  <span> Arbic  </span> </a> </li>
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <span></span><a href="sign_in.html" class="btn  btn  btn-primary  rounded-pill    rounded-pill"> Login </a>
+                        </span></div>
+                    </div>
+                </nav>
+                <!--<div class="search  p-relative">
+                    <span> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                    <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                </div>-->
+            </div>
+        <!--  end head -->
+        <br>
+        <br>
+        <br>
+        <br>
+                        <h1 class="p-relative "> Profile </h1>
+                        <div class="profile-page  m-20">
+                            <!--   start overview -->
+                            <div class="overview     rad-10   d-flex   align-center ">
+                                <div class="img-box  text-center  p-20">
+                                    <span class=" "> <i class="fa-solid fa-user  rad-half  mb-10  fs-20  fs-70"></i> </span>
+                                        <!--<img src="" alt="" class=" rad-half  mb-10"> -->
+                                        <h3 class="m-0 "> Your Name  </h3>
+                                        <p class="  mt-10"> Stocs Numbers </p>
+                                        <div class="level   rad-6    bg-eee  p-relative">
+                                            <span style="width:70%"> </span>
+                                        </div>
+                                        <div class="rating mt-10   mb-10">
+                                            <i class="fa-solid   fa-star   c-orange   fs-14"></i>
+                                            <i class="fa-solid   fa-star   c-orange   fs-14"></i>
+                                            <i class="fa-solid   fa-star   c-orange   fs-14"></i>
+                                            <i class="fa-solid   fa-star   c-orange   fs-14"></i>
+                                            <i class="fa-solid   fa-star   c-orange   fs-14"></i>
+                                            <i class="fa-solid   fa-star   c-orange   fs-14"></i>
+                                        </div>
+                                        <p class="c-gray   m-0   fs-14">   34 correct    </p>
+                                </div>
+                                <div class="info-box  w-full">
+                                    <!--    start  information rows    1 -->
+                                    <div class="box  p-20   d-flex  align-center">
+                                        <h4 class="w-full   c-blue   fa-14   m-0">  General Information </h4>
+                                        <div class=" fs-14    ">
+                                            <span  class="c-gray">  Full Name: </span>
+                                            <span>   YourName  </span>
+                                        </div>
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray" >  Gender: </span>
+                                            <span>   YourGender  </span>
+                                        </div>
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray">  Country: </span>
+                                            <span>   YourCountry  </span>
+                                        </div>
+                                        <div class="label">
+                                            <label >
+                                                <input type="checkbox" class="togell-checkbox" checked  >
+                                                <div class="togell-switch">
+                                                    <span class="one"></span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--    end information   rows    1 -->
+                                    <!--    start  information rows    2 -->
+                                    <div class="box  p-20   d-flex  align-center  w-full">
+                                        <h4 class="w-full   c-blue   fa-14   m-0"> Personal Information </h4>
+                                        <div class=" fs-14    ">
+                                            <span  class="c-gray">  Email:  </span>
+                                            <span>  YourEmail  </span>
+                                        </div>
+            
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray" >  Phone:  </span>
+                                            <span>    YourPhone  </span>
+                                        </div>
+            
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray">  Date Of Birth:  </span>
+                                            <span>     YourDate  </span>
+                                        </div>
+                                        <div class="label">
+                                            <label >
+                                                <input type="checkbox" class="togell-checkbox" checked  >
+                                                <div class="togell-switch">
+                                                    <span class="one"></span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--    end information   rows    2 -->
+            
+            
+                                    <!--    start  information rows   3-->
+                                    <div class="box  p-20   d-flex  align-center">
+                                        <h4 class="w-full   c-blue   fa-14   m-0">  Job Information </h4>
+                                        <div class=" fs-14    ">
+                                            <span  class="c-gray">  Title: </span>
+                                            <span>   JobTitle  </span>
+                                        </div>
+            
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray" >  jop:  </span>
+                                            <span>  jop   </span>
+                                        </div>
+            
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray">  Years Of Experience: </span>
+                                            <span>   Experience  </span>
+                                        </div>
+                                        <div class="label">
+                                            <label >
+                                                <input type="checkbox" class="togell-checkbox" checked  >
+                                                <div class="togell-switch">
+                                                    <span class="one"></span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--    end information   rows  3-->
+                                    <!--    start  information rows 4 -->
+                                    <div class="box  p-20   d-flex  align-center">
+                                        <h4 class="w-full   c-blue  fa-14   m-0"> Billing Information </h4>
+                                        <div class=" fs-14    ">
+                                            <span  class="c-gray">  Payment Method: </span>
+                                            <span>   YourPaymentMethod </span>
+                                        </div>
+            
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray" >  Email: </span>
+                                            <span>   YourEmail  </span>
+                                        </div>
+            
+                                        <div class=" fs-14    ">
+                                            <span class="c-gray">  Subscription </span>
+                                            <span>   Monthly  </span>
+                                        </div>
+                                        <div class="label">
+                                            <label >
+                                                <input type="checkbox" class="togell-checkbox" checked  >
+                                                <div class="togell-switch">
+                                                    <span class="one"></span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--    end information   rows  4-->
+                                </div>
+                            </div>
+            
+                            <!--   end   overview -->
+                            <br>
+                            <br>
+                            <br>
+                            <div class="create-account    d-flex gap-20   ">
+                                <h3 class="">  Dont Have An Account !   </h3>
+                                <div>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            Lets create an Account
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel"> User Information </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <form action="" class="was-validated">
+                                                            <div class="form-group">
+                                                                <label for="">  Full Name </label>
+                                                                <p> <input type="text"  class="w-full  form-control p-2"  placeholder="please write Your Name" required> </p>
+                                                            </div>
+                                                            
+
+                                                            <div class="form-group">
+                                                                <label for="">  Gender </label>
+                                                                <p> <input type="text"  class="w-full form-control   p-2"   placeholder="please write Your Gender" required> </p>
+                                                            </div>
+                                                        
+                                                            <div class="form-group">
+                                                                <label for="">  Country </label>
+                                                                <p> <input type="text"  class="w-full form-control  p-2"   placeholder=" please write your  Country" required> </p>
+
+                                                            </div>
+                                                        
+                                                            <div class="form-group">
+                                                                <label for="">  Email </label>
+                                                            <p> <input type="email"  class="w-full  form-control  p-2"   placeholder="please write your Email" required> </p>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">  Phone </label>
+                                                                <p> <input type="number"  class="w-full  form-control   p-2"   placeholder="please write your  Phone" required> </p>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label for="">  
+                                                                    Date Of Birth </label>
+                                                                <p> <input type="date"  class="w-full   form-control  p-2"   placeholder="please write your Date Of Birth" required> </p>
+                                                            </div>
+                                                            
+
+                                                            <div class="form-group">
+                                                                <label for="">  jop </label>
+                                                                <p> <input type="text"  class="w-full  form-control   p-2"   placeholder="please write your jop" required> </p>
+                                                            </div>
+
+                                                                <div class="form-check pb-2">
+                                                                <label class="form-check-label">
+                                                                    <input  class="form-check-input" type="checkbox">
+                                                                Remember Me</label>
+                                                            </div>
+                                                            <input type="submit"  class="btn btn-primary" value="submit">
+                                                            </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"> Understand </button>
+                                                
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                                    <!-- start other data -->
+                                    <div class="other-data   d-flex   gap-20">
+                                        <div class="skills-card  p-20     rad-10   mt-20">
+                                            <h2 class="mt-0  text-center-mobile    mb-10"> My Skills  </h2>
+                                            <p class="mt-0   mb-20    text-center-mobile  c-gray  pt-15  fs-20"> Complete Skills List  </p>
+                                            <ul class="m-0 text-center-mobile   c-gray">
+                                                <li> 
+                                                    <span> project manger </span> 
+                                                </li>
+                                                <li>
+                                                    <span> 3 years experiance at position co  </span>
+                                                </li>
+                                                <li>   <span> 2 years head of the information depatment  </span> 
+                                                </li>
+                                            </ul>
+                                        </div>
+            
+                                        <!--  start activity -->
+                                        <div class="activites    p-20     rad-10   mt-20">
+                                            <h2 class="mt-0   mb-10  c-blue   text-center-mobile"> Latest Activities  </h2>
+                                            <p class="mt-0   mb-20   c-gray  text-center-mobile  fs-15"> Latest Activities Done By The User  </p>
+                                            <div class="activity  d-flex  align-center mt-10  text-center-mobile">
+                                                <br>
+
+                                                <img src="../static/images/activity-01.png" alt="logo photo">
+                                                <div class="info">
+                                                    <span> market us  </span>
+                                                    <span>   Bought  23 arrow  at rised company work at trade </span>
+                                                </div>
+                                                <div class="date">
+                                                    <span class="d-block   mb-10">  time </span>
+                                                    <span class="c-gray">   last fraiday     </span>
+                                                </div>
+                                            </div>
+            
+                                            <br>
+                                            <div class="activity  d-flex  align-center  text-center-mobile">
+                                                <img src="../static/images/activity-01.png" alt="logo photo">
+                                                <div class="info">
+                                                    <span> market us  </span>
+                                                    <span>   Bought  23 arrow  at rised company work at trade </span>
+                                                </div>
+                                                <div class="date">
+                                                    <span class="d-block   mb-10">  time </span>
+                                                    <span class="c-gray">   last fraiday     </span>
+                                                </div>
+                                            </div>
+            
+                                            <br>
+                                            <div class="activity  d-flex  align-center  text-center-mobile">
+                                                <img src="../static/images/activity-01.png" alt="logo photo">
+                                                <div class="info">
+                                                    <span> market us  </span>
+                                                    <span>   Bought  23 arrow  at rised company work at trade </span>
+                                                </div>
+                                                <div class="date">
+                                                    <span class="d-block   mb-10">  time </span>
+                                                    <span class="c-gray">   last fraiday     </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--  end activity -->
+                                    </div>
+                                    <!--   end other data -->
+            
+                                    <!--  start bio  -->
+                                    <div class="bio-chan    p-20   rad-10   mt-20">
+                                        <h2  class=""> Change Your Bio  </h2>
+                                        <div class="text-area d-flex c-gray">
+                                            <br>
+                                            <textarea name="bio" id="bio"  class="mb-20  c-gray" cols="95" rows="7"> write more about your self 
+                                            </textarea>
+                                            <a href="#" class=" change-bio  "> Change </a>
+                                        </div>
+                                    </div>
+                                    
+                                <!--  end  bio  -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+        <!-- java-script files  -->
+        <script src="../static/Java-script/Translation.js"></script>
+        <script src="../static/Java-script/main.js"></script>
+        <script src="../static/js/all.min.js"></script>
+        <script src="../static/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

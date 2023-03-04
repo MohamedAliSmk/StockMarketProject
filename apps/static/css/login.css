@@ -1,0 +1,164 @@
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+body{
+    color: white;
+    
+    background-size:cover;
+    background-image: url(../images/photo-1612010167102-d1e8f83833e1.avif);
+
+  
+}
+@media(max-width:767px){
+    
+
+}
+
+
+.outer-form{
+    width: 340px;
+    height: 470px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    background-image: url(../images/photo-1612010167102-d1e8f83833e1.avif);
+}
+
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    display: block;
+    max-width: 700px;
+    max-height: 700px;
+
+}
+
+.container form{
+    position: relative;
+    margin-bottom: 10px;
+    
+
+}
+.container form #email{
+    outline: none;
+    padding-left: 30px;
+    height: 30px;
+    border: white;
+}
+.material-symbols-outlined{
+    position: absolute;
+    content: attr("");
+    left: 5px;
+    top: 5%;
+    color: black;
+    font-size:smaller;
+
+}
+.container form #password{
+    margin-top: 10px;
+    outline: none;
+    padding-left: 30px;
+    height: 30px;
+    border: white;
+}
+.container form .sumbit{
+    background-color: black;
+    color: aliceblue;
+    width: 100px;
+    height: 30px;
+    outline: none;
+    border: none;
+}
+.container form .sumbit:hover{
+    transform: scale(1.1);
+    animation: 1s ease;
+
+}
+.icon-lock{
+    position: absolute;
+    content: attr("");
+    left: 5%;
+    top: 45%;
+    color: black;
+    font-size:smaller;
+}
+.closed-eye{
+    color: black;
+    position: absolute;
+    content: attr("");
+    left: 85%;
+    top: 45%;
+    cursor: pointer;
+}
+/*.eye{
+    display: none;
+}*/
+
+.buttons .login-button span{
+    background-color:deepskyblue;
+    width: 60px;
+    padding-left:25px ;
+    padding-right: 25px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 35px;
+    cursor: pointer;
+}
+.error-login{
+    padding-top: 25px;
+    font-size: 1.3rem;
+}
+.social{
+    display: flex;
+    justify-content: space-around;
+}
+.first-social-button{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 20px;
+    background-color: royalblue;
+    cursor: pointer;
+}
+.second-social-button{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: magenta;
+    width: 90px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.sign-up p{
+    font-size: 1.1rem;
+}
+.sign-up a{
+    text-decoration: none;
+    background-color: deepskyblue;
+    color: white;
+    padding-left:25px ;
+    padding-right: 25px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 35px;
+    cursor: pointer;
+    font-size: bold;
+}
+/*
+
+*/

@@ -1,0 +1,319 @@
+{% load static %}
+    
+<!DOCTYPE html>
+<html lang="enn" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Dashboard  </title>
+    
+
+    <!--  boostrap link  -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <!--  boostrap  icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <!-- css link  framework -->
+    <link rel="stylesheet" href="../static/css/framework.css">
+    <!--  css link  master -->
+    <link rel="stylesheet" href="../static/css/master.css">
+    <!--  normalize link -->
+    <link rel="stylesheet" href="../static/css/normalise.css">
+    <!--  all link   -->
+    <link rel="stylesheet" href="../static/css/all.min.css">
+    <!--  font link  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&#038;display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="page d-flex">
+
+        <div class="sidebar   p-15  p-relative ">
+            <!--<h3  class="p-relative   text-center mt-0 pt-15" > 
+                <img src="./logo/logo/logo.png" class="one"   alt="">
+                <img src="../FRONT-END/imgs/logo (1)/logo/logo.png" class="two"  alt="">
+            </h3>-->
+            <br>
+            <br>
+            <br>
+            <br>
+            <ul class="  list-none  ">
+                <li>
+                    <a  class="active   d-flex  align-center  fs-20     rad-6  p-10 " href="index.html" >  
+                        <i class="fa-solid fa-chart-simple  fa-fw"></i>
+                        <span class="hide-mobile" > Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href="setting.html" >  
+                        <i class="fa-solid fa-gear fa-fw "></i>
+                        <span class="hide-mobile" > Setting </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="profile.html" >  
+                        <i class="fa-regular fa-user  fa-fw"></i>
+                        <span class="hide-mobile"> Profile </span>
+                    </a>
+                </li>
+            </ul>
+        </div> 
+    
+        <!-- start content  -->
+        <div class="content w-full  ">
+            <!--   start head  -->
+
+            <div class="head   fixed-top    between-flex   ">
+                <nav class="navbar navbar-expand-lg stiky-top   fixed-top   bg-black  w-full  ">
+                    <div class="container ">
+                        <ul>
+                            <li>
+                                <div>
+                                    <img src="../static/images/logo (1)/logo/logo.png"  class="bg-black  logo p-relative" alt="">
+                                    </div>
+                            </li>
+                            <li>
+                                <div class="search mt-2 p-relative">
+                                    <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                                    </div>  </span>
+                                    <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                                </div>
+                            </li>
+                        </ul>
+                            <!--<div class="search  p-relative">
+                            <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                            <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                        </div>-->
+                        <nav class="navbar navbar-light bg-black ">
+                            
+                            <!--<div class="container-fluid">
+                                <form class="d-flex  w-75">
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>-->
+                        
+                        </nav>
+                        <button class="navbar-toggler  bg-eee" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon ">
+                                
+                            </span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                
+                                <li>
+                                    <div class="icons  fs-20  d-flex  space-between">
+                                    
+                                        <div class=" p-relative mt-2  align-items-center   notification ">
+                                            <i class="fa-regular fa-bell fa-lg c-gray ">   </i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="mr-10 mt-2 " >
+                                        <div class="dropdown ">
+                                            <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Get start
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_up.html"> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
+                                                <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="#"> 
+                                                    <span> MODE </span>
+                                                    <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center  " id="toggleDark">   </i> 
+                                                    </a>
+                                                </li>
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_in.html"> </a> </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="mr-10 mt-2 " >
+                                        <div class="dropdown ">
+                                            <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Language
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="#">  <span> English  </span> </a> </li>
+                                                <li > <a class="dropdown-item between-flex   fs-20" href="#">  <span> Arbic  </span> </a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a method="POST" class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
+
+                                </li>
+                            </ul>
+                            <span></span>
+                        </span></div>
+                    </div>
+                </nav>
+                <!--<div class="search  p-relative">
+                    <span> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                    <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                </div>-->
+                
+            </div>
+        <!--  end head -->
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+            <h1 class="p-relative"> Dashboard </h1>
+            <!--   start  carousel   -->
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+
+                <div class="carousel-item  active" data-bs-interval="2000">
+                    <img src="../static/imgs/photo-background-2-.avif" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5 class="fs-20  text-white">WELCOME TO Our App</h5>
+                    <p class="text-white fs-20"> We offour Some Greate services for finanes and stocks.  </p>
+                    </div>
+                </div>
+                <div class="carousel-item " data-bs-interval="10000">
+                    <img src="../static/imgs/photo-background-4-.avif" class="d-block   w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5 class="fs-20 text-white"> Look The Graph Down!   </h5>
+                    <p class=" fs-20 text-white">  the graph show the history of stocs and company data through specific. </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/imgs/photo-background-3-.avif " class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5 class="fs-20"> Wall Street !</h5>
+                    <p class="text-black fs-20">Wall Street has been the historic headquarters of some of the largest U.S. brokerages and investment banks and is also the home of the New York Stock Exchange.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        <!--   end   carousel   -->
+            <br>
+            <br>
+            <!--<div class=" space-around  ">
+                <div class="spinner-grow" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>-->
+            <br>
+            <div class="wrapper   d-grid   gap-20">
+                <!--  start  welcome  widget   -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div>
+                            <h2  class="m-0" > Welcome  </h2>
+                            <p class="c-gray    mt-5">  FINTEC APP.  </p>
+                        </div>
+                        <img src="../static/images/welcome.png" class="hide-mobile " alt="">
+                    </div>
+                    <img src="../static/images/avatar.png" class="avatar" alt="">
+                    <div class="body   text-center   d-flex   p-20   mt-20   mb-20    block-mobile">
+                        <div> mohmed ali <span class="d-block    c-gray    fs-14    mt-10"> Business Man </span> </div>
+                        <div>80 <span class="d-block    c-gray   fs-14    mt-10"> Stocs </span> </div>
+                        <div> $8500 <span class="d-block    c-gray    fs-14    mt-10"> Earned </span> </div>
+                    </div>
+                    <a href="profile.html" class="visit   d-block  fs-14    rad-6   bg-blue    w-fit    button-shape"  > profile  </a>
+                </div>
+                <!--  end  welcome  widget   -->
+
+                <!--  start   quick  widget   -->
+                <div class="quick-draft   p-20     rad-10     ">
+                    <h2  class="mt-0    mb-20   ">  quick News </h2>
+                    <p class="mt-0   mb-20   c-gray   fs-15  "> write adraft for yours ideas.  </p>
+                    <form >
+                        <input type="text" class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6 " placeholder="title">
+                        <textarea class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6  "  placeholder="Your Thought" name="" id="" cols="30" rows="10"></textarea>
+                        <input  class="save   d-block    fs-14    bg-blue   c-white    b-none   w-fit  button-shape " type="submit" value="Save">
+                    </form>
+                </div>
+                <!--  end  quick   widget   -->
+
+                <!--  start tagets -->
+                <div class="targets    p-20     rad-10 ">
+                    <h2  class="mt-0    mb-10"> Yearly Target  </h2>
+                    <p class="mt-0   mb-20   fs-15"> Tagets Of Years   </p>
+                    <div class="targets-row   mb-20      align-center   d-flex ">
+                        <div class="icon   center-flex    blue">
+                            <i class="fa-solid  fa-dollar  fa-lg   c-blue"></i>
+                        </div>
+                        <div class="details">
+                            <span class="fs-14    c-gray"> Money </span>
+                            <span class="d-block   mt-5   mb-10    fw-bold">  $YourMoney </span>
+                            <div class="progress   p-relative  blue">
+                                <span  class="bg-blue  " style="width:60%">
+                                    <span class="bg-blue  "> 64% </span>   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="targets-row   mb-20    orange  align-center   d-flex ">
+                        <div class="icon   center-flex    blue">
+                            <i class="fa-solid fa-arrow-trend-up  orange  "></i>
+                        </div>
+                        <div class="details">
+                            <span class="fs-14    c-gray"> My Stocs </span>
+                            <span class="d-block   mt-5   mb-10     col-black  fw-bold">  StocsNoumber </span>
+                            <div class="progress   p-relative  blue">
+                                <span  class="bg-orange    orange " style="width:40%">
+                                    <span class="bg-orange  "> 34% </span>   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="targets-row   mb-20   green   align-center   d-flex ">
+                        <div class="icon   center-flex    blue">
+                            <i class="fa-solid   fa-user  green     fa-lg   "></i>
+                        </div>
+                        <div class="details">
+                            <span class="fs-14    c-gray"> Teams </span>
+                            <span class="d-block   mt-5   mb-10  col-black   fw-bold">  TeamsNumber  </span>
+                            <div class="progress   p-relative  blue">
+                                <span  class="bg-green  green " style="width:70%">
+                                    <span class="bg-green  "> 75% </span>   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--   end  targets  -->
+                <!--  start    carousel  -->
+            </div>
+            <br>
+            <br>
+        </div>
+        <!-- end  content  -->
+    </div>
+    <!-- link to java-script file  -->
+
+
+    
+    <script src="../static/Java-script/Translation.js"></script>
+    <script src="../static/Java-script/main.js"></script>
+    <script src="../static/js/all.min.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
