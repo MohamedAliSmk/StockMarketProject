@@ -3,12 +3,10 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django import template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
-from django.urls import reverse
-
+from django.shortcuts import render
 
 @login_required(login_url="/login/")
 def index(request):
@@ -18,27 +16,23 @@ def index(request):
     return HttpResponse(html_template.render(context, request))
 
 
-@login_required(login_url="/login/")
-def pages(request):
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
+def setting(request):
+    return render(request, "setting.html")
 
-        load_template = request.path.split('/')[-1]
+def profile(request):
+    return render(request, "profile.html")
 
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        context['segment'] = load_template
+def Companys(request):
+    return render(request, "Companys.html")
 
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
+def LastNews(request):
+    return render(request, "LastNews.html")
 
-    except template.TemplateDoesNotExist:
+def Trending(request):
+    return render(request, "Trending.html")
 
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
+def chart(request):
+    return render(request, "chart.html")
 
-    except:
-        html_template = loader.get_template('home/page-500.html')
-        return HttpResponse(html_template.render(context, request))
+def Community(request):
+    return render(request, "Community.html")
