@@ -14,4 +14,3 @@ urlpatterns = [
     path('outh/',include('social_django.urls'), name='social'),
     
 ]
-urlpatterns +=static(settings.STATIC_URL, document_root = settings.STATICFILES_DIRS)
