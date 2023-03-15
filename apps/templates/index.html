@@ -386,20 +386,7 @@
             <br>
         </div>
         <!-- end  content  -->
-        
-        <!-- there is task here -->
-        <button type="submit" class="btn btn-primary py-3 w-100 mb-4" onclick="LoadURL()">Predict</button>
-        <script type="text/javascript">
-            function LoadURL() {
-                var ticker = document.getElementById("tickerinp").value;
-                var days = document.getElementById("days").value;
-                var server = window.location.origin;
-                var path = "/predict/" + ticker + "/" + days;
-                var url = server + path;
-                window.location.href = url;
-            }
-        </script> 
-    </div>
+            </div>
     <!--  start footer -->
     <div class="footer  pt-5  pb-5  text-center   bg-black  text-md-start">
         <div class="container">
