@@ -111,10 +111,10 @@ def prediction(ticker):
     output=scaler.inverse_transform(lst_output)
     
 
-    return data,train_len,prediction,day_step,next_days,df,output
+    return data,train_len,day_step,next_days,df,output
             
 
-data, train_len, prediction,day_step,next_days,df,output,model = prediction('AAPL')
+data, train_len,day_step,next_days,df,output,model = prediction('AAPL')
 
 def predict_next_day():
     scaler = MinMaxScaler(feature_range=(0,1))
