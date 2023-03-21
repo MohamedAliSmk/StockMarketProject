@@ -76,6 +76,9 @@
 .pt-15{
     padding-top: 15px;
 }
+.mt-25{
+    margin-top: 45px;
+}
 .m-20{
     margin: 20px;
 }
@@ -84,6 +87,9 @@
 }
 .mr-10{
     margin-right: 10px;
+}
+.ml-10{
+    margin-left:10px ;
 }
 .mt-50{
     margin-top: 50px;

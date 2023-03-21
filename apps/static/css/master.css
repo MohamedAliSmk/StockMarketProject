@@ -5,6 +5,7 @@
     --red-color:#f44336;
     --grey-color:#888 ;
     --green-color: #22c55e;
+    --main-color:rgb(255 255 255 / 80%);
 
 
     --dark-color:#19283f;
@@ -130,12 +131,12 @@ body {
     background-color: black;
     border: 4px solid white ;
 }
-.sidebar ul {
+/* .sidebar ul {
     
-}
-.sidebar ul li {
+} */
+/* .sidebar ul li {
 
-}
+} */
 .sidebar ul li a {
     transition: 0.3s;
     margin-bottom: 5px;
@@ -854,9 +855,327 @@ body {
 /*  start   profilee */
 
 /*   end profiole */
-.carousel-item {
-   
+/* .carousel-item {
+
+} */
+
+
+/*    start  up  botton   */
+#up{
+    background-color:dodgerblue;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+    padding: 6px;
+    border-radius: 14px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 60px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 999;
 }
+
+/* start company */
+.companes-block{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+.company-name {
+    color: black;
+}
+.tesla-block,
+.Apple-block,
+.meta-block,
+.google-block,
+.amazon-block,
+.microsoft-block,
+.starpucs-block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    padding: 20px;
+    width: 400px;
+    border-radius: 30px;
+}
+@media(max-width:767px){
+    .tesla-block,
+    .Apple-block,
+    .meta-block,
+    .google-block{
+        justify-content: space-around;
+        width: 100%;
+        align-items: center;
+        padding-top: 20px;
+        margin-left: 0px;
+}
+.meta-block{
+    margin-left: 10px;
+}
+}
+.amazon-block:hover{
+    background-color: #bbb;
+}
+.microsoft-block:hover{
+    background-color: #bbb;
+}
+.tesla-block:hover{
+    background-color:#bbb;
+}
+.meta-block:hover{
+background-color:#bbb;
+}
+.starpucs-block:hover{
+    background-color: #bbb;
+}
+.google-block:hover{
+    background-color:#bbb;
+}
+.Apple-block:hover{
+    background-color:#bbb;
+}
+.see-more:hover{
+    background-color: #bbb;
+    border-radius: 100px;
+}
+.see-more{
+    align-items: center;
+    display: flex;
+    width: 400px;
+    border-radius: 3px;
+    justify-content: center;
+    height: 100px;
+    margin-top: 30px;
+}
+
+.tesla-block img{
+    max-width: 100%;
+}
+.meta-block img{
+    max-width: 100%;
+}
+.google-block img{
+    max-width: 100%;
+}
+.logoes{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    max-width: 100%;
+}
+.Apple-block img{
+    max-width: 100%;
+}
+.company-details{
+    margin-left: 70px;
+}
+.companyContent{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill,minmax(550px,1fr));
+}
+
+
+
+/*  end  company */
+
+/*   start community */
+.dasboaed-community .finance-education  {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+    margin-left: 20px;
+    gap: 20px;
+    
+}
+.dasboaed-community .finance-education li {
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+}
+.dasboaed-community  li:hover {
+    background-color: #0075ff;
+    color: white;
+}
+@media(max-width:767px){
+    .dasboaed-community .finance-education{
+        display: block;
+    }
+    .dasboaed-community .finance-education li{
+        margin-top: 20px;
+        text-align: left;
+        width: fit-content;
+        visibility:visible;
+
+    }
+}
+.activee{
+    background-color: #1877f2;
+    color: white;
+}
+
+
+/*   end  community */
+
+
+
+/*   start   type effect  */
+
+.typeEffect{
+    font-size: 33px;
+    width: 500px;
+    margin: 30px auto;
+    border-right: 2px solid black;
+    overflow: hidden;
+    white-space:nowrap;
+    animation: control-width steps(26) 3s  2s  both , blink  1s  infinite;
+}
+
+@keyframes control-width {
+    from{
+        width: 0;
+    }
+    to{
+        width: 500px;
+    }
+}
+@keyframes blink {
+    from{
+        border-right-color: var(--main-color);
+    }
+    to{
+        border-right-color:var(--grey-color);
+    }
+}
+@media(max-width:767px){
+    
+.typeEffect{
+    font-size: 18px;
+    width: 150px;
+    margin: 30px auto;
+    border-right: 2px solid black;
+    overflow: hidden;
+    white-space:nowrap;
+    animation: control-width steps(26) 3s  2s  both , blink  1s  infinite;
+}
+@keyframes control-width {
+    from{
+        width: 0;
+    }
+    to{
+        width: 270px;
+    }
+}
+@keyframes blink {
+    from{
+        border-right-color: var(--main-color);
+    }
+    to{
+        border-right-color:var(--grey-color);
+    }
+}
+
+
+}
+/*   end type effect */
+
+/*  start  
+.fill-text{
+    margin: 20px auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke:1px  #3d3d3d;
+    position: relative;
+    width: fit-content;
+}
+.fill-text::before{
+    content: attr(data-text);
+    position: absolute;
+    transition: 0.5s;
+    -webkit-text-fill-color: #ff5722;
+
+}
+/*   end   */
+
+/*  start  company content  changed*/
+.comanyDetails{
+    display: flex;
+    margin-left: 30px;
+}
+.comanyDetails h3{
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+/*   start community */
+.companyChange .allEllement  {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(170px,1fr));
+    margin-left: 20px;
+    gap: 20px;
+    
+}
+.companyChange .allEllement li {
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+}
+.companyChange  li:hover {
+    background-color: #0075ff;
+    color: white;
+}
+@media(max-width:767px){
+    .companyChange .allEllement{
+        display: block;
+    }
+    .companyChange .allEllement li{
+        margin-top: 20px;
+        text-align: left;
+        width: fit-content;
+        visibility:visible;
+    }
+}
+.activee{
+    background-color: #1877f2;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  end  company content  changed*/
+
+
+/*    end  end  botton */
 /*  start footer */
 .footer{
     background-color: var(--dark-color);

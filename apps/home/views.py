@@ -16,8 +16,10 @@ import datetime as dt
 
 @login_required(login_url="/login/")
 def index(request):
+  
+    
     return render(request, 'index.html', {
-        'firstname':'mohamed' #here we should get firstname frim users database
+        'firstname':'mohamed', #here we should get firstname frim users database
     })
 
 #def search(request):
@@ -30,11 +32,11 @@ def profile(request):
     return render(request, "profile.html")
 
 def Companys(request):
-    # Here we use yf.download function
+      # Here we use yf.download function
     data = yf.download(
         
         # passes the ticker
-        tickers=['AAPL', 'AMZN', 'QCOM', 'META', 'NVDA', 'JPM'],
+        tickers=['CIB', 'AMZN', 'QCOM', 'META', 'NVDA', 'JPM'],
         
         group_by = 'ticker',
         
@@ -52,7 +54,7 @@ def Companys(request):
 
     fig_left = go.Figure()
     fig_left.add_trace(
-                go.Scatter(x=data['Date'], y=data['AAPL']['Adj Close'], name="AAPL")
+                go.Scatter(x=data['Date'], y=data['CIB']['Adj Close'], name="CIB")
             )
     fig_left.add_trace(
                 go.Scatter(x=data['Date'], y=data['AMZN']['Adj Close'], name="AMZN")
@@ -76,14 +78,14 @@ def Companys(request):
 
     # ================================================ To show recent stocks ==============================================
     
-    df1 = yf.download(tickers = 'AAPL', period='1d', interval='1d')
+    df1 = yf.download(tickers = 'CIB', period='1d', interval='1d')
     df2 = yf.download(tickers = 'AMZN', period='1d', interval='1d')
     df3 = yf.download(tickers = 'GOOGL', period='1d', interval='1d')
     df4 = yf.download(tickers = 'UBER', period='1d', interval='1d')
     df5 = yf.download(tickers = 'TSLA', period='1d', interval='1d')
     df6 = yf.download(tickers = 'TWTR', period='1d', interval='1d')
 
-    df1.insert(0, "Ticker", "AAPL")
+    df1.insert(0, "Ticker", "CIB")
     df2.insert(0, "Ticker", "AMZN")
     df3.insert(0, "Ticker", "GOOGL")
     df4.insert(0, "Ticker", "UBER")
@@ -107,15 +109,15 @@ def Companys(request):
     ticker_list = []
     ticker_list = json.loads(json_ticker)
 
-  
-    return render(request, 'Companys.html', {
-        'ticker_list': ticker_list,
+    return render(request, 'companys.html', {
         'plot_div_left': plot_div_left,
         'recent_stocks': recent_stocks,
+        'ticker_list':ticker_list,
 
     })
 
-def predict(request, ticker_value, number_of_days):
+
+#def predict(request, ticker_value, number_of_days):
     try:
         # ticker_value = request.POST.get('ticker')
         ticker_value = ticker_value.upper()
@@ -214,6 +216,15 @@ def predict(request, ticker_value, number_of_days):
     pred_fig.update_xaxes(rangeslider_visible=True)
     pred_fig.update_layout(paper_bgcolor="#14151b", plot_bgcolor="#14151b", font_color="white")
     plot_div_pred = plot(pred_fig, auto_open=False, output_type='div')
+
+    # ========================================== Plotting candlesitck chart ======================================
+    cand_fig= go.Figure(
+        data=[
+        go.candlestick(
+        
+        )
+        ]
+    )
 
     # ========================================== Display Ticker Info ==========================================
 
