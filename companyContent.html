@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    
+    <!--  boostrap link  -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!--  boostrap  icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <!-- css link  framework -->
+    <link rel="stylesheet" href="./css/framework.css">
+    <!--  css link  master -->
+    <link rel="stylesheet" href="./css/master.css">
+    <!--  normalize link -->
+    <link rel="stylesheet" href="./css/normalise.css">
+    <!--  all link   -->
+    <link rel="stylesheet" href="./css/all.min.css">
+    <!--  font link  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&#038;display=swap" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="page d-flex">
+
+        <div class="sidebar   p-15  p-relative ">
+            <!--<h3  class="p-relative   text-center mt-0 pt-15" > 
+                <img src="./logo/logo/logo.png" class="one"   alt="">
+                <img src="../FRONT-END/imgs/logo (1)/logo/logo.png" class="two"  alt="">
+            </h3>-->
+            <br>
+            <br>
+            <br>
+            <br>
+           
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li> </li>
+                </ul>
+            </div>
+            
+            <ul class="  list-none  " style="position: fixed;">
+                <li>
+                    <a  class="active   d-flex  align-center  fs-20     rad-6  p-10 " href="index.html" >  
+                        <i class="fa-solid fa-chart-simple  fa-fw"></i>
+                        <span class="hide-mobile" > Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href="setting.html" >  
+                        <i class="fa-solid fa-gear fa-fw "></i>
+                        <span class="hide-mobile" > Setting </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="profile.html" >  
+                        <i class="fa-regular fa-user  fa-fw"></i>
+                        <span class="hide-mobile"> Profile </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="companys.html" >  
+                        <i class="fa-regular fa-building"></i>
+                        <span class="hide-mobile" > Companys </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="LastNews.html" >  
+                        <i class="fa-solid fa-newspaper"></i>
+                        <span class="hide-mobile" > LastNews </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="Trending.html" >  
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                        <span class="hide-mobile" > Trending </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href="Chart.html" >  
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span class="hide-mobile" > Chart </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href="Community.html" >  
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span class="hide-mobile" > Education Com </span>
+                    </a>
+                </li>
+    
+            </ul>
+        </div> 
+    
+        <!-- start content  -->
+        <div class="content w-full  ">
+            <!--   start head  -->
+
+            <div class="head   fixed-top     between-flex   " style="padding:10px;">
+                <nav  style="padding: 7px;" class="navbar navbar-expand-lg stiky-top   fixed-top   bg-black  w-full  ">
+                    <div class="container ">
+                        <ul>
+                            <li>
+                                <div>
+                                    <h2 style="margin-top: 17px;"> <span style="color:yellow;">Fin</span><span style="color:dodgerblue ;">tickers</span> </h2>
+                                    <!--<img src="./images/logo (1)/logo/logo.png"  class="bg-black  logo p-relative" alt=""> -->
+                                    </div>
+                            </li>
+                        
+                            <!-- <li>
+                                <div class="search mt-2 p-relative">
+                                    <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                                    </div>  </span>
+                                    <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                                </div>
+                            </li> -->
+                        </ul>
+                            <!--<div class="search  p-relative">
+                            <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                            <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                        </div>-->
+                        
+                        <button class="navbar-toggler  bg-eee" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon ">
+                                
+                            </span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li>
+                                    <nav class="navbar navbar-light bg-black ">
+                                        <div class="container-fluid">
+                                            <form class="d-flex  w-100">
+                                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                            </form>
+                                        </div>
+                                    </nav>
+                                </li>
+                                
+                                <li>
+                                    <div class="mr-10 mt-2 " >
+                                        <div class="dropdown ">
+                                            <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Get start
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_up.html"> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
+                                                <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="#"> 
+                                                    <span> MODE </span>
+                                                    <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center  " id="toggleDark">   </i> 
+                                                    </a>
+                                                </li>
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_in.html"> </a> </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="mr-10 mt-2 " >
+                                        <div class="dropdown ">
+                                            <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Language
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="#">  <span> English  </span> </a> </li>
+                                                <li > <a class="dropdown-item between-flex   fs-20" href="#">  <span> Arbic  </span> </a> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="./sign_in.html" class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
+
+                                </li>
+                                <li>
+                                    <div class="icons  fs-20  d-flex  space-between">
+                                    
+                                        <div class=" p-relative mt-2  align-items-center   notification ">
+                                            <i class="fa-regular fa-bell fa-lg c-gray ">   </i>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                            <span></span>
+                        </span>
+                    </div>
+                </div>
+            </nav>
+                <!--<div class="search  p-relative">
+                    <span> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                    <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                </div>-->
+                
+        </div>
+        <!--  end head -->
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+            <div class="wrapper   d-grid   gap-20">
+            
+            </div>
+
+            <button id="up"> Up </button>
+            <br>
+            <br>
+            <div class="companyContentChaned">
+                <div class="comanyDetails">
+                    <img src="./images/Amazon-Logo-Font-1-scaled.webp" width="50px" height="50px" style="border-radius: 50%;" alt="">
+                    <h3> companyName </h3>
+
+                </div>
+
+            </div>
+            <br>
+
+            <div class="  companyChange  pt-15">
+                <ul class="allEllement">
+                    <!--<li class="activee  community" data-cont=".finance-ideaContent  .education-ideaContent  .video-ideaContent"> Community  </li> -->
+                    <li class="OverView " data-cont=".OverViewContent" >  OverView </li>
+                    <li class="  finance " data-cont=".financeContent" > finance   </li>
+                    <li  class=" ComanyhistoryData" data-cont=".ComanyhistoryDataContent" > Comany history data  </li>
+                    <li  class=" companyNewes" data-cont=".companyNewesContent" > companyNewes  </li>
+                    <li  class=" testModel" data-cont=".testModelContent" > test Model  </li>
+                </ul>
+                <br>
+                <div class="theChildContent">
+                    <div class="OverViewContent">
+                        <p> OverViewContent </p>
+                    </div>
+
+                    <div class="financeContent">
+                        <p> financeContent </p>
+                    </div>
+
+                    <div class="ComanyhistoryDataContent">
+                        <ul class="companyContent " style=" padding: 10px; margin: 5px; ">
+                            <label for="select"> choose year </label>
+                            <select style="width: 120px; margin-left: 10px;" name="" id="">
+                                <option value="2022"> 2022 </option>
+                                <option value=""> 2021 </option>
+                                <option value=""> 2020 </option>
+                                <option value=""> 2019 </option>
+                                <option value=""> 2018 </option>
+                                <option value=""> 2017 </option>
+                                <option value=""> 2016 </option>
+                                <option value=""> 2015 </option>
+                                <option value=""> 2014 </option>
+                                <option value=""> 2013 </option>
+                                <option value=""> 2012 </option>
+                                <option value=""> 2011 </option>
+                                <option value=""> 2010 </option>
+                                <option value=""> 2009 </option>
+                                <option value=""> 2008 </option>
+                                <option value=""> 2007 </option>
+                                <option value=""> 2006 </option>
+                                <option value=""> 2005 </option>
+                                <option value=""> 2004 </option>
+                                <option value=""> 2003 </option>
+                                <option value=""> 2002 </option>
+                                <option value=""> 2001 </option>
+                                <option value=""> 2000 </option>
+                                <option value=""> 1999 </option>
+                                <option value=""> 1998 </option>
+                                <option value=""> 1997 </option>
+                                <option value=""> 1996 </option>
+                                <option value=""> 1995 </option>
+                                <option value=""> 1994 </option>
+                                <option value=""> 1993 </option>
+                                <option value=""> 1992 </option>
+                                <option value=""> 1991 </option>
+                                <option value=""> 1991 </option>
+                                <option value=""> 1990 </option>
+                                <option value=""> 1989 </option>
+                                <option value=""> 1988 </option>
+                                <option value=""> 1987 </option>
+                                <option value=""> 1986 </option>
+                                <option value=""> 1985 </option>
+                            </select>
+                            <br>
+                            <br>
+                        </ul>
+                    </div>
+                    <div class="companyNewesContent">
+                        <p> companyNewesContent </p>
+                    </div>
+
+                    <div class="testModelContent">
+                        <p> testModelContent </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- end  content  -->
+        
+    </div>
+
+    <!--  start footer -->
+    <div  class= "footer  mt-5  pt-5 pb-5  text-center   bg-black  text-md-start">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="info mb-5">
+                        <img src="./images/logo (1)/logo/logo.png" class="mb-4" alt="">
+                        <p class="mb-4 c-gray">
+                            Hi! Welcome to our website we are happy to help you to learn about 
+                            Finance and to provide you with best preditcion stocs algorithms.
+                        </p>
+                        <div class="copyright c-gray">
+                            Created By <span class=>  ahmedsalehbasuony </span>
+                            <div> &copy; <span> 2023 -  FinTec   </span> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                    <div class="liks">
+                        <h5 class="text-light">  LINKS </h5>
+                        <ul class="list-unstyled lh-lg c-gray">
+                            <li> <a  href="index.html" class="c-gray"> Home </a>   </li>
+                            <li> <a href="companys.html" class="c-gray"> Our Services </a>  </li>
+                            <li> <a href="profile.html"  class="c-gray">   Portfolio </a></li>
+                            <li><a href="Chart.html"  class="c-gray"> Chart </a></li>
+                            <li > <a href="setting.html"  class="c-gray"> Support </a></li>
+                            <li > <a href="LastNews.html"  class="c-gray"> Newes </a></li>
+                            <li > <a href="Trending.html"  class="c-gray"> Trending </a></li>
+                            <li > <a href="Community.html"  class="c-gray"> Learn ! </a></li>
+                            <li>Terms and Condition</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-2">
+                    <div class="links">
+                        <h5 class="text-light"> About Us </h5>
+                        <ul class="list-unstyled  lh-lg c-gray">
+                            <li>  <a href="sign_in.html" class="c-gray">  Sign In  </a></li>
+                            <li> <a href="sign_up.html" class="c-gray"> Register</a></li>
+                            <li>  <a href="abouus.html" class="c-gray"> About Us </a></li>
+                            <li>Blog</li>
+                            <li>Contact Us</li>
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="contact">
+                        <h5 class="text-light"> Contact Us </h5>
+                        <p class="lh-lg mt-3 mb-5  c-gray"> Get in touch with us via mail phone.We are waiting for your call or message </p>
+                    
+                        <a href="#" class="btn rounded-pill main-btn   c-gray  w-100"> graphberry@gmail.com </a>
+                        <ul class="d-flex  mt-5  list-unstyled  gap-3">
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-facebook fa-lg facebook rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-twitter fa-lg twitter rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-linkedin fa-lg linkedin rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-youtube fa-lg youtube rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--  end footer -->
+
+        
+    <!-- link to java-script file  -->
+
+    <!--  api links  -->
+    <script src="./Api/AppleApi.js"></script> 
+    
+    <!--- <script src="./Api/CIBApi.js"></script>
+    <script src="./Api/GoogleApi.js"></script>
+    <script src="./Api/TESLAApi.js"></script>
+    <script src="./Api/MICROSOFTApi.js"></script>
+    <script src="./Api/METAApi.js"></script>
+    <script src="./Api/AmazonApi.js"></script>
+    <script src="./Api/CIBApi.js"></script>
+    <script src="./Api/ELSWEDAYApi.js"></script>
+    <script src="./Api/WEApi.js"></script>
+
+    -->
+    
+
+    <script src="./Java-script/companydataonclick.js"></script>
+    <script src="./Java-script/companyContent.js"></script>
+    <script src="./Java-script/community.js"></script>
+    <script src="./Java-script/upbotton.js"></script>
+    <!---
+    <script src="./Java-script/Translation.js"></script> -->
+    <script src="./Java-script/main.js"></script>
+    <script src="./js/all.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+    
+</body>
+</html>

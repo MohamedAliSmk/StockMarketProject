@@ -14,7 +14,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn import preprocessing, model_selection, svm
 import datetime as dt
 
-@login_required(login_url="/login/")
+#@login_required(login_url="/login/")
 def index(request):
   
     
@@ -116,8 +116,7 @@ def Companys(request):
 
     })
 
-
-#def predict(request, ticker_value, number_of_days):
+def predict(request, ticker_value, number_of_days):
     try:
         # ticker_value = request.POST.get('ticker')
         ticker_value = ticker_value.upper()
