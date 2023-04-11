@@ -1,10 +1,12 @@
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Chart </title>
+    <title> chart </title>
     <!--  boostrap link  -->
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
 
@@ -40,49 +42,49 @@
             <br>
             <ul class="  list-none  ">
                 <li>
-                    <a  class="  d-flex  align-center  fs-20     rad-6  p-10 " href="index.html" >  
+                    <a  class="  d-flex  align-center  fs-20     rad-6  p-10 " href="/" >  
                         <i class="fa-solid fa-chart-simple  fa-fw"></i>
                         <span class="hide-mobile" > Dashboard </span>
                     </a>
                 </li>
                 <li>
-                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href="setting.html" >  
+                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'setting' %} >  
                         <i class="fa-solid fa-gear fa-fw "></i>
                         <span class="hide-mobile" > Setting </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="profile.html" >  
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href={% url 'profile' %} >  
                         <i class="fa-regular fa-user  fa-fw"></i>
                         <span class="hide-mobile"> Profile </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="companys.html" >  
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="{% url 'Companys' Ticker='GOOG' %}" >  
                         <i class="fa-regular fa-building"></i>
                         <span class="hide-mobile" > Companys </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="LastNews.html" >  
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href={% url 'LastNews' %} >  
                         <i class="fa-solid fa-newspaper"></i>
                         <span class="hide-mobile" > LastNews </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="Trending.html" >  
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " <a href={% url 'Trending' %} >  
                         <i class="fa-solid fa-money-bill-trend-up"></i>
                         <span class="hide-mobile" > Trending </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="active   d-flex  align-center  fs-20    rad-6  p-10 " href="Chart.html" >  
+                    <a  class="active   d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'chart' %} >  
                         <i class="fa-solid fa-chart-pie"></i>
-                        <span class="hide-mobile" > Chart </span>
+                        <span class="hide-mobile" > chart </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href="Community.html" >  
+                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'Community' %} >  
                         <i class="fa-solid fa-graduation-cap"></i>
                         <span class="hide-mobile" > Education Com </span>
                     </a>
@@ -153,13 +155,13 @@
                                             Get start
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_up.html"> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href={% url 'register' %}> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
                                                 <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="#"> 
                                                     <span> MODE </span>
                                                     <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center  " id="toggleDark">   </i> 
                                                     </a>
                                                 </li>
-                                                <li > <a class="dropdown-item between-flex active  fs-20" href="sign_in.html"> </a> </li>
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href={% url 'login' %}> </a> </li>
                                                 </ul>
                                         </div>
                                     </div>
@@ -171,14 +173,14 @@
                                             Language
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                                <li > <a class="dropdown-item between-flex active  fs-20" href="#">  <span> English  </span> </a> </li>
-                                                <li > <a class="dropdown-item between-flex   fs-20" href="#">  <span> Arbic  </span> </a> </li>
+                                                <li > <a class="dropdown-item between-flex active  fs-20" href="/?lang=en">  <span> English  </span> </a> </li>
+                                                <li > <a class="dropdown-item between-flex   fs-20" href="/?lang=en">  <span> Arbic  </span> </a> </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="sign_in.html" class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
+                                    <a href={% url 'login' %} class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
 
                                 </li>
                             </ul>
@@ -200,7 +202,7 @@
             <br>
             <button id="up"> Up </button>
 
-            <h1 class="p-relative"> Chart </h1>
+            <h1 class="p-relative"> chart </h1>
         </div>
     </div>
     <!--  start footer -->
@@ -224,14 +226,14 @@
                     <div class="liks">
                         <h5 class="text-light">  LINKS </h5>
                         <ul class="list-unstyled lh-lg c-gray">
-                            <li> <a  href="index.html" class="c-gray"> Home </a>   </li>
-                            <li> <a href="companys.html" class="c-gray"> Our Services </a>  </li>
-                            <li> <a href="profile.html"  class="c-gray">   Portfolio </a></li>
-                            <li><a href="Chart.html"  class="c-gray"> Chart </a></li>
-                            <li > <a href="setting.html"  class="c-gray"> Support </a></li>
-                            <li > <a href="LastNews.html"  class="c-gray"> Newes </a></li>
-                            <li > <a href="Trending.html"  class="c-gray"> Trending </a></li>
-                            <li > <a href="Community.html"  class="c-gray"> Learn ! </a></li>
+                            <li> <a  href="/" class="c-gray"> Home </a>   </li>
+                            <li> <a href="{% url 'Companys' Ticker='GOOG' %}" class="c-gray"> Our Services </a>  </li>
+                            <li> <a href={% url 'profile' %}  class="c-gray">   Portfolio </a></li>
+                            <li><a href={% url 'chart' %}  class="c-gray"> chart </a></li>
+                            <li > <a href={% url 'setting' %}  class="c-gray"> Support </a></li>
+                            <li > <a href={% url 'LastNews' %}  class="c-gray"> Newes </a></li>
+                            <li > <a href={% url 'Trending' %}  class="c-gray"> Trending </a></li>
+                            <li > href={% url 'Community' %} class="c-gray"> Learn ! </a></li>
                             <li>Terms and Condition</li>
                         </ul>
                     </div>
@@ -241,8 +243,8 @@
                     <div class="links">
                         <h5 class="text-light"> About Us </h5>
                         <ul class="list-unstyled  lh-lg c-gray">
-                            <li>  <a href="sign_in.html" class="c-gray">  Sign In  </a></li>
-                            <li> <a href="sign_up.html" class="c-gray"> Register</a></li>
+                            <li>  <a href={% url 'login' %} class="c-gray">  Sign In  </a></li>
+                            <li> <a href={% url 'register' %} class="c-gray"> Register</a></li>
                             <li>  <a href="abouus.html" class="c-gray"> About Us </a></li>
                             <li>Blog</li>
                             <li>Contact Us</li>
@@ -301,3 +303,5 @@
     
 </body>
 </html>
+
+{% endblock content %}

@@ -1,51 +1,79 @@
-# Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from .forms import LoginForm, SignUpForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from pymongo import MongoClient
 
+# Connect to MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+db = client['Fintechers']
+collection = db['users']
 
-def login_view(request):
-    form = LoginForm(request.POST or None)
+def register(request):
+    if request.method == 'POST':
+        # Get form data
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
 
-    msg = None
+        # Create new user
+        user = User.objects.create_user(username, email, password)
+        user.save()
 
-    if request.method == "POST":
+        # Save user data to MongoDB
+        collection.insert_one({
+            'username': username,
+            'email': email,
+            'password': password
+        })
 
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("/")
-            else:
-                msg = 'Invalid credentials'
-        else:
-            msg = 'Error validating the form'
-
-    return render(request, "sign_in.html", {"form": form, "msg": msg})
-
-
-def register_user(request):
-    msg = None
-    success = False
-
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
-
-            msg = 'Account created successfully.'
-            success = True
-
-            # return redirect("/login/")
-
-        else:
-            msg = 'Form is not valid'
+        # Log in user and redirect to home page
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('/')
     else:
-        form = SignUpForm()
+        return render(request, 'sign_up.html')
 
-    return render(request, "sign_up.html", {"form": form, "msg": msg, "success": success})
+def login(request):
+    if request.method == 'POST':
+        # Get form data
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # Authenticate user
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            # Log in user and redirect to home page
+            login(request, user)
+            return redirect('/')
+        else:
+            # Show error message
+            error = 'Invalid username or password'
+            return render(request, 'sign_in.html', {'error': error})
+    else:
+        return render(request, 'sign_in.html')
+
+def logout(request):
+    # Log out user and redirect to login page
+    logout(request)
+    return redirect('/login/')
+
+def profile(request):
+    # Get user data from MongoDB
+    user = collection.find_one({'username': request.user.username})
+
+    if request.method == 'POST':
+        # Update user data
+        email = request.POST['email']
+        password = request.POST['password']
+
+        collection.update_one(
+            {'username': request.user.username},
+            {'$set': {'email': email, 'password': password}}
+        )
+
+        # Update user email in Django auth
+        user.email = email
+        user.save()
+
+    return render(request, 'profile.html', {'user': user})

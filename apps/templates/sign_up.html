@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -13,6 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    {% block content %}
     <div class="wrapper">
     	<div class="title-text">
         <div class="title">
@@ -28,15 +30,20 @@
 					<div class="fh-2">or</div>
 				</div>
       <div class="form-inner">
-          <form action="#" class="signup">
+          <form method="post" class="signup">
+            {% csrf_token %}
+            {{ form.as_p }}
             <div class="field">
               <input type="text" placeholder="Email Address" required>
+              {{ form.email }}
             </div>
             <div class="field">
               <input type="password" placeholder="Password" required>
+              {{ form.password1 }}
             </div>
             <div class="field">
               <input type="password" placeholder="Confirm Password" required>
+              {{ form.password2 }}
             </div>
             <label class="terms">
               i agree to the <span>Terms and Condition</span>
@@ -51,9 +58,10 @@
         </div>
         <div class="form-footer">
           already have an account?
-          <a href="sign_in.html">sign in</a>
+          <a href={% 'login' %}>sign in</a>
         </div>
       </div>
     </div>
   </body>
 </html>
+{% endblock %}

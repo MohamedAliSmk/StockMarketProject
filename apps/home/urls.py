@@ -1,21 +1,22 @@
- 
-from django.urls import path, re_path
+from django.urls import path, include
 from apps.home import views
+from django.conf.urls.i18n import urlpatterns as i18n_urlpatterns
+
+
+
 
 urlpatterns = [
 
     # The home page
     path('', views.index, name='home'),
-
-    # Matches any html file
-    #re_path(r'^.*\.*', views.pages, name='pages'),
     path('setting/',views.setting , name="setting"),
-    path('Profile/',views.profile , name="Profile"),
-    path('Companys/',views.Companys , name="Companys"),
+    path('profile/',views.profile , name="Profile"),
+    path('Companys/<str:Ticker>',views.Companys , name="Companys"),
     path('LastNews/',views.LastNews , name="LastNews"),
     path('Trending/',views.Trending , name="Trending"),
     path('chart/',views.chart , name="chart"),
     path('Community/',views.Community , name="Community"),
    
+    path('i18n/', include(i18n_urlpatterns)),#for translation
 
 ]

@@ -21,14 +21,14 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 
-def prediction(ticker):
+def prediction(request,symbol):
     global next_days 
     global day_step
     global prediction
     global data
     global train_len 
     day_step = 150
-    data = yf.download(tickers = ticker, period='5y', interval='1d')
+    data = yf.download(tickers = symbol, period='5y', interval='1d')
     df = data.filter(['Close'])
     df=df.values
     #get the lengh of training set
@@ -109,14 +109,26 @@ def prediction(ticker):
             i=i+1
     print(scaler.inverse_transform(lst_output))
     output=scaler.inverse_transform(lst_output)
-    
+    #plotting
+    day_new=np.arange(1,day_step+1)
+    day_pred=np.arange(day_step+1,day_step+next_days+1)
+    plt.plot(day_new,df[len(df)-day_step:])
+    plt.plot(day_pred,output)
 
-    return data,train_len,day_step,next_days,df,output
+
+    return render(request,"Companys.html",context={"symbol":symbol,
+                                                   "data":data,
+                                                   "train_len":train_len,
+                                                   "day_step":day_step,
+                                                   "next_days":next_days,
+                                                   "df":df,
+                                                   "output":output})
             
-
-data, train_len,day_step,next_days,df,output,model = prediction('AAPL')
-
-def predict_next_day():
+def predict_next_day(request,symbol):
+    data = yf.download(tickers = symbol, period='5y', interval='1d')
+    df = data.filter(['Close'])
+    df=df.values
+   
     scaler = MinMaxScaler(feature_range=(0,1))
     scaled_df=scaler.fit_transform(df)
     actual_data = scaled_df[len(scaled_df) - day_step :]
@@ -136,14 +148,10 @@ def predict_next_day():
     #invers scaler
     first_next_date = scaler.inverse_transform(first_next_date)
     
-    return first_next_date
+    return render(request,"Companys.html",context={"first_next_date":first_next_date,
+                                                   "symbol":symbol})
+    
 
-
-def plot_predicrtions():
-    day_new=np.arange(1,day_step+1)
-    day_pred=np.arange(day_step+1,day_step+next_days+1)
-    plt.plot(day_new,df[len(df)-day_step:])
-    plt.plot(day_pred,output)
 
 
 

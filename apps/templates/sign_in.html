@@ -13,6 +13,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
+    {% block content %}
     <div class="wrapper">
     	<div class="title-text">
         <div class="title">
@@ -30,7 +31,9 @@
           </div>
 				</div>
       <div class="form-inner">
-          <form action="#" class="signup">
+          <form method="post" class="signup">
+            {% csrf_token %}
+            {{ form.as_p }}
             <div class="field">
               <input type="text" placeholder="Email Address" required>
             </div>
@@ -52,9 +55,11 @@
         </div>
         <div class="form-footer">
           Don't have an account?
-          <a href="sign_up.html">sign up</a>
+          <a href={% url 'register' %}>sign up</a>
         </div>
       </div>
     </div>
   </body>
 </html>
+{% endblock%}
+    
