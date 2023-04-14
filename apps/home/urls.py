@@ -16,7 +16,11 @@ urlpatterns = [
     path('Trending/',views.Trending , name="Trending"),
     path('chart/',views.chart , name="chart"),
     path('Community/',views.Community , name="Community"),
-   
+    path('stock-prices/', views.stock_prices, name='stock_prices'),
+    path('Companys/stocks/', views.stocks, name='stocks'),
+    path('Companys/stocks/data/', views.stocks_data, name='stocks_data'),
+
+
     path('i18n/', include(i18n_urlpatterns)),#for translation
 
 ]

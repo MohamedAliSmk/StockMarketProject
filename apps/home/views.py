@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render 
+from django.shortcuts import render ,HttpResponse
 import yfinance as yf
 import pandas as pd
 from plotly.offline import plot
@@ -9,8 +9,38 @@ import requests
 from django.utils.translation import gettext as _
 import matplotlib.pyplot as plt
 import io
-import urllib, base64
- 
+import urllib, base64 
+
+from django.http import JsonResponse
+
+def stocks(request):
+    companies = ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
+    data = {}
+    for company in companies:
+        stock = yf.Ticker(company)
+        data[company] = {
+            'price': stock.info['currentPrice'],
+            'change': stock.info['regularMarketChange'],
+        }
+        print(data)
+    return render(request, 'companys.html', {'data': data})
+
+def stock_prices(request):
+    return render(request, 'companys.html')
+
+def stocks_data(request):
+    companies =  ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
+    data = {}
+    for company in companies:
+        stock = yf.Ticker(company)
+        data[company] = {
+            'price': stock.info['currentPrice'],
+            
+            #'change': stock.info['regularMarketChange'],
+        }
+        
+    return JsonResponse(data)
+
 
 def get_news_data(stock):
     api_key = '29de022d931f42e73af5b5884f4e970d'
@@ -18,6 +48,7 @@ def get_news_data(stock):
     response = requests.get(url)
     data = json.loads(response.text)
     return data
+    
 
 #@login_required(login_url="/login/")
 def index(request):   
@@ -30,56 +61,49 @@ def setting(request):
 
 def profile(request):
     return render(request, "profile.html")
-def Companys(request,Ticker):  
-    company_data = CompanyDetails(Ticker)
-    #company information
-    company_name =company_data['symbol']
-    price =company_data['price']
-    mktCap =company_data['mktCap']
-    volAvg =company_data['volAvg']
-    changes =company_data['changes']
-    currency =company_data['currency']
-    exchange =company_data['exchange']
-    exchangeShortName =company_data['exchangeShortName']
-    industry =company_data['industry']
-    website =company_data['website']
-    description =company_data["description"]
-    ceo =company_data['ceo']
-    sector =company_data['sector']
-    country =company_data['country']
-    image =company_data['image']
-
-    
-    return render(request,"Companys.html",context={"Ticker":Ticker,
-                                                    "company_name" :company_name,
-                                                    "price":price,
-                                                    "mktCap" :mktCap,
-                                                    "volAvg":volAvg,
-                                                    "changes" :changes,
-                                                    "currency":currency,
-                                                    "exchange" :exchange,
-                                                    "exchangeShortName":exchangeShortName,
-                                                    "industry" :industry,
-                                                    "website":website,
-                                                    "description" :description,
-                                                    "ceo":ceo,
-                                                    "sector" :sector,
-                                                    "country":country,
-                                                    "image":image,       
-    })
-
-url = "https://financialmodelingprep.com/api/v3/stock_news?tickers={tickers}&{page}=0&apikey={apikey}"
-params = {
-        "tickers": "AAPL,FB,GOOG,AMZN",
-        "page": "0",
-        "apikey": "29de022d931f42e73af5b5884f4e970d"
-    }
-
+def Companys(request, Ticker):  
+    # Define the API endpoint and parameters
+    apikey = "29de022d931f42e73af5b5884f4e970d"
+    url = f"https://financialmodelingprep.com/api/v3/profile/{Ticker}?apikey={apikey}"
     # Send a GET request to the API and parse the JSON response
-response = requests.get(url, params=params)
-data = response.json()
-print(data)
-
+    response = requests.get(url)
+    if response.status_code == 200:
+        company_data = response.json()
+        if len(company_data) > 0:
+            company_data = company_data[0]
+            # Extract company information
+            price = company_data['price']
+            mktCap = company_data['mktCap']
+            volAvg = company_data['volAvg']
+            changes = company_data['changes']
+            currency = company_data['currency']
+            exchange = company_data['exchange']
+            exchangeShortName = company_data['exchangeShortName']
+            industry = company_data['industry']
+            website = company_data['website']
+            description = company_data["description"]
+            ceo = company_data['ceo']
+            sector = company_data['sector']
+            country = company_data['country']
+            image = company_data['image']
+            return render(request, "Companys.html", context={
+                "Ticker": Ticker,
+                "price": price,
+                "mktCap": mktCap,
+                "volAvg": volAvg,
+                "changes": changes,
+                "currency": currency,
+                "exchange": exchange,
+                "exchangeShortName": exchangeShortName,
+                "industry": industry,
+                "website": website,
+                "description": description,
+                "ceo": ceo,
+                "sector": sector,
+                "country": country,
+                "image": image,
+            })
+ 
 def LastNews(request):
 
     # Define the API endpoint and parameters

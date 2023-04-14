@@ -100,7 +100,7 @@
                         <ul>
                             <li>
                                 <div>
-                                    <img src="../images/logo (1)/logo/logo.png"  class="bg-black  logo p-relative" alt="">
+                                    <img src="../static/images/logo (1)/logo/logo.png"  class="bg-black  logo p-relative" alt="">
                                     </div>
                             </li>
                             <li>
@@ -200,61 +200,55 @@
             <h1 class="p-relative"> Companys </h1>
 
             <!-- start up botton -->
-
+            
             <button id="up"> Up </button>
-            <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>company name</td>
-                            <td>{{ company_name }}</td>
-                        </tr>
-                        <tr>
-                            <td>market capcity</td>
-                            <td>{{ mktCap }}</td>
-                        </tr>
-                        <tr>
-                            <td>volume Average</td>
-                            <td>{{ volAvg }}</td>
-                        </tr>
-                        <tr>
-                            <td>currency</td>
-                            <td>{{ currency }}</td>
-                        </tr>
-                        <tr>
-                            <td>industry</td>
-                            <td>{{ industry }}</td>
-                        </tr>
-                        <tr>
-                            <td>ceo</td>
-                            <td>{{ ceo }}</td>
-                        </tr>
-                        <tr>
-                            <td>country</td>
-                            <td>{{ country }}</td>
-                        </tr>
-                        <tr>
-                            <td>website</td>
-                            <td>{{ website }}</td>
-                        </tr>
-                        <tr>
-                            <td>industry</td>
-                            <td>{{ industry }}</td>
-                        </tr>
-                        <tr>
-                            <td>description</td>
-                            <td>{{ description }}</td>
-                        </tr>
-                        <tr>
-                            <td>sector</td>
-                            <td>{{ sector }}</td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-            <br>
+            <h1>Real-Time Stock Prices</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Price</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody id="stock-table-body">
+                     
+                </tbody>
+            </table>
         
+            <script>
+                const socket = new WebSocket('ws://' + window.location.host + '/ws/stocks/');
+        
+                socket.onmessage = function(event) {
+                    const message = JSON.parse(event.data);
+        
+                    if (message.type === 'stock_data') {
+                        const stocks = message.data;
+        
+                        const stockTableBody = document.getElementById('stock-table-body');
+                        stockTableBody.innerHTML = '';
+        
+                        for (let i = 0; i < stocks.length; i++) {
+                            const stock = stocks[i];
+        
+                            const row = document.createElement('tr');
+        
+                            const symbolCell = document.createElement('td');
+                            symbolCell.textContent = stock.symbol;
+                            row.appendChild(symbolCell);
+        
+                            const priceCell = document.createElement('td');
+                            priceCell.textContent = stock.price;
+                            row.appendChild(priceCell);
+        
+                           
+                            stockTableBody.appendChild(row);
+                        }
+                    }
+                };
+            </script>
+        
+          
             <h1 class="p-relative"> Us stock Companes </h1>
             <div class="companes-block  ">
                 <div class="tesla-block  ">
@@ -523,4 +517,5 @@
 </body>
 </html>
 
-{% endblock content %}
+
+{% endblock %}

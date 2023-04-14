@@ -112,17 +112,12 @@ def prediction(request,symbol):
     #plotting
     day_new=np.arange(1,day_step+1)
     day_pred=np.arange(day_step+1,day_step+next_days+1)
-    plt.plot(day_new,df[len(df)-day_step:])
+    pre_plot = plt.plot(day_new,df[len(df)-day_step:])
     plt.plot(day_pred,output)
 
 
-    return render(request,"Companys.html",context={"symbol":symbol,
-                                                   "data":data,
-                                                   "train_len":train_len,
-                                                   "day_step":day_step,
-                                                   "next_days":next_days,
-                                                   "df":df,
-                                                   "output":output})
+    return render(request,"Companys.html",context={"pre_plot":pre_plot,
+                                                   })
             
 def predict_next_day(request,symbol):
     data = yf.download(tickers = symbol, period='5y', interval='1d')
