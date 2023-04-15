@@ -241,7 +241,10 @@
                             priceCell.textContent = stock.price;
                             row.appendChild(priceCell);
         
-                           
+                            const changeCell = document.createElement('td');
+                            changeCell.textContent = stock.change + '%';
+                            row.appendChild(changeCell);
+        
                             stockTableBody.appendChild(row);
                         }
                     }
