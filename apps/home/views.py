@@ -10,8 +10,17 @@ from django.utils.translation import gettext as _
 import matplotlib.pyplot as plt
 import io
 import urllib, base64 
-
 from django.http import JsonResponse
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.conf import settings
+
 
 def stocks(request):
     companies = ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
@@ -57,10 +66,74 @@ def index(request):
     return render(request, 'index.html', context)
 
 def setting(request):
+    if request.method == 'POST':
+        # Check if the user wants to enable/disable the website
+        site_control = request.POST.get('site_control')
+        if site_control:
+            if site_control == 'open':
+                settings.SITE_CLOSED = False
+            else:
+                settings.SITE_CLOSED = True
+            messages.success(request, 'Website control updated successfully.')
+
+        # Update the user's information
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        if username and email:
+            request.user.username = username
+            request.user.email = email
+            request.user.save()
+            messages.success(request, 'User information updated successfully.')
+
+        # Change the user's password
+        password_form = PasswordChangeForm(request.user, request.POST)
+        if password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Password updated successfully.')
+        else:
+            for error in password_form.errors.values():
+                messages.error(request, error[0])
+
+        # Enable/disable two-factor authentication
+        two_factor_auth = request.POST.get('two_factor_auth')
+        if two_factor_auth:
+            if two_factor_auth == 'enable':
+                request.user.profile.two_factor_auth_enabled = True
+                request.user.profile.save()
+            else:
+                request.user.profile.two_factor_auth_enabled = False
+                request.user.profile.save()
+            messages.success(request, 'Two-factor authentication updated successfully.')
+
+        # Update social media information
+        twitter = request.POST.get('twitter')
+        facebook = request.POST.get('facebook')
+        linkedin = request.POST.get('linkedin')
+        youtube = request.POST.get('youtube')
+        if twitter or facebook or linkedin:
+            request.user.profile.twitter_username = twitter
+            request.user.profile.facebook_username = facebook
+            request.user.profile.linkedin_username = linkedin
+            request.user.profile.linkedin_username = youtube
+            request.user.profile.save()
+            messages.success(request, 'Social media information updated successfully.')
+
+        # Control widgets
+        show_widgets = request.POST.get('show_widgets')
+        if show_widgets:
+            if show_widgets == 'yes':
+                request.user.profile.show_widgets = True
+                request.user.profile.save()
+            else:
+                request.user.profile.show_widgets = False
+                request.user.profile.save()
+            messages.success(request, 'Widget control updated successfully.')    
     return render(request, "setting.html")
 
 def profile(request):
     return render(request, "profile.html")
+
 def Companys(request, Ticker):  
     # Define the API endpoint and parameters
     apikey = "29de022d931f42e73af5b5884f4e970d"

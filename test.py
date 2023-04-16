@@ -54,8 +54,7 @@ NASDAQ_API="zYsazxgkrAQ3aE5ySsgg"
              
 """
 def getPrice_Change(symbol):
-    tickers = yf.Tickers('TSLA APPL FB GOOG MSFT SBUX MBG.DE 2222.SR CIB QNBK ETEL EGS3G0Z1C014.CA EGS3C251C013.CA')
-    data=yf.Tickers(symbol)
+    data=yf.Ticker(symbol)
     Price=data.info['currentPrice']
     Previous_Day=data.info['previousClose']
     change = ((Price - Previous_Day)/ Previous_Day)*100 
@@ -83,3 +82,13 @@ def getUSPrices(US_tickers):
         'Price Change': company_data['Close'].iloc[-1].values - company_data['Open'].iloc[-1].values,
     })
 
+#import classes
+from TrandingViewClasses import *
+companies_urls = ['EGX-AUTO'] #get from https://www.tradingview.com/symbols/NASDAQ-AAPL/ Support multiple tickers.
+companies_data = START.get_data(companies_urls) #Get from DataBase or Website
+company = companies_data[0] #get the first company
+company_income_statement = IncomeStatementVisualizer(company_data=company)
+company_balance_sheet = BalanceSheetVisualizer(company_data=company)
+company_cashflow_statement = CashflowStatementVisualizer(company_data=company)
+company_statistics_ratios = StatisticsRatiosVisualizer(company_data=company)
+company_dividents = DividentsVisualizer(company_data=company)

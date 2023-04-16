@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,34 +13,42 @@
     rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
+
   <body>
-    {% block content %}
     <div class="wrapper">
     	<div class="title-text">
         <div class="title">
 					Welcome Back<br><span>Sign in with</span>
         </div>
+        
     	</div>
+      <h6 class="card-category">
+        {% if msg %}
+          <span class="text-danger">{{ msg | safe }}</span>
+        {% endif %}  
+    </h6>
+    
     <div class="form-container">
         <div class="form-header">
 					<div class="icons">
 						<div class="facebook-icon"><i class="fa-brands fa-facebook"></i></div>
 						<div class="google-icon"><i class="fa-brands fa-google"></i></div>
 					</div>
-					<div class="fh-2">
-            <div class="or">or</div>
-          </div>
-				</div>
+					</div>
+
       <div class="form-inner">
           <form method="post" class="signup">
             {% csrf_token %}
             {{ form.as_p }}
-            <div class="field">
-              <input type="text" placeholder="Email Address" required>
+            
+            <div class="form-control">
+            {{ form.username }}
             </div>
-            <div class="field">
-              <input type="password" placeholder="Password" required>
+
+            <div class="form-control">
+            {{ form.password }}
             </div>
+
             <div class="remember-me">
               <label class="switch">
                 <input type="checkbox" checked>
@@ -47,16 +56,20 @@
               </label>
               <div class="switch-text">Remember me</div>
             </div>
+            
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Sign In">
             </div>
+          
           </form>
         </div>
+        
         <div class="form-footer">
           Don't have an account?
           <a href={% url 'register' %}>sign up</a>
         </div>
+      
       </div>
     </div>
   </body>

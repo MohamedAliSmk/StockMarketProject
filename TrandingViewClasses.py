@@ -130,13 +130,13 @@ class DataBase():
         data = Instance of ScrapeTrendingView() Class
         """
         
-        cls.StoreInDatabase(data=data.income_statement, table_name=(data.company_url + '/Income-Statement'))
-        cls.StoreInDatabase(data=data.balanse_sheet, table_name=(data.company_url + '/Balance-Sheet'))
-        cls.StoreInDatabase(data=data.cashflow_statement, table_name=(data.company_url + '/Cashflow-Statement'))
-        cls.StoreInDatabase(data=data.statistics, table_name=(data.company_url + '/Ratios'))
+        cls.StoreInDatabase(data=data.income_statement, table_name=(data.company_url + '/Income-Statement'), if_exists_value='replace', data_index=True)
+        cls.StoreInDatabase(data=data.balanse_sheet, table_name=(data.company_url + '/Balance-Sheet'), if_exists_value='replace', data_index=True)
+        cls.StoreInDatabase(data=data.cashflow_statement, table_name=(data.company_url + '/Cashflow-Statement'), if_exists_value='replace', data_index=True)
+        cls.StoreInDatabase(data=data.statistics, table_name=(data.company_url + '/Ratios'), if_exists_value='replace', data_index=True)
         if data.dividents is not None:
-            cls.StoreInDatabase(data=data.dividents, table_name=(data.company_url + '/Dividents'))
-        cls.StoreInDatabase(data=data.company_data, table_name=(data.company_url + '/Company-Data'))
+            cls.StoreInDatabase(data=data.dividents, table_name=(data.company_url + '/Dividents'), if_exists_value='replace', data_index=True)
+        cls.StoreInDatabase(data=data.company_data, table_name=(data.company_url + '/Company-Data'), if_exists_value='replace', data_index=True)
 
     @classmethod
     def StoreInDatabase(cls, data, table_name, if_exists_value='replace', data_index=True): #method that writes the data into the database
@@ -682,13 +682,13 @@ class ScrapeTrendingView():
 
         self.company_url = company_url
 
-        company_name_css = "#js-category-content > div.tv-category-symbol-header > div.js-symbol-page-header-root > div > div > div > h2"
+        company_name_css = "#js-category-content > div.technicals-root > div > div > div.container-PzISMB5Q > div"
         company_name_element = self.driver.find_element(By.CSS_SELECTOR, company_name_css)
         self.company_name = company_name_element.text
         # print(self.company_name)
 
         # company_ticker_css = "span[class='tv-symbol-header__second-line tv-symbol-header__second-line--with-hover js-symbol-dropdown'] span[class='tv-symbol-header__second-line--text']"
-        company_ticker_css = '#js-category-content > div.tv-category-symbol-header > div.js-symbol-page-header-root > div > div > div > div.buttonsRow-HFnhSVZy > button.buttonMedium-JLr4OyLc.light-button-bYDQcOkp.with-end-icon-bYDQcOkp.variant-secondary-bYDQcOkp.color-gray-bYDQcOkp.size-medium-bYDQcOkp.typography-medium16px-bYDQcOkp > span.content-bYDQcOkp.nowrap-bYDQcOkp > span > span > div > span:nth-child(2)'
+        company_ticker_css = '#js-category-content > div.tv-category-symbol-header > div.js-symbol-page-header-root > div > div > div > div.buttonsRow-HFnhSVZy > div > span > div > span:nth-child(2)'
         company_ticker_element = self.driver.find_element(By.CSS_SELECTOR, company_ticker_css)
         self.company_ticker = company_ticker_element.text
         # print(self.company_ticker)
@@ -700,7 +700,6 @@ class ScrapeTrendingView():
         # exchange_xpath = "//span[@class='tv-symbol-header__second-line']/span[2]"
         # exchage_element = self.driver.find_element(By.XPATH, exchange_xpath)
         # self.exchange = exchage_element.text
-
     def companyData_to_dataframe(self):
 
         data = {'company_url':self.company_url,
@@ -727,7 +726,7 @@ class ScrapeTrendingView():
         cookie_button_element.click()
 
     def switch_annual_data(self):
-        annual_button_xpath = "//button[@id='FY']"
+        annual_button_xpath = "//*[@id='FY']"
         annual_button_element = self.driver.find_element(by=By.XPATH, value=annual_button_xpath)
         annual_button_element.click()
 
@@ -2022,7 +2021,7 @@ class CustomCalculations():
 
 
 
-screener = ScrapeTrendingView('NASDAQ-AAPL')
+#screener = ScrapeTrendingView('NASDAQ-AAPL')
 
 #DataBase.Start()
 #result = DataBase.FindNumberOfSectorElements(table_name="Tickers", market="USA",symbol="Common Stock", exchange="NYSE ARCA", sector="Commercial Services")

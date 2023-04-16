@@ -13,53 +13,66 @@
     rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
+
   <body>
-    {% block content %}
     <div class="wrapper">
-    	<div class="title-text">
+    
+      <div class="title-text">
         <div class="title">
 					Register With
         </div>
     	</div>
-    <div class="form-container">
+    
+      <div class="form-container">
         <div class="form-header">
 					<div class="icons">
 						<div class="facebook-icon"><i class="fa-brands fa-facebook"></i></div>
 						<div class="google-icon"><i class="fa-brands fa-google"></i></div>
 					</div>
-					<div class="fh-2">or</div>
 				</div>
+
       <div class="form-inner">
           <form method="post" class="signup">
             {% csrf_token %}
             {{ form.as_p }}
-            <div class="field">
-              <input type="text" placeholder="Email Address" required>
+            <div class="form-control">
+              {{ form.username }}
+            </div>
+            <span class="text-danger">{{ form.username.errors }}</span>
+
+            <div class="form-control">
               {{ form.email }}
             </div>
-            <div class="field">
-              <input type="password" placeholder="Password" required>
+            <span class="text-danger">{{ form.email.errors }}</span>
+
+            <div class="form-control">
               {{ form.password1 }}
             </div>
-            <div class="field">
-              <input type="password" placeholder="Confirm Password" required>
+            <span class="text-danger">{{ form.password1.errors }}</span>
+
+            <div class="form-control">
               {{ form.password2 }}
             </div>
+            <span class="text-danger">{{ form.password2.errors }}</span>
+
             <label class="terms">
               i agree to the <span>Terms and Condition</span>
               <input type="checkbox">
               <span class="checkmark"></span>
             </label>
+
             <div class="field btn">
               <div class="btn-layer"></div>
               <input type="submit" value="Sign Up">
             </div>
           </form>
         </div>
+
         <div class="form-footer">
           already have an account?
-          <a href={% 'login' %}>sign in</a>
+          <a href={% url 'login' %}>sign in</a>
         </div>
+        
       </div>
     </div>
   </body>

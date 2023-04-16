@@ -10,7 +10,7 @@ urlpatterns = [
     # The home page
     path('', views.index, name='home'),
     path('setting/',views.setting , name="setting"),
-    path('profile/',views.profile , name="Profile"),
+    path('profile/',views.profile , name="profile"),
     path('Companys/<str:Ticker>',views.Companys , name="Companys"),
     path('LastNews/',views.LastNews , name="LastNews"),
     path('Trending/',views.Trending , name="Trending"),
