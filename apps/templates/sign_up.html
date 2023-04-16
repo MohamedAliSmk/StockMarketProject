@@ -34,26 +34,26 @@
       <div class="form-inner">
           <form method="post" class="signup">
             {% csrf_token %}
-            <div class="form-control">
-              <label class="bmd-label-floating">Username</label>
+            <div class="field">
+              <label class="bmd-label-floating"></label>
               {{ form.username }}
             </div>
             <span class="text-danger">{{ form.username.errors }}</span>
 
-            <div class="form-control">
-              <label class="bmd-label-floating">Email Address</label>
+            <div class="field">
+              <label class="bmd-label-floating"></label>
               {{ form.email }}
             </div>
             <span class="text-danger">{{ form.email.errors }}</span>
 
-            <div class="form-control">
-              <label class="bmd-label-floating">password</label>
+            <div class="field">
+              <label class="bmd-label-floating"></label>
               {{ form.password1 }}
             </div>
             <span class="text-danger">{{ form.password1.errors }}</span>
 
-            <div class="form-control">
-              <label class="bmd-label-floating">confirm passwords</label>
+            <div class="field">
+              <label class="bmd-label-floating"></label>
               {{ form.password2 }}
             </div>
             <span class="text-danger">{{ form.password2.errors }}</span>
