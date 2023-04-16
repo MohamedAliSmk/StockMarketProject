@@ -180,27 +180,32 @@
                 <div class="setting-page   m-20   g-20">
         
                     <!--   start setting box -->
-                    <div class="p-20    rad-10">
-                        <h2  class="mt-0    mb-10"> Site Control  </h2>
-                        <p class="mt-0  mb-20  c-gray   fs-15">  Control The Website There Is Maintenance  </p>
-                        <div class="mb-15   between-flex    ">
-                            <div>
-                                <br>
-                                <span class="fs-20"> Website Control  </span>
-                                <p class="    mb-0    fs-15 c-gray"> open/close Website And Type Reasons  </p>
+                    <div class="p-20 rad-10">
+                        <h2 class="mt-0 mb-10">Site Control</h2>
+                        <p class="mt-0 mb-20 c-gray fs-15">Control the website during maintenance</p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-15 between-flex">
+                                <div>
+                                    <br>
+                                    <span class="fs-20">Website Control</span>
+                                    <p class="mb-0 fs-15 c-gray">Open/close website and type reasons</p>
+                                </div>
+                                <div>
+                                    <br>
+                                    <label>
+                                        <input type="checkbox" class="togell-checkbox" name="site_control" {% if not settings.SITE_CLOSED %}checked{% endif %} value="open">
+                                        <div class="togell-switch">
+                                            <span class="one"></span>
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
-                            <div>
-                                <br>
-                                <label >
-                                    <input type="checkbox" class="togell-checkbox" checked  >
-                                    <div class="togell-switch">
-                                        <span class="one"></span>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                        <textarea class="close-message   b-none   p-10   rad-10   d-block  w-full"   placeholder="close message content"></textarea>
+                            <textarea name="close_message" class="close-message b-none p-10 rad-10 d-block w-full" placeholder="Close message content">{{ request.user.profile.close_message }}</textarea>
+                            <button type="submit" class="btn btn-primary mt-20">Save changes</button>
+                        </form>
                     </div>
+                    
                     <!-- end setting box  -->
                     <!--   start setting box -->
                     <div class="p-20   rad-10">
@@ -314,7 +319,7 @@
                         </div>
 
                         <div class="control   d-flex   align-center   mb-15 ">
-                            <input type="checkbox" id="three" checked >
+                          z  <input type="checkbox" id="three" checked >
                             <label for="three">  Tickets Statistics  </label>
                         </div>
 
