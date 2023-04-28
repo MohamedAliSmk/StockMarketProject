@@ -879,16 +879,19 @@ body {
     z-index: 999;
 }
 
+body{
+	color: black;
+}
+
+
 /* start company */
 .companes-block{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding-top: 30px;
+    padding-top: 10px;
 }
-.company-name {
-    color: black;
-}
+
 .tesla-block,
 .Apple-block,
 .meta-block,
@@ -900,7 +903,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-left: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
     flex-wrap: wrap;
     cursor: pointer;
     padding: 20px;
@@ -923,28 +926,28 @@ body {
 }
 }
 .amazon-block:hover{
-    background-color: #bbb;
+    background-color:#f0f4f8;
 }
 .microsoft-block:hover{
-    background-color: #bbb;
+    background-color: #f0f4f8;
 }
 .tesla-block:hover{
-    background-color:#bbb;
+    background-color:#f0f4f8;
 }
 .meta-block:hover{
-background-color:#bbb;
+background-color:#f0f4f8;
 }
 .starpucs-block:hover{
-    background-color: #bbb;
+    background-color: #f0f4f8;
 }
 .google-block:hover{
-    background-color:#bbb;
+    background-color:#f0f4f8;
 }
 .Apple-block:hover{
-    background-color:#bbb;
+    background-color:#f0f4f8;
 }
 .see-more:hover{
-    background-color: #bbb;
+    background-color: #f0f4f8;
     border-radius: 100px;
 }
 .see-more{

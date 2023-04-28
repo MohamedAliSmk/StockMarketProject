@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="../static/css/master.css">
     <!--  normalize link -->
     <link rel="stylesheet" href="../static/css/normalise.css">
+		<!-- companies styling -->
+		<link rel="stylesheet" href="../static/css/company-style.css">
     <!--  all link   -->
     <link rel="stylesheet" href="../static/css/all.min.css">
     <!--  font link  -->
@@ -203,19 +205,70 @@
             
             <button id="up"> Up </button>
             <h1>Real-Time Stock Prices</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Price</th>
-                        <th>Change</th>
-                    </tr>
-                </thead>
-                <tbody id="stock-table-body">
-                     
-                </tbody>
-            </table>
-        
+            <div class="companes-container">
+              <div class="company-image">
+								<img src="../static/images/apple-logo-small.png" alt="logo photo" >
+							</div>
+							<div class="company-information">
+								<div class="company-name">
+									<h1>Apple</h1>
+								</div>
+								<div class="company-stock-value">
+									<div class="stock-value-child">
+										<div class="stock-price">
+											<span class="stock-value-price">168.41</span>
+											<span class="currency">USD</span>
+										</div>
+										<div class="stock-price-change">
+											<span class="price-change-child">+4.65</span>
+											<span class="price-change-child">+2.84%</span>
+										</div>
+										<div class="stock-price-date">
+											<span class="fixed-part">Last update at</span>
+											<span class="changed-part">Apr 27, 19:59 EDT</span>
+										</div>
+									</div>
+								</div>
+						</div>
+						<!-- Tab links -->
+							<div class="tab">
+								<button class="tablinks" onclick="openblock(event, 'overview')">Overview</button>
+								<button class="tablinks" onclick="openblock(event, 'Financial')">Financial</button>
+								<button class="tablinks" onclick="openblock(event, 'Technicals')">Technicals</button>
+							</div>
+							<!-- Tab content -->
+							<div id="overview" class="tabcontent" style="display: block;" >
+								<h3>overview</h3>
+								<p>overview content</p>
+							</div>
+							<div id="Financial" class="tabcontent">
+								<h3>Financial</h3>
+								<p>Financial content</p>
+							</div>
+							<div id="Technicals" class="tabcontent">
+								<h3>Technicals</h3>
+								<p>Technicals content</p>
+							</div>
+					</div>
+    		    <script>
+							function openblock(evt, blockName) {
+								// Declare all variables
+								var i, tabcontent, tablinks;
+								// Get all elements with class="tabcontent" and hide them
+								tabcontent = document.getElementsByClassName("tabcontent");
+								for (i = 0; i < tabcontent.length; i++) {
+									tabcontent[i].style.display = "none";
+								}
+								// Get all elements with class="tablinks" and remove the class "active"
+								tablinks = document.getElementsByClassName("tablinks");
+								for (i = 0; i < tablinks.length; i++) {
+									tablinks[i].className = tablinks[i].className.replace(" active", "");
+								}
+								// Show the current tab, and add an "active" class to the button that opened the tab
+								document.getElementById(blockName).style.display = "block";
+								evt.currentTarget.className += " active";
+							}
+						</script>
             <script>
                 const socket = new WebSocket('ws://' + window.location.host + '/ws/stocks/');
         
@@ -255,9 +308,9 @@
             <h1 class="p-relative"> Us stock Companes </h1>
             <div class="companes-block  ">
                 <div class="tesla-block  ">
-                    <img src="../static/images/tesla-symbol.jpg" class="logoes"  alt="logo photo">
+                    <img src="../static/images/tesla-smalllogo.png" class="logoes"  alt="logo photo">
                     <div class="company-details">
-                    <a url="{% url 'Companys' Ticker='GOOG' %}">    
+                    <a url="{% url 'Companys' Ticker='GOOG' %}" style="color:#0075ff">    
                          <h2> Tesla </h2> 
                         </a>
                     </div>
@@ -267,7 +320,7 @@
                 </div>
                 <div class="Apple-block   ">
                     <a href="Apple.html">
-                        <img src="../static/images/apple-logo-1656693488392.webp" class="logoes"   alt="logo photo">
+                        <img src="../static/images/apple-logo-small.png" class="logoes"   alt="logo photo">
                         <div class="company-details">
                             <a href="companyContent.html"> <h2 > Apple </h2> </a>
                         </div>
@@ -291,7 +344,7 @@
 
                 </div>
                 <div class="google-block   ">
-                    <img src="../static/images/mkXgKuGBww7TQUASvxRxmR-320-80.jpg" class="logoes"   alt="logo photo">
+                    <img src="../static/images/Google__G__Logo.svg.png" class="logoes"   alt="logo photo">
                     <div class="company-details">
                         <a href="companyContent.html"> <h2> Google </h2> </a>
                         
@@ -302,10 +355,10 @@
 
                 </div>
 
-                <div class=" amazon-block   ">
-                    <img src="../static/images/Amazon-Logo-Font-1-scaled.webp" class="logoes"   alt="logo photo">
+                <div class="amazon-block">
+                    <img src="../static/images/amazon-small-logo.png" class="logoes"   alt="logo photo">
                     <div class="company-details">
-                        <a href="companyContent.html"> <h2> amazon </h2> </a>
+                        <a href="companyContent.html"> <h2> Amazon </h2> </a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -314,15 +367,15 @@
                 <div class=" microsoft-block   ">
                     <img src="../static/images/microsoft-logo-icon-editorial-free-vector.webp" class="logoes"   alt="logo photo">
                     <div class="company-details">
-                        <a href="companyContent.html"> <h2> microsoft </h2> </a>
+                        <a href="companyContent.html"> <h2> Microsoft </h2> </a>
                     </div>
                     <div class="scrap-value">  
                     </div>
                 </div>
                 <div class="starpucs-block   ">
-                    <img src="../static/images/8tEvBrHEeMTTBt26SiniHM-1200-80.jpg" class="logoes"   alt="logo photo">
+                    <img src="../static/images/starbucks-smalllogo.jpg" class="logoes"   alt="logo photo">
                     <div class="company-details">
-                        <a href="companyContent.html"> <h2> starpucs </h2> </a>
+                        <a href="companyContent.html"> <h2> Starbucks </h2> </a>
                     </div>
                     <div class="scrap-value">  
                     </div>
