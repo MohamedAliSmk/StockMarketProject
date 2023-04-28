@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="{% url 'Companys' Ticker='GOOG' %}" >  
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="{% url 'Companys' companies_urls='EGX-ORHD' %}" >  
                         <i class="fa-regular fa-building"></i>
                         <span class="hide-mobile" > Companys </span>
                     </a>
@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'chart' %} >  
+                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href="{% url 'chart' Ticker='GOOG' %}" >  
                         <i class="fa-solid fa-chart-pie"></i>
                         <span class="hide-mobile" > chart </span>
                     </a>
@@ -360,18 +360,22 @@
             <!--  start  chart  -->
             <h1 class="p-relative"> chart </h1>
             <div class="wrapper   d-grid   gap-20">
+                {% block Left_Plot %}
+
+                {% autoescape off %}
+                    {{ plot_div_left }}
+                {% endautoescape %}
+
+            {% endblock Left_Plot %}
 
             </div>
             <!--  end  chart  -->
             <br>
             <br>
-
-            
-
             <!--  start  Companys  -->
             <h1 class="p-relative"> Companys </h1>
             <br>
-            <a href="{% url 'Companys' Ticker='GOOG' %}">
+            <a href="{% url 'Companys' companies_urls='EGX-ORHD' %}">
                 <h1 class="p-relative"> Us companyes </h1>
             </a>
 
@@ -425,7 +429,7 @@
                         </div>
                     </div>
                     <div class="see-more">
-                        <a href="{% url 'Companys' Ticker='GOOG' %}">
+                        <a href="{% url 'Companys' companies_urls='EGX-ORHD' %}">
                             <h2> see more </h2>
                         </a>
                     </div>
@@ -435,7 +439,7 @@
                 <br>
                 <br>
                 <br>
-            <a href="{% url 'Companys' Ticker='GOOG' %}">
+            <a href="{% url 'Companys' companies_urls='EGX-ORHD' %}">
                 <h1 class="p-relative"> EG stock Companes </h1>
             </a>
             <div class="companes-block  ">
@@ -565,13 +569,13 @@
                         <h5 class="text-light">  LINKS </h5>
                         <ul class="list-unstyled lh-lg c-gray">
                             <li> <a  href="/" class="c-gray"> Home </a>   </li>
-                            <li> <a href="{% url 'Companys' Ticker='GOOG' %}" class="c-gray"> Our Services </a>  </li>
+                            <li> <a href="{% url 'Companys' companies_urls='EGX-ORHD' %}" class="c-gray"> Our Services </a>  </li>
                             <li> <a href={% url 'profile' %}  class="c-gray">   Portfolio </a></li>
-                            <li><a href={% url 'chart' %}  class="c-gray"> chart </a></li>
+                            <li><a href="{% url 'chart' Ticker='GOOG' %}"  class="c-gray"> chart </a></li>
                             <li > <a href={% url 'setting' %}  class="c-gray"> Support </a></li>
                             <li > <a href={% url 'LastNews' %}  class="c-gray"> Newes </a></li>
                             <li > <a href={% url 'Trending' %}  class="c-gray"> Trending </a></li>
-                            <li > href={% url 'Community' %} class="c-gray"> Learn ! </a></li>
+                            <li > <a href={% url 'Community' %} class="c-gray"> Learn ! </a></li>
                             <li>Terms and Condition</li>
                         </ul>
                     </div>

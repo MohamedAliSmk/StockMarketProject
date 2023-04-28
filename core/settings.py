@@ -56,6 +56,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'core.urls'
 TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
 
+AUTH_PROFILE_MODULE = 'apps.authentication.UserProfile'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

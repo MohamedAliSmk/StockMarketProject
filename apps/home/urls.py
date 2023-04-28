@@ -11,15 +11,13 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('setting/',views.setting , name="setting"),
     path('profile/',views.profile , name="profile"),
-    path('Companys/<str:Ticker>',views.Companys , name="Companys"),
+    path('Companys/',views.Companys , name="Companys"),
+    path('Companys/<str:companies_urls>',views.Companys , name="Companys"),
     path('LastNews/',views.LastNews , name="LastNews"),
     path('Trending/',views.Trending , name="Trending"),
-    path('chart/',views.chart , name="chart"),
+    path('chart/<str:Ticker>',views.chart , name="chart"),
     path('Community/',views.Community , name="Community"),
-    path('stock-prices/', views.stock_prices, name='stock_prices'),
-    path('Companys/stocks/', views.stocks, name='stocks'),
-    path('Companys/stocks/data/', views.stocks_data, name='stocks_data'),
-
+    path('predict/<str:ticker_value>/<str:number_of_days>/', views.predict),
 
     path('i18n/', include(i18n_urlpatterns)),#for translation
 

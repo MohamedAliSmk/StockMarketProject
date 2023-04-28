@@ -22,6 +22,9 @@
     <!--  all link   -->
     <link rel="stylesheet" href="../static/css/all.min.css">
     <!--  font link  -->
+    <link rel="stylesheet" href="../static/css/styles.css">
+    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&#038;display=swap" rel="stylesheet" />
@@ -58,7 +61,7 @@
                     </a>
                 </li>
                 <li>
-                    <a  class="active   d-flex  align-center  fs-20     rad-6  p-10 " href="{% url 'Companys' Ticker='GOOG' %}" >  
+                    <a  class="active   d-flex  align-center  fs-20     rad-6  p-10 " href="{% url 'Companys' companies_urls='EGX-ORHD' %}" >  
                         <i class="fa-regular fa-building"></i>
                         <span class="hide-mobile" > Companys </span>
                     </a>
@@ -76,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'chart' %} >  
+                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href="{% url 'chart' Ticker='GOOG' %}" >  
                         <i class="fa-solid fa-chart-pie"></i>
                         <span class="hide-mobile" > chart </span>
                     </a>
@@ -200,58 +203,58 @@
             <h1 class="p-relative"> Companys </h1>
 
             <!-- start up botton -->
-            
-            <button id="up"> Up </button>
-            <h1>Real-Time Stock Prices</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Price</th>
-                        <th>Change</th>
-                    </tr>
-                </thead>
-                <tbody id="stock-table-body">
-                     
-                </tbody>
-            </table>
-        
-            <script>
-                const socket = new WebSocket('ws://' + window.location.host + '/ws/stocks/');
-        
-                socket.onmessage = function(event) {
-                    const message = JSON.parse(event.data);
-        
-                    if (message.type === 'stock_data') {
-                        const stocks = message.data;
-        
-                        const stockTableBody = document.getElementById('stock-table-body');
-                        stockTableBody.innerHTML = '';
-        
-                        for (let i = 0; i < stocks.length; i++) {
-                            const stock = stocks[i];
-        
-                            const row = document.createElement('tr');
-        
-                            const symbolCell = document.createElement('td');
-                            symbolCell.textContent = stock.symbol;
-                            row.appendChild(symbolCell);
-        
-                            const priceCell = document.createElement('td');
-                            priceCell.textContent = stock.price;
-                            row.appendChild(priceCell);
-        
-                            const changeCell = document.createElement('td');
-                            changeCell.textContent = stock.change + '%';
-                            row.appendChild(changeCell);
-        
-                            stockTableBody.appendChild(row);
-                        }
-                    }
-                };
-            </script>
-        
+    <header>
+        <h1 class="company-name">{{ company_name }}</h1>
+        <p class="exchange-name"> {{ exchange }}</p>
+        <p class="currency">{{ currency }}</p>
+        <img class="company-logo" src="company-logo.png" alt="Company Logo">
+        <p class="price-change">({{ Current_price }} , {{ changes }})</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="#overview">Overview</a>
+        <a href="#financial">Financial</a>
+        <a href="#technical">Technical</a>
+        <a href="#prediction">Prediction</a>
+    </nav>
+
+    <section id="overview">
+        <h2>Overview</h2>
+        <h3>About {{ company_name }}</h3>
+        <div class="graph">
+            <!-- Insert graph here -->
+            <div style="width: 75%;">
+                <canvas id="stockChart"></canvas>
+            </div>
+        </div>
+        <div class="company-data">
+            <!-- Insert company data here -->
+        </div>
+    </section>
+
+    <section id="financial">
+        <h2>Financial</h2>
+        <div class="balance-sheet">
+            <!-- Insert balance sheet here -->
           
+        </div>
+        <div class="income-statement">
+            <!-- Insert income statement here -->
+        </div>
+        <div class="cash-flow">
+            <!-- Insert cash flow here -->
+        </div>
+    </section>
+
+    <section id="technical">
+        <!-- Insert technicals here -->
+    </section>
+
+    <section id="prediction">
+        <!-- Insert predictions here -->
+    </section>
+
+            
             <h1 class="p-relative"> Us stock Companes </h1>
             <div class="companes-block  ">
                 <div class="tesla-block  ">
@@ -446,9 +449,9 @@
                         <h5 class="text-light">  LINKS </h5>
                         <ul class="list-unstyled lh-lg c-gray">
                             <li> <a  href="/" class="c-gray"> Home </a>   </li>
-                            <li> <a href="{% url 'Companys' Ticker='GOOG' %}" class="c-gray"> Our Services </a>  </li>
+                            <li> <a href="{% url 'Companys' companies_urls='EGX-ORHD' %}" class="c-gray"> Our Services </a>  </li>
                             <li> <a href={% url 'profile' %}  class="c-gray">   Portfolio </a></li>
-                            <li><a href={% url 'chart' %}  class="c-gray"> chart </a></li>
+                            <li><a href="{% url 'chart' Ticker='GOOG' %}"  class="c-gray"> chart </a></li>
                             <li > <a href={% url 'setting' %}  class="c-gray"> Support </a></li>
                             <li > <a href={% url 'LastNews' %}  class="c-gray"> Newes </a></li>
                             <li > <a href={% url 'Trending' %}  class="c-gray"> Trending </a></li>
@@ -509,14 +512,55 @@
     </div>
     <!--  end footer -->
             <!-- link to java-script file  -->
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
     <script src="../static/Java-script/upbotton.js"></script>
     <script src="../static/Java-script/Translation.js"></script>
     <script src="../static/Java-script/main.js"></script>
     <script src="../static/js/all.min.js"></script>
     <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fetch the stock data from the Django API
+        async function fetchStockData() {
+            const stockSymbol = '{{ symbol }}'; // Replace with the desired stock symbol
+            const response = await fetch(`/api/stock-data/${stockSymbol}/`);
+            const stockData = await response.json();
+            return stockData;
+        }
 
-    
+        // Initialize the chart
+        async function initChart() {
+            const stockData = await fetchStockData();
+            const ctx = document.getElementById('stockChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: stockData.map(dataPoint => dataPoint.Date),
+                    datasets: [{
+                        label: 'Close Price',
+                        data: stockData.map(dataPoint => dataPoint.Close),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'month'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        initChart();
+    </script>    
 </body>
 </html>
 
