@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import UserProfileExtended
 
 
 class LoginForm(forms.Form):
@@ -53,3 +54,24 @@ class SignUpForm(UserCreationForm):
 class Meta:
     model = User
     fields = ('username', 'email', 'password1', 'password2', 'last_name', 'first_name')
+
+
+class UserProfileExtendedForm(forms.ModelForm):
+    class Meta:
+        model = UserProfileExtended
+        fields = ('lastName',
+                'country',
+                'dateOfBirth',
+                'jobTitle',
+                'yearsOfExperience',
+                'paymentMethod',
+                'subscription',
+                'photo',
+                'phoneNumber',
+                'skills',
+                'latestActivities',
+                'bio',
+                'twitter',
+                'facebook',
+                'linkedin',
+                'youtube',)

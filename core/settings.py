@@ -1,28 +1,29 @@
-import os, environ
+import os, sys
+import environ
+from decouple import config
+from unipath import Path
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = Path(__file__).parent
+CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
 )
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY', default='S#perS3crEt_007')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Assets Management
 ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets') 
 
 # load production server from .env
-ALLOWED_HOSTS        = ['localhost', 'localhost:85', '127.0.0.1',               env('SERVER', default='127.0.0.1') ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', config('SERVER', default='127.0.0.1')]
 CSRF_TRUSTED_ORIGINS = ['http://localhost:85', 'http://127.0.0.1', 'https://' + env('SERVER', default='127.0.0.1') ]
 
 # Application definition
@@ -34,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.home',  # Enable the inner home (home)
+    'apps.home',
     'social_django',
     'channels',
+    'apps.authentication',
+    'Model',
 ]
 
 MIDDLEWARE = [
@@ -50,13 +53,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-
 ]
 
 ROOT_URLCONF = 'core.urls'
 TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
 
-AUTH_PROFILE_MODULE = 'apps.authentication.UserProfile'
+AUTH_PROFILE_MODULE = 'apps.authentication.models.UserProfile'
 
 TEMPLATES = [
     {
@@ -77,25 +79,22 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = 'apps.home.routing.application'
+#ASGI_APPLICATION = 'apps.home.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DATABASES = {
-        'default': {
-            'ENGINE': 'djongo',
-            'NAME': env('MONGO_DATABASE'),
-            'ENFORCE_SCHEMA': True,
-            'CLIENT': {
-                'host': env('MONGO_SERVER_CLUSTER_URL')
-            }  
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'Fintechers',
+        'ENFORCE_SCHEMA': False,
+        'CLIENT': {
+            'host': 'localhost:27017',
+        }
     }
 }
-
-
  
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -118,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'ar'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Africa/cairo'
 
@@ -183,10 +182,10 @@ LOGOUT_URL='apps.authentication:logout'
 
 
 
-#SOCIAL_AUTH_FACEBOOK_KEY =os.getenv('SOCIAL_AUTH_FACEBOOK_KEY') 
-#OCIAL_AUTH_FACEBOOK_SECRET = os.getenv('OCIAL_AUTH_FACEBOOK_SECRET')
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY =os.getenv('SOCIAL_AUTH_FACEBOOK_KEY') 
+SOCIAL_AUTH_FACEBOOK_SECRET = os.getenv('OCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'

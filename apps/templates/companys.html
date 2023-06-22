@@ -204,48 +204,12 @@
 
             <h1 class="p-relative"> Companys </h1>
 
-            <!-- start up botton -->
-<<<<<<< HEAD
-    <header>
-        <h1 class="company-name">{{ company_name }}</h1>
-        <p class="exchange-name"> {{ exchange }}</p>
-        <p class="currency">{{ currency }}</p>
-        <img class="company-logo" src="company-logo.png" alt="Company Logo">
-        <p class="price-change">({{ Current_price }} , {{ changes }})</p>
-    </header>
-
-    <nav class="navbar">
-        <a href="#overview">Overview</a>
-        <a href="#financial">Financial</a>
-        <a href="#technical">Technical</a>
-        <a href="#prediction">Prediction</a>
-    </nav>
-
-    <section id="overview">
-        <h2>Overview</h2>
-        <h3>About {{ company_name }}</h3>
-        <div class="graph">
-            <!-- Insert graph here -->
-            <div style="width: 75%;">
-                <canvas id="stockChart"></canvas>
-            </div>
-        </div>
-        <div class="company-data">
-            <!-- Insert company data here -->
-        </div>
-    </section>
-
-    <section id="financial">
-        <h2>Financial</h2>
-        <div class="balance-sheet">
-            <!-- Insert balance sheet here -->
-=======
-            
+            <!-- start up botton -->            
             <button id="up"> Up </button>
             <h1>Real-Time Stock Prices</h1>
             <div class="companes-container">
               <div class="company-image">
-								<img src="../static/images/apple-logo-small.png" alt="logo photo" >
+								<img src="{{  }}" alt="logo photo" >
 							</div>
 							<div class="company-information">
 								<div class="company-name">
@@ -258,8 +222,8 @@
 											<span class="currency">USD</span>
 										</div>
 										<div class="stock-price-change">
-											<span class="price-change-child">+4.65</span>
-											<span class="price-change-child">+2.84%</span>
+											<span class="price-change-child">{{ price }}</span>
+											<span class="price-change-child"> {{ change_str }} </span>
 										</div>
 										<div class="stock-price-date">
 											<span class="fixed-part">Last update at</span>

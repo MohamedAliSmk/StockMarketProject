@@ -186,11 +186,13 @@
                                       </div>
                                     </div>
                                   </li>
-                                   
+                                  {% if not is_logged_in %}
+
                                 <li>
                                     <a href={% url 'login' %} class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
 
                                 </li>
+                                {% endif %}
                                 <li>
                                     <div class="icons  fs-20  d-flex  space-between">
                                     
@@ -221,6 +223,7 @@
        
             <h1 class="p-relative"> Dashboard </h1>
             <!--   start  carousel   -->
+            {% if not is_logged_in %}
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -270,27 +273,25 @@
                 </div>
             </div>-->
             <br>
+            {% else %}
             <div class="wrapper   d-grid   gap-20">
-                <!--  start  welcome  widget   
                 <div class="welcome      rad-10    text-center-mobile    block-mobile">
                     <div class="intro   p-20   d-flex   space-between   bg-ccc">
                         <div>
-                            <h2  class="m-0" > Welcome  </h2>
+                            <h2  class="m-0" > Welcome, {{ user_profile.user.username }}!  </h2>
                             <p class="c-gray    mt-5">  FINTEC APP.  </p>
                         </div>
                         <img src="./images/welcome.png" class="hide-mobile " alt="">
                     </div>
                     <img src="./images/avatar.png" class="avatar" alt="">
                     <div class="body   text-center   d-flex   p-20   mt-20   mb-20    block-mobile">
-                        <div> mohmed ali <span class="d-block    c-gray    fs-14    mt-10"> Business Man </span> </div>
+                        <div>{{ user_profile.user.username }}!  <span class="d-block    c-gray    fs-14    mt-10"> Business Man </span> </div>
                         <div>80 <span class="d-block    c-gray   fs-14    mt-10"> Stocs </span> </div>
                         <div> $8500 <span class="d-block    c-gray    fs-14    mt-10"> Earned </span> </div>
                     </div>
                     <a href={% url 'profile' %} class="visit   d-block  fs-14    rad-6   bg-blue    w-fit    button-shape"  > profile  </a>
                 </div>
-                end  welcome  widget   -->
-
-                <!--  start   quick  widget   -
+                
                 <div class="quick-draft   p-20     rad-10     ">
                     <h2  class="mt-0    mb-20   ">  quick News </h2>
                     <p class="mt-0   mb-20   c-gray   fs-15  "> write adraft for yours ideas.  </p>
@@ -300,9 +301,7 @@
                         <input  class="save   d-block    fs-14    bg-blue   c-white    b-none   w-fit  button-shape " type="submit" value="Save">
                     </form>
                 </div>
-                <  end  quick   widget   -->
-
-                <!--  start tagets 
+               
                 <div class="targets    p-20     rad-10 ">
                     <h2  class="mt-0    mb-10"> Yearly Target  </h2>
                     <p class="mt-0   mb-20   fs-15"> Tagets Of Years   </p>
@@ -351,23 +350,39 @@
                         </div>
                     </div>
                 </div>
-            end  targets  -->
                 <!--  start    carousel  -->
             </div>
+            {% endif %}
             <br>
             <br>
             <br>
             <!--  start  chart  -->
             <h1 class="p-relative"> chart </h1>
             <div class="wrapper   d-grid   gap-20">
-                {% block Left_Plot %}
-
-                {% autoescape off %}
-                    {{ plot_div_left }}
-                {% endautoescape %}
-
-            {% endblock Left_Plot %}
-
+            <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div id="tradingview_6b1f5"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text">AAPL stock chart</span></a> by TradingView</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "autosize": true,
+    "symbol": "NASDAQ:AAPL",
+    "interval": "D",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_6b1f5"
+  }
+    );
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
             </div>
             <!--  end  chart  -->
             <br>
@@ -585,8 +600,10 @@
                     <div class="links">
                         <h5 class="text-light"> About Us </h5>
                         <ul class="list-unstyled  lh-lg c-gray">
+                            {% if is_logged_in %}
                             <li>  <a href={% url 'login' %} class="c-gray">  Sign In  </a></li>
                             <li> <a href={% url 'register' %} class="c-gray"> Register</a></li>
+                            {% endif %}
                             <li>  <a href="abouus.html" class="c-gray"> About Us </a></li>
                             <li>Blog</li>
                             <li>Contact Us</li>

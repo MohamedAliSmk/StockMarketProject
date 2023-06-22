@@ -41,7 +41,7 @@ class START():
 
             #if data is not loaded from Database
             if company_data.income_statement is None or \
-                company_data.balance_sheet is None or \
+                company_data.balanse_sheet is None or \
                 company_data.cashflow_statement is None or \
                 company_data.statistics is None or \
                 company_data.company_data is None:
@@ -113,7 +113,7 @@ class DataBase:
         """
 
         cls.StoreInDatabase(data=data.income_statement, collection_name=data.company_url + '/Income-Statement')
-        cls.StoreInDatabase(data=data.balance_sheet, collection_name=data.company_url + '/balance-Sheet')
+        cls.StoreInDatabase(data=data.balanse_sheet, collection_name=data.company_url + '/balance-Sheet')
         cls.StoreInDatabase(data=data.cashflow_statement, collection_name=data.company_url + '/Cashflow-Statement')
         cls.StoreInDatabase(data=data.statistics, collection_name=data.company_url + '/Ratios')
         if data.dividents is not None:
@@ -137,7 +137,7 @@ class DataBase:
     def GetFromDataBase(self, company_url):
         # get financial data from database
         self.income_statement = self.ReadFromDatabase(collection_name=company_url + "/Income-Statement")
-        self.balance_sheet = self.ReadFromDatabase(collection_name=company_url + "/balance-Sheet")
+        self.balanse_sheet = self.ReadFromDatabase(collection_name=company_url + "/balance-Sheet")
         self.cashflow_statement = self.ReadFromDatabase(collection_name=company_url + "/Cashflow-Statement")
         self.statistics = self.ReadFromDatabase(collection_name=company_url + "/Ratios")
         self.company_data = self.ReadFromDatabase(collection_name=company_url + "/Company-Data")
@@ -228,7 +228,7 @@ class ScrapeTrendingView():
                 break
         # scrape the data
         output = self.scrape_the_data(self.balanse_sheet_url)
-        self.balance_sheet = self.scraped_data_to_dataframe(output=output)
+        self.balanse_sheet = self.scraped_data_to_dataframe(output=output)
     def scrapeCashFlow(self, company_url):
 
         logger.info('Start CashFlow Scrape')
@@ -436,8 +436,3 @@ class ScrapeTrendingView():
             output.append(output_row)
         return output
     
-
-companies_urls = ['NASDAQ-TLSA'] 
-scrap = ScrapeTrendingView(companies_urls)
-df_of_income=scrap.scrapeIncomeStatement(companies_urls)
-print(type(df_of_income))

@@ -1,5 +1,4 @@
 import requests
-import yfinance as yf
 import yfm
 import yfinance as yf
 import pandas as pd
@@ -83,16 +82,275 @@ def getUSPrices(US_tickers):
         'Price Change': company_data['Close'].iloc[-1].values - company_data['Open'].iloc[-1].values,
     })
 
-#import classes
-from TrandingViewClasses import *
+"""def get_stock_data(request, Ticker):
+    stock_data = yf.download(Ticker, start='2020-01-01', end='2023-01-01')
+    stock_data.reset_index(inplace=True)
+    stock_data['Date'] = stock_data['Date'].apply(lambda x: x.strftime('%Y-%m-%d'))
+    response_data = stock_data.to_dict(orient='records')
+    return JsonResponse(response_data, safe=False)
 
-companies_urls = ['NASDAQ-AAPL'] #get from https://www.tradingview.com/symbols/NASDAQ-AAPL/ Support multiple tickers.
-companies_data = START.get_data(companies_urls) #Get from DataBase or Website
-company = companies_data[0] #get the first company
+def stocks(request):
+    companies = ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
+    data = {}
+    for company in companies:
+        stock = yf.Ticker(company)
+        data[company] = {
+            'price': stock.info['currentPrice'],
+            'change': stock.info['regularMarketChange'],
+        }
+        print(data)
+    return render(request, 'companys.html', {'data': data})
 
-company_income_statement = IncomeStatementVisualizer(company_data=company)
-company_balance_sheet = BalanceSheetVisualizer(company_data=company)
-company_cashflow_statement = CashflowStatementVisualizer(company_data=company)
-company_statistics_ratios = StatisticsRatiosVisualizer(company_data=company)
-company_dividents = DividentsVisualizer(company_data=company)
+def stock_prices(request):
+    return render(request, 'companys.html')
 
+def stocks_data(request):
+    companies =  ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
+    data = {}
+    for company in companies:
+        stock = yf.Ticker(company)
+        data[company] = {
+            'price': stock.info['currentPrice'],
+            
+            #'change': stock.info['regularMarketChange'],
+        }
+        
+    return JsonResponse(data)
+
+
+def get_news_data(stock):
+    api_key = '29de022d931f42e73af5b5884f4e970d'
+    url = f"https://financialmodelingprep.com/api/v3/stock_news?{stock}&page=0&apikey={api_key}"
+    response = requests.get(url)
+    data = json.loads(response.text)
+    return data
+
+"""
+def getPrice_Change(symbol):
+    data=yf.Ticker(symbol)
+    Price=data.info['currentPrice']
+    Previous_Day=data.info['previousClose']
+    change = ((Price - Previous_Day)/ Previous_Day)*100 
+    change= round(change,2) 
+    if change>0:
+        change=f'+ {change}%'
+        
+    elif change<0:
+        change=f'{change}%'
+    else:
+        change=f'{change}%'
+    PAC=[Price,change]
+    return PAC
+
+
+def get_comapny_data(symbol):
+    overview_response = yf.Ticker(symbol)
+    Company_data = overview_response.info
+    company_name=Company_data['shortName']
+    company_exchange=Company_data['exchange']
+    currency=Company_data['financialCurrency']
+    industry=Company_data['industry']
+    website=Company_data['website']
+    description=Company_data['longBusinessSummary']
+    data=[symbol,company_name,company_exchange,currency,industry,description,website]
+    return data
+    
+
+def get_companydata(symbol):
+    # Get the company data
+    company = yf.Ticker(symbol)
+    data = company.info
+
+    # Get the image
+    image_url = data["logo_url"]
+
+    # Get the exchange
+    exchange = data["exchange"]
+
+    # Get the company name
+    company_name = data["shortName"]
+
+    # Get the currency
+    currency = data["currency"]
+
+    # Get the website
+    website = data["website"]
+
+    # Get the CEO
+    ceo = data["ceo"]
+
+    # Get the description
+    description = data["longBusinessSummary"]
+
+    # Get the industry
+    industry = data["industry"]
+
+    # Get the sector
+    sector = data["sector"]
+
+    # Get the real time price
+    real_time_price = data["price"]
+
+    # Get the change
+    change = data["change"]
+
+    return {
+        "image_url": image_url,
+        "exchange": exchange,
+        "company_name": company_name,
+        "currency": currency,
+        "website": website,
+        "ceo": ceo,
+        "description": description,
+        "industry": industry,
+        "sector": sector,
+        "real_time_price": real_time_price,
+        "change": change
+    }
+
+import requests
+import yfinance as yf
+import pandas as pd
+
+def yf_Scraper(symbol):
+    data = yf.Ticker(symbol)
+    info = data.info
+    #print(info)
+    # Get stock price and change
+    current_price = info['currentPrice']
+    previous_close = info['regularMarketPreviousClose']
+    price_change = round((current_price - previous_close) / previous_close * 100, 2)
+    if price_change > 0:
+        price_change = f'+{price_change}%'
+    else:
+        price_change = f'{price_change}%'
+        
+    # Get company data
+    company_name = info['shortName']
+    company_exchange = info['exchange']
+    currency = info['financialCurrency']
+    industry = info['industry']
+    website = info['website']
+    description = info['longBusinessSummary']
+    
+    # Return data as dictionary
+    data_dict = {
+        'symbol': symbol,
+        'current_price': current_price,
+        'price_change': price_change,
+        'company_name': company_name,
+        'company_exchange': company_exchange,
+        'currency': currency,
+        'industry': industry,
+        'description': description,
+        'website': website,
+    }
+    
+    return data_dict
+
+
+
+"""companies_urls = ['EGX-ORHD'] #get from https://www.tradingview.com/symbols/NASDAQ-AAPL/ Support multiple tickers.
+    companies_data = START.get_data(companies_urls) #Get from DataBase or Website
+    company = companies_data[0] #get the first company
+
+    company_income_statement = IncomeStatementVisualizer(company_data=company)
+    company_balance_sheet = BalanceSheetVisualizer(company_data=company)
+    company_cashflow_statement = CashflowStatementVisualizer(company_data=company)
+    company_statistics_ratios = StatisticsRatiosVisualizer(company_data=company)
+    company_dividents = DividentsVisualizer(company_data=company)
+        
+    # get company data from Database
+    DataBase.Start()
+    tables = DataBase.ListTableRows('EGX-ORHD/Company-Data')
+    DataBase.Stop()
+    s = tables[0][0]  # assuming the first element of the first row is the Ticker
+    Tickerexchange = s.split("-")
+    Ticker=Tickerexchange[0]
+    exchange=Tickerexchange[1]
+    price = tables[7][0]
+    changes = tables[8][0]
+    currency = tables[9][0]    
+
+    # Define a dictionary to hold the financial data
+    financial_data = {}
+
+    # Display dividents
+    #dividents = company_dividents.dividents()
+    #financial_data['dividents'] = dividents
+
+    # Display income statement
+    revenue = company_income_statement.revenue()
+    operating_income = company_income_statement.operating_income()
+    pretax_income = company_income_statement.pretax_income()
+    discontinued_operations = company_income_statement.discontinued_operations()
+    net_income = company_income_statement.net_income()
+    diluted_net_income = company_income_statement.diluted_net_income()
+    eps = company_income_statement.eps()
+    shares = company_income_statement.shares()
+    ebit = company_income_statement.ebit()
+    operating_expenses = company_income_statement.operating_expenses()
+
+    financial_data['revenue'] = revenue
+    financial_data['operating_income'] = operating_income
+    financial_data['pretax_income'] = pretax_income
+    financial_data['discontinued_operations'] = discontinued_operations
+    financial_data['net_income'] = net_income
+    financial_data['diluted_net_income'] = diluted_net_income
+    financial_data['eps'] = eps
+    financial_data['shares'] = shares
+    financial_data['ebit'] = ebit
+    financial_data['operating_expenses'] = operating_expenses
+
+    # Display balance sheet
+    total_assets_liabilities_equity = company_balance_sheet.total_assets_liabilities_equity()
+    current_non_current_assets = company_balance_sheet.current_non_current_assets()
+    current_non_current_liabilities = company_balance_sheet.current_non_current_liabilities()
+    total_debt_net_debt = company_balance_sheet.total_debt_net_debt()
+    book_value_per_share = company_balance_sheet.book_value_per_share()
+
+    financial_data['total_assets_liabilities_equity'] = total_assets_liabilities_equity
+    financial_data['current_non_current_assets'] = current_non_current_assets
+    financial_data['current_non_current_liabilities'] = current_non_current_liabilities
+    financial_data['total_debt_net_debt'] = total_debt_net_debt
+    financial_data['book_value_per_share'] = book_value_per_share
+
+    # Display cashflow
+    cashflow_operating_investing_financial = company_cashflow_statement.cashflow_operating_investing_financial()
+    cashflow_operating_activities = company_cashflow_statement.cashflow_operating_activities()
+    cashflow_investing_activities = company_cashflow_statement.cashflow_investing_activities()
+    cash_from_financing_activities = company_cashflow_statement.cash_from_financing_activities()
+
+    financial_data['cashflow_operating_investing_financial'] = cashflow_operating_investing_financial
+    financial_data['cashflow_operating_activities'] = cashflow_operating_activities
+    financial_data['cashflow_investing_activities'] = cashflow_investing_activities
+    financial_data['cash_from_financing_activities'] = cash_from_financing_activities
+
+    # Display statistics
+    shares_outstanding = company_statistics_ratios.shares_outstanding()
+    enterprice_values = company_statistics_ratios.enterprice_values()
+    numer_of_employees_shareholders = company_statistics_ratios.numer_of_employees_shareholders()
+    price_ratios = company_statistics_ratios.price_ratios()
+    return_ratios = company_statistics_ratios.return_ratios()
+    margins = company_statistics_ratios.margins()
+    dept_ratios = company_statistics_ratios.dept_ratios()
+    liquidity_ratios = company_statistics_ratios.liquidity_ratios()
+
+    financial_data['shares_outstanding'] = shares_outstanding
+    financial_data['enterprice_values'] = enterprice_values
+    financial_data['numer_of_employees_shareholders'] = numer_of_employees_shareholders
+    financial_data['price_ratios'] = price_ratios
+    financial_data['return_ratios'] = return_ratios
+    financial_data['margins'] = margins
+    financial_data['dept_ratios'] = dept_ratios
+    financial_data['liquidity_ratios'] = liquidity_ratios
+
+    # Add the financial data to the context
+    context = {'exchange': exchange,
+            'currency': currency,
+            'Current_price': price,
+            'changes': changes,
+            'symbol': Ticker,
+            'financial_data': financial_data}
+    return render(request, 'companys.html', context)
+"""

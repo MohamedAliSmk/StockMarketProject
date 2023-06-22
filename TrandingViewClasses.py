@@ -25,6 +25,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from pymongo import MongoClient
+from pymongo.errors import PyMongoError
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, True)
+)
 
 #logger setup
 logger = logging.getLogger()
@@ -109,215 +117,224 @@ class START():
 
 class DataBase():
     
-    database_file = 'tradingview_database.db'
-    # database_file = 'database_test.db'
-
     @classmethod
-    def Start(cls): #Connect to Database
-        cls.conn = sqlite3.connect(cls.database_file) #connect to sqlite3-database
-        cls.cursor = cls.conn.cursor()
+    def Start(self): #Connect to Database
+        self.client = MongoClient(env("MONGO_SERVER_CLUSTER_URL"))
         logger.info('DataBase Connected')
 
     @classmethod
-    def Stop(cls): #Disconnect/Commit to Database
-        cls.conn.commit() # Commit your changes in the database
-        cls.conn.close() #Closing the connection
+    def Stop(self): #Disconnect/Commit to Database
+        self.client.close()
         logger.info('DataBase Disconnected')
     
     @classmethod
-    def AddToDatabase(cls, data): #method that innitiates the write-to-database method with the needed parameters
+    def AddToDatabase(cls, data):
         """
         data = Instance of ScrapeTrendingView() Class
         """
-        
-        cls.StoreInDatabase(data=data.income_statement, table_name=(data.company_url + '/Income-Statement'), if_exists_value='replace', data_index=True)
-        cls.StoreInDatabase(data=data.balanse_sheet, table_name=(data.company_url + '/Balance-Sheet'), if_exists_value='replace', data_index=True)
-        cls.StoreInDatabase(data=data.cashflow_statement, table_name=(data.company_url + '/Cashflow-Statement'), if_exists_value='replace', data_index=True)
-        cls.StoreInDatabase(data=data.statistics, table_name=(data.company_url + '/Ratios'), if_exists_value='replace', data_index=True)
+
+        cls.StoreInDatabase(data=data.income_statement, collection_name=data.company_url + '/Income-Statement')
+        cls.StoreInDatabase(data=data.balanse_sheet, collection_name=data.company_url + '/balance-Sheet')
+        cls.StoreInDatabase(data=data.cashflow_statement, collection_name=data.company_url + '/Cashflow-Statement')
+        cls.StoreInDatabase(data=data.statistics, collection_name=data.company_url + '/Ratios')
         if data.dividents is not None:
-            cls.StoreInDatabase(data=data.dividents, table_name=(data.company_url + '/Dividents'), if_exists_value='replace', data_index=True)
-        cls.StoreInDatabase(data=data.company_data, table_name=(data.company_url + '/Company-Data'), if_exists_value='replace', data_index=True)
+            cls.StoreInDatabase(data=data.dividents, collection_name=data.company_url + '/Dividents')
+        cls.StoreInDatabase(data=data.company_data, collection_name=data.company_url + '/Company-Data')       
 
     @classmethod
-    def StoreInDatabase(cls, data, table_name, if_exists_value='replace', data_index=True): #method that writes the data into the database
-        """data = ScrapeTrendingView().income_statement \n
-        data = ScrapeTrendingView().balanse_sheet \n
-        data = ScrapeTrendingView().cashflow_statement \n
-        data = ScrapeTrendingView().statistics \n
-        data = ScrapeTrendingView().company_data \n\n
-
-        table_name = Exchange-Ticker/Statement-Type \n
-        Examples: \n
-        table_name = NASDAQ-AAPL/Income-Statement \n
-        table_name = NASDAQ-AAPL/Balance-Sheet \n
-        table_name = NASDAQ-AAPL/Cashflow-Statement \n
-        table_name = NASDAQ-AAPL/Ratios \n
-        table_name = NASDAQ-AAPL/Company-Data \n
+    def StoreInDatabase(cls, data, collection_name):
         """
-
-        logger.info(f'Storring {table_name} in {cls.database_file}')
-        data.to_sql(name=table_name, con=cls.conn, if_exists=if_exists_value,  index=data_index) #store dataframe to sqlite-database
+        Stores data in a MongoDB collection.
+        
+        Parameters:
+        - data (pandas.DataFrame): The data to be stored.
+        - collection_name (str): The name of the collection to store the data in.
+        """
+        try:
+            with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+                db = client.get_database()
+                if collection_name in db.list_collection_names():
+                    db[collection_name].drop()
+                db.create_collection(collection_name)
+                collection = db[collection_name]
+                collection.insert_many(data.to_dict('records'))
+                print(f"Data stored in collection {collection_name}")
+        except PyMongoError as e:
+            print(f"Error storing data: {e}")
 
     @classmethod
-    def ReadFromDatabase(cls, table_name): #read data from Database, if available return the data if not return None
+    def ReadFromDatabase(self, collection_name): #read data from Database, if available return the data if not return None
         """
-        table_name = Exchange-Ticker/Statement-Type \n
+        collection_name = Exchange-Ticker/Statement-Type \n
         Examples: \n
-        table_name = NASDAQ-AAPL/Income-Statement \n
-        table_name = NASDAQ-AAPL/Balance-Sheet \n
-        table_name = NASDAQ-AAPL/Cashflow-Statement \n
-        table_name = NASDAQ-AAPL/Ratios \n
-        table_name = NASDAQ-AAPL/Company-Data \n
+        collection_name = NASDAQ-AAPL/Income-Statement \n
+        collection_name = NASDAQ-AAPL/balance-Sheet \n
+        collection_name = NASDAQ-AAPL/Cashflow-Statement \n
+        collection_name = NASDAQ-AAPL/Ratios \n
+        collection_name = NASDAQ-AAPL/Company-Data \n
         """
-
-        try: #get the data from database and put it in pandas-dataframe
-            output = pd.read_sql_query(f"SELECT * from '{table_name}'", cls.conn, index_col='index') 
-            logger.info(f"Load {table_name} from DataBase")
-            
-        except : #if data not available, return None
-            logging.error(f'ERROR: {table_name}, not found in {cls.database_file}')
-            return None
-
-        return output
+        collection = self.client[self.db_name][collection_name]
+        data = []
+        for doc in collection.find():
+            data.append(doc)
+        if len(data) == 0:
+            return []
+        else:
+            return data[0]
 
     @classmethod
     def DropTable(cls, table_name_prefix): 
         """table_name=NASDAQ-AAPL"""
 
-        table_name_suffix = ['/Income-Statement', '/Balance-Sheet', '/Cashflow-Statement', '/Ratios', '/Company-Data', '/Dividents']
-        #Connecting to sqlite
-
-        #Droping  table if already exists
+        table_name_suffix = ['/Income-Statement', '/balance-Sheet', '/Cashflow-Statement', '/Ratios', '/Company-Data', '/Dividents']
+        #Connecting to MongoDB
+        client= MongoClient(env("MONGO_SERVER_CLUSTER_URL"))
+        database = client[env("MONGO_DATABASE")]
+        # Dropping collection if already exists
         for i in range(0,len(table_name_suffix)):
             try:
-                cls.cursor.execute(f"DROP TABLE '{table_name_prefix + table_name_suffix[i]}'")
-                logger.info(f"Table {table_name_prefix + table_name_suffix[i]} dropped... ")
-            except sqlite3.OperationalError:
-                logging.error(f' Error removing {table_name_prefix + table_name_suffix[i]}. Table is probably not availabe in the database!')
-
+                collection_name = table_name_prefix + table_name_suffix[i]
+                database[collection_name].drop()
+                logger.info(f"Collection {collection_name} dropped... ")
+            except PyMongoError.OperationFailure:
+                logging.error(f' Error removing {collection_name}. Collection is probably not available in the database!')
     @classmethod
     def DropAllTables(cls):
-
-        # Get a list of all tables in the database
-        tables = cls.ListAllTables()
-
-        # Drop all tables in the list
-        for table in tables:
-            print(table)
-            cls.cursor.execute(f"DROP TABLE '{table}'")
+        try:
+            with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+                db = client.get_database()
+                for table_name in cls.ListAllTables():
+                    db[table_name].drop()
+        except PyMongoError as e:
+            print(f"Error dropping tables: {e}")
 
     @classmethod
     def ListAllTables(cls):
-        cls.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        output_temp = cls.cursor.fetchall()
-        output = []
-        for item in output_temp:
-            output.append(item[0])
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            return db.list_collection_names()
 
-        return(output)
-    
     @classmethod
     def ListTableRows(cls, table_name):
-        cls.cursor.execute(f"SELECT * FROM '{table_name}'")
-        output = cls.cursor.fetchall()
-        return output
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.find()
 
     @classmethod
     def ListRowByName(cls, row_name, table_name):
-        cls.cursor.execute(f'SELECT * FROM "{table_name}" WHERE "index"="{row_name}"')
-        output = cls.cursor.fetchone()
-        return output
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.find({"index": row_name})
 
     @classmethod
     def ListByColumnName(cls, column_name, table_name):
-        cls.cursor.execute(f'SELECT "{column_name}" FROM "{table_name}"')
-        output = cls.cursor.fetchall()
-        return output
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.distinct(column_name)
 
     @classmethod
     def ListIndexColumn(cls, table_name):
-        output = cls.ListByColumnName(column_name="index", table_name=table_name)
-        return output
+        return cls.ListByColumnName(column_name="index", table_name=table_name)
 
     @classmethod
-    def GetTableShema(cls,table_name):
-        cls.cursor.execute(f'PRAGMA table_info("{table_name}")')
-        output = cls.cursor.fetchall()
-        return output
+    def GetTableShema(cls, table_name):
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.index_information()
 
     @classmethod
     def RenameColumn(cls, col_old_name, col_new_name, table_name):
-        cls.cursor.execute(f'ALTER TABLE "{table_name}" RENAME COLUMN "{col_old_name}" TO "{col_new_name}"')
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            collection.update_many({}, {"$rename": {col_old_name: col_new_name}}, upsert=False)
 
     @classmethod
     def RenameTable(cls, table_name_old, table_name_new):
-        cls.cursor.execute(f'ALTER TABLE "{table_name_old}" RENAME TO "{table_name_new}"')
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name_old]
+            collection.rename(table_name_new)
 
     @classmethod
-    def UpdateValue(cls,table_name, col_to_update, new_value, search_col, search_value):
-        cls.cursor.execute(f'UPDATE "{table_name}" SET "{col_to_update}"="{new_value}" WHERE "{search_col}"="{search_value}"')
-        #UPDATE "ARCA-BATL/Company-Data" SET "value"="1234567" WHERE "index" = "company_data_url"
+    def UpdateValue(cls, table_name, col_to_update, new_value, search_col, search_value):
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            collection.update_many({search_col: search_value}, {"$set": {col_to_update: new_value}}, upsert=False)
 
     @classmethod
-    def DeleteAllRowsFromTable(cls,table_name):        
-        cls.cursor.execute(f'DELETE FROM "{table_name}"')
+    def DeleteAllRowsFromTable(cls, table_name):
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            collection.delete_many({})
 
     @classmethod
     def InsertRows(cls, table_name, columns_tuple, values_tuple):
-        cls.cursor.execute(f'INSERT INTO "{table_name}" {columns_tuple} VALUES {values_tuple}')
-        # INSERT INTO "ARCA-BATL/Company-Data" ("index", "value") VALUES ("1", "2")
-    
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            data = dict(zip(columns_tuple, values_tuple))
+            collection.insert_one(data)
+
     @classmethod
     def InsertRowIfNotExists(cls, table_name, input_columns, input_values):
-        # logger.info(f'Insert or Ignore Into {table_name} in {cls.database_file}')
-        # logger.info(f"columns = {input_columns} \n values = {input_values}")
-        cls.cursor.execute(f'INSERT OR IGNORE INTO "{table_name}" {input_columns} VALUES {input_values}')
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            data = dict(zip(input_columns, input_values))
+            collection.update_one(data, {"$setOnInsert": data}, upsert=True)
 
     @classmethod
     def FindElementsInTableColumn(cls, table_name, column_name, search_text):
-        result = cls.cursor.execute(f'SELECT "{column_name}" FROM "{table_name}" WHERE "{column_name}"="{search_text}"')
-        output = result.fetchall()
-        print(len(output))
-        return output
-    
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.find({column_name: search_text})
+
     @classmethod
     def FindNumberOfSectorElements(cls, table_name, market, symbol, exchange, sector):
-        result = cls.cursor.execute(f'SELECT "sector" FROM "{table_name}" WHERE "market"="{market}" AND "symbol"="{symbol}" AND \
-                                      "exchange"="{exchange}" AND "sector"="{sector}"')
-        output = result.fetchall()
-        # logger.info(f"Number of Items found in DataBase {len(output)}")
-        return len(output)
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.count_documents({"market": market, "symbol": symbol, "exchange": exchange, "sector": sector})
 
     @classmethod
     def FindNumberOfExchangeElements(cls, table_name, market, symbol, exchange):
-        result = cls.cursor.execute(f'SELECT "exchange" FROM "{table_name}" WHERE "market"="{market}" AND "symbol"="{symbol}" AND "exchange"="{exchange}"')
-        output = result.fetchall()
-        # logger.info(f"Number of Items found in DataBase {len(output)}")
-        return len(output)
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            collection = db[table_name]
+            return collection.count_documents({"market": market, "symbol": symbol, "exchange": exchange})
 
     @classmethod
     def Test(cls):
         print("DataBase class is working")
+    @classmethod
+    def GetFromDataBase(cls, company_url):
+        with MongoClient(env("MONGO_SERVER_CLUSTER_URL")) as client:
+            db = client.get_database()
+            income_statement = db[company_url + "/Income-Statement"].find_one()
+            balance_sheet = db[company_url + "/Balance-Sheet"].find_one()
+            cashflow_statement = db[company_url + "/Cashflow-Statement"].find_one()
+            statistics = db[company_url + "/Ratios"].find_one()
+            company_data = db[company_url + "/Company-Data"].find_one()
 
-    def GetFromDataBase(self, company_url):
-        #get financial data from DataBase
-        self.income_statement = __class__.ReadFromDatabase(table_name= company_url + "/Income-Statement") #attempt to get the data from database
-        self.balanse_sheet = __class__.ReadFromDatabase(table_name= company_url + "/Balance-Sheet") #attempt to get the data from database
-        self.cashflow_statement = __class__.ReadFromDatabase(table_name= company_url + "/Cashflow-Statement") #attempt to get the data from database
-        self.statistics = __class__.ReadFromDatabase(table_name= company_url + "/Ratios") #attempt to get the data from database
-        self.company_data = __class__.ReadFromDatabase(table_name= company_url + "/Company-Data") #attempt to get the data from database
+            dividents = None
+            if company_data is not None:
+                cls.company_name = company_data['company_name']
+                cls.company_ticker = company_data['company_ticker']
+                cls.company_url = company_data['company_url']
+                dividents_exists = company_data['dividents']
 
-        if self.company_data is not None:
-            self.company_name = self.company_data.loc['company_name'][0]
-            self.company_ticker = self.company_data.loc['company_ticker'][0]
-            self.company_url = self.company_data.loc['company_url'][0]
-            dividents_exists = self.company_data.loc['dividents'][0]
+                if dividents_exists == '1':
+                    dividents = db[company_url + "/Dividents"].find_one()
 
-            if dividents_exists == '1':
-                self.dividents = __class__.ReadFromDatabase(table_name= company_url + "/Dividents") #attempt to get the data from database
-            else:
-                self.dividents = None
-
+        return income_statement, balance_sheet, cashflow_statement, statistics, company_data, dividents
             
 class Excel(): #static class for exporting Excel files 
     
@@ -386,7 +403,7 @@ class Excel(): #static class for exporting Excel files
 class Helper():
 
     def generateClassVariables(self, company_statement):
-        """ Generate Income Statement / Balance Sheet / Cashflow Statement / Statistics variables """
+        """ Generate Income Statement / balance Sheet / Cashflow Statement / Statistics variables """
 
         self.items = company_statement.transpose()
         # self.item_keys = []
@@ -422,10 +439,9 @@ class Helper():
     # helper = Helper()
     # helper.generateClassVariables(companies[0].statistics)
 
-class ScrapeTrendingView():
+class ScrapeTrendingView(): 
 
     maximum_number_of_colapsed_rows = 50
-
     def __init__(self, company_url,*args, **kwargs):
         """
         company_url = Exchange-Ticker \n
@@ -435,120 +451,70 @@ class ScrapeTrendingView():
         # innitialize and set chrome-webdriver options
         chrome_options = Options()
         chrome_options.add_argument("--start-maximized")
-        # self.chrome_options.add_argument("--window-size=1000,1080")
-        # chrome_options.add_argument("--headless")
-
+        #chrome_options.add_argument("--window-size=1000,1080")
+        #chrome_options.add_argument("--headless")
         self.driver = webdriver.Chrome("chromedriver.exe", options=chrome_options)
         self.driver.implicitly_wait(2)
         self.time_sleep = 2
-        # self.driver.maximize_window()
-
+        #self.driver.maximize_window()
         self.scrapeIncomeStatement(company_url=company_url) #start Income-Statement scraping
-        self.scrapeBalanceSheet(company_url=company_url) #start Balance-Sheet scraping
+        self.scrapeBalanceSheet(company_url=company_url) #start balance-Sheet scraping
         self.scrapeCashFlow(company_url=company_url) #start Cashflow-Statement scraping
         self.scrapeStatistics(company_url=company_url) #start Ratios scraping
         self.scrapeDividents(company_url=company_url) #start Dividents scraping
         self.scrapeCompanyData(company_url = company_url) #start Company-Data scraping
-
         #add additional data to dataframe
         self.companyData_to_dataframe()
-
         self.driver.close()
-
     def scrapeIncomeStatement(self, company_url):
-
-        self.income_statement_url = "https://www.tradingview.com/symbols/" + \
-            company_url + "/financials-income-statement/?selected="
+        self.income_statement_url = f"https://www.tradingview.com/symbols/{company_url}/financials-income-statement/?selected="
 
         self.driver.get(self.income_statement_url)
         time.sleep(self.time_sleep)
-
         self.switch_annual_data()
-#        self.close_cookies_popup()
-#        self.wait_page_to_load()
-
         # expand income-statement collapsed rows
         i = 0
         while True:
             i = i+1
-            if i > __class__.maximum_number_of_colapsed_rows:
+            if i >self.maximum_number_of_colapsed_rows:
                 logging.error(f'Break While loop i={i}')
                 break
             try:
                 expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k']"
-                expand_arrow_element = self.driver.find_element_by_xpath(
-                    expand_arrow_xpath)
-                # self.driver.execute_script("arguments[0].scrollIntoView();", expand_arrow_element) #scroll view to element
-
+                expand_arrow_element = self.driver.find_element(by=By.XPATH ,value= expand_arrow_xpath)
                 expand_arrow_element.click()
-                # print(expand_arrow_element.if_exists)
-
             except:
                 break
-
         # scrape the data
-        output = self.scrape_the_data()
-
+        output= self.scrape_the_data(self.income_statement_url)
         self.income_statement = self.scraped_data_to_dataframe(output=output)
-
     def scrapeBalanceSheet(self, company_url):
-        logger.info('Start Balance Sheet Scrape')
+        logger.info('Start balance Sheet Scrape')
         self.balanse_sheet_url = "https://www.tradingview.com/symbols/" + \
             company_url + "/financials-balance-sheet/?selected="
         self.driver.get(self.balanse_sheet_url)
         time.sleep(self.time_sleep)
 
         self.switch_annual_data()
-#        self.wait_page_to_load()
-        # self.close_cookies_popup()
-
-        # expand balance-sheet collapsed-rows level-1
+        # expand balance-sheet collapsed-rows level-2
         i = 0
         while True:
-            # logger.info('Start Expanding Balance Sheet Rows Level-1')
+            logger.info('Start Expanding balance Sheet Rows Level-2')
             i = i+1
-            if i > __class__.maximum_number_of_colapsed_rows:
+            if i >  self.maximum_number_of_colapsed_rows:
                 logging.error(f'Break While loop i={i}')
                 break
             try:
-                # expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k']"
-                expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k hasChanges-_PBNXQ7k']"
-                expand_arrow_element = self.driver.find_element_by_xpath(
-                    expand_arrow_xpath)
-                # self.driver.execute_script("arguments[0].scrollIntoView();", expand_arrow_element) #scroll view to element
-
+                expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k hasChanges1-_PBNXQ7k']"
+                expand_arrow_element = self.driver.find_element(by=By.XPATH,value=expand_arrow_xpath)
                 expand_arrow_element.click()
                 # print(expand_arrow_element.if_exists)
-
             except:
-                # logger.info('End Expanding Balance Sheet Rows Level-1')
+                logger.info('End Expanding balance Sheet Rows Level-2')
                 break
-
-         # expand balance-sheet collapsed-rows level-2
-        i = 0
-        while True:
-            # logger.info('Start Expanding Balance Sheet Rows Level-2')
-            i = i+1
-            if i >  __class__.maximum_number_of_colapsed_rows:
-                logging.error(f'Break While loop i={i}')
-                break
-            try:
-                expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k']"
-                expand_arrow_element = self.driver.find_element_by_xpath(
-                    expand_arrow_xpath)
-                # self.driver.execute_script("arguments[0].scrollIntoView();", expand_arrow_element) #scroll view to element
-
-                expand_arrow_element.click()
-                # print(expand_arrow_element.if_exists)
-
-            except:
-                # logger.info('End Expanding Balance Sheet Rows Level-2')
-                break
-
         # scrape the data
-        output = self.scrape_the_data()
+        output = self.scrape_the_data(self.balanse_sheet_url)
         self.balanse_sheet = self.scraped_data_to_dataframe(output=output)
-
     def scrapeCashFlow(self, company_url):
 
         logger.info('Start CashFlow Scrape')
@@ -559,216 +525,151 @@ class ScrapeTrendingView():
         time.sleep(self.time_sleep)
 
         self.switch_annual_data()
-  #      self.wait_page_to_load()
-        # self.close_cookies_popup()
-
-        # expand cash-flow collapsed-rows level-1
-        i = 0
-        while True:
-            # logger.info('Start Expanding CashFlow Rows Level-1')
-            i = i+1
-            if i > 20:
-                logger.info(f'Break While loop i={i}')
-                break
-            try:
-                # expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k']"
-                expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k hasChanges-_PBNXQ7k']"
-                expand_arrow_element = self.driver.find_element_by_xpath(
-                    expand_arrow_xpath)
-                # self.driver.execute_script("arguments[0].scrollIntoView();", expand_arrow_element) #scroll view to element
-
-                expand_arrow_element.click()
-                # print(expand_arrow_element.if_exists)
-
-            except:
-                # logger.info('End Expanding CashFlow Rows Level-1')
-                break
-
         # expand cash-flow collapsed-rows level-2
-        i = 0
+        i = 1
         while True:
-            # logger.info('Start Expanding CashFlow Rows Level-2')
-            i = i+1
+            logger.info('Start Expanding CashFlow Rows Level-2')
             if i > 20:
                 logger.info(f'Break While loop i={i}')
                 break
             try:
                 expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k']"
-                expand_arrow_element = self.driver.find_element_by_xpath(
+                expand_arrow_element = self.driver.find_element(by=By.XPATH,value=
                     expand_arrow_xpath)
-                # self.driver.execute_script("arguments[0].scrollIntoView();", expand_arrow_element) #scroll view to element
-
                 expand_arrow_element.click()
                 # print(expand_arrow_element.if_exists)
-
+                i += 1
             except:
-                # logger.info('End Expanding CashFlow Rows Level-2')
+                logger.info('End Expanding CashFlow Rows Level-2')
+                break
+
+        # reset i to 1 for the next loop
+        i = 1
+        # expand cash-flow collapsed-rows level-1
+        while True:
+            logger.info('Start Expanding CashFlow Rows Level-1')
+            if i > 20:
+                logger.info(f'Break While loop i={i}')
+                break
+            try:
+                expand_arrow_xpath = "//span[@class='arrow-_PBNXQ7k hasChanges-_PBNXQ7k']"
+                expand_arrow_element = self.driver.find_element(by=By.XPATH,value=
+                    expand_arrow_xpath)
+                expand_arrow_element.click()
+                # print(expand_arrow_element.if_exists)
+                i += 1
+            except:
+                logger.info('End Expanding CashFlow Rows Level-1')
                 break
 
         # scrape the data
-        output = self.scrape_the_data()
-        self.cashflow_statement = self.scraped_data_to_dataframe(output=output)
-
+        output = self.scrape_the_data(self.cashflow_url)
+        self.cashflow_statement = self.scraped_data_to_dataframe(output=output)     
     def scrapeStatistics(self, company_url):
         logger.info('Start Statistics Scrape')
         self.statistics_url = "https://www.tradingview.com/symbols/" + company_url + "/financials-statistics-and-ratios/?selected="
         self.driver.get(self.statistics_url)
         time.sleep(self.time_sleep)
-
-        # self.close_cookies_popup()
         self.switch_annual_data()
-    #    self.wait_page_to_load()
-
         statistics_table_xpath = "//*[@id='js-category-content']/div[2]/div/div/div[4]/div/div[1]/div/div[3]"
         statistics_table_rows = self.driver.find_elements(by=By.XPATH, value=statistics_table_xpath)
-
         # for item in financial_table[1]:
         #     print(item)
 
         # print(self.financial_table.text)
         # print(len(statistics_table_rows))
         output = []
-
         for item in statistics_table_rows:
             item_list = item.text.splitlines()
             output_temp = []
-
             # skip non-data items like Key stats, Profitability ratios, Liquidity ratios, Solvency ratios
             if len(item_list) == 1:
                 continue
             else:
                 for i in range(len(item_list)):
-
                     output_temp.append(item_list[i].replace(
                         '\u202a', '').replace('\u202c', ''))
-                    # print(temp[i])
-
+                # print(temp[i])
                 # print(type(temp), len(temp))
                 # print(temp)
                 output.append(output_temp)
-
         # for item in output:
         #     print(len(item),item)
         #     pass
-
         self.statistics = self.scraped_data_to_dataframe(output=output)
-
     def scrapeDividents(self,company_url):
         logger.info('Start Dividents Scrape')
-        self.dividents_url = "https://www.tradingview.com/symbols/" + company_url + "/financials-dividends/?selected="
+        self.dividents_url = "https://www.tradingview.com/symbols/" + company_url + "/financials-dividents/?selected="
         self.driver.get(self.dividents_url)
         time.sleep(self.time_sleep)
-
-        # self.close_cookies_popup()
-   #     self.wait_page_to_load()
-
         # scrape dividents
         try: #if dividents exists
             output = self.scrape_the_data()
             self.dividents = self.scraped_data_to_dataframe(output=output)
-
         except: #if dividents not exists, return none
              self.dividents = None
         # print(self.dividents)
-        
-
     def scrapeCompanyData(self, company_url):
-        # self.company_data_url = "https://www.tradingview.com/symbols/" + company_url + "/forecast/"
         self.company_data_url = "https://www.tradingview.com/symbols/" + company_url + "/technicals/"
-
         self.driver.get(self.company_data_url)
         time.sleep(self.time_sleep)
-        #self.wait_page_to_load()
-
         self.company_url = company_url
-
         company_name_css = "#js-category-content > div.technicals-root > div > div > div.container-PzISMB5Q > div"
         company_name_element = self.driver.find_element(By.CSS_SELECTOR, company_name_css)
         self.company_name = company_name_element.text
         # print(self.company_name)
-
-        # company_ticker_css = "span[class='tv-symbol-header__second-line tv-symbol-header__second-line--with-hover js-symbol-dropdown'] span[class='tv-symbol-header__second-line--text']"
-        company_ticker_css = '#js-category-content > div.tv-category-symbol-header > div.js-symbol-page-header-root > div > div > div > div.buttonsRow-HFnhSVZy > div > span > div > span:nth-child(2)'
-        company_ticker_element = self.driver.find_element(By.CSS_SELECTOR, company_ticker_css)
-        self.company_ticker = company_ticker_element.text
-        # print(self.company_ticker)
-
-        # exchage_css = "span[class='tv-symbol-header__second-line tv-symbol-header__second-line--with-hover js-symbol-dropdown'] span[class='tv-symbol-header__exchange']" #NASDAQ/NYSE
-        # exchage_css = ".tv-symbol-header__exchange" #NASDAQ/NYSE
-        # exchage_element = self.driver.find_element(By.CSS_SELECTOR, exchage_css)
-        # exchange_xpath = "//span[@class='tv-symbol-header__second-line tv-symbol-header__second-line--with-hover js-symbol-dropdown']/span[2]"
-        # exchange_xpath = "//span[@class='tv-symbol-header__second-line']/span[2]"
-        # exchage_element = self.driver.find_element(By.XPATH, exchange_xpath)
-        # self.exchange = exchage_element.text
+        price_xpath = "//*[@id='js-category-content']/div[1]/div[1]/div/div/div/div[3]/div[1]/div/div[1]/span[1]/span"
+        price_element = self.driver.find_element(By.XPATH, price_xpath)
+        self.price = price_element.text
+        changes_xpath = "//*[@id='js-category-content']/div[1]/div[1]/div/div/div/div[3]/div[1]/div/div[2]/span[2]"
+        changes_element = self.driver.find_element(By.XPATH, changes_xpath)
+        self.changes = changes_element.text
+        logo_xpath = "//*[@id='js-category-content']/div[1]/div[1]/div/div/div/div[1]/img[2]"
+        logo_element = self.driver.find_element(By.XPATH, logo_xpath)
+        self.logo = logo_element.text
+        curr_xpath = "//*[@id='js-category-content']/div[1]/div[1]/div/div/div/div[3]/div[1]/div/div[1]/span[2]/span[1]"
+        curr_element = self.driver.find_element(By.XPATH, curr_xpath)
+        self.curr = curr_element.text
     def companyData_to_dataframe(self):
-
-        data = {'company_url':self.company_url,
-                'income_statement_url': self.income_statement_url,
-                'balanse_sheet_url': self.balanse_sheet_url,
-                'cashflow_url': self.cashflow_url,
-                'statistics_url': self.statistics_url,
-                'company_data_url': self.company_data_url,
-                'company_name':self.company_name,
-                'company_ticker': self.company_ticker} #,"exchange": self.exchange}
-
-        
+        data = {'company_url':self.company_url,'income_statement_url': self.income_statement_url,'balanse_sheet_url': self.balanse_sheet_url,'cashflow_url': self.cashflow_url,'statistics_url': self.statistics_url,   'company_data_url': self.company_data_url,  'company_name':self.company_name,    'price':self.price,    'changes':self.changes,  'stock currency':self.curr,  'logo_url':self.logo }  
         if self.dividents is None:
             data.update({"dividents": False})
         else:
             data.update({"dividents": True})
-
         self.company_data = pd.DataFrame.from_dict(data, orient='index', columns=['value'])
-        
-    
-    def close_cookies_popup(self):
-        cookie_button_xpath = "//button[@class='acceptAll-WvyPjcpY button-OvB35Th_ size-xsmall-OvB35Th_ color-brand-OvB35Th_ variant-primary-OvB35Th_']"
-        cookie_button_element = self.driver.find_element(by=By.XPATH, value=cookie_button_xpath)
-        cookie_button_element.click()
-
     def switch_annual_data(self):
         annual_button_xpath = "//*[@id='FY']"
         annual_button_element = self.driver.find_element(by=By.XPATH, value=annual_button_xpath)
         annual_button_element.click()
-
     def scraped_data_to_dataframe(self, output):
-        output_index = []
+        output_index = ['Date'] + output[0][1:]
         output_values = []
-        output_colums = output[0][1:]
+        output_colums = output[0][1:].replace('(', '').replace(')', '').replace(',', '').split(' ')
         self.currency = output[0][0].replace('Currency: ', '')
         # print(self.currency)
-
         for i in range(1, len(output)):
             output_index.append(output[i][0])
             output_values.append(output[i][1:])
-
         # apply neccessery correction to fix the values-data
         output_values = self.fix_data_values(input_data=output_values)
-        df = pd.DataFrame(output_values, columns=output_colums,
-                          index=output_index)  # add scraped data to dataframe
+        df = pd.DataFrame(output_values, columns=output_colums, index=output_index, index_col='Date')  # add scraped data to dataframe
         return df
-
     def scrape_the_data(self):
-
         financial_table_xpath = "//*[@id='js-category-content']/div[2]/div/div"
-        #financial_table_xpath = "//div[@class='container-YOfamMRP']/div"
         financial_table_rows = self.driver.find_elements(by=By.XPATH, value=financial_table_xpath)
-        # print(len(financial_table_rows))
-
         output = []
-        number_of_periods = len(financial_table_rows[0].text.splitlines())
-
+        number_of_columns = len(financial_table_rows[0].text.split())
         for item in financial_table_rows:
             item_list = item.text.splitlines()
             output_temp = []
-
-            if len(item_list) == number_of_periods:  # rows without YOY-grow
+            if len(item_list) == number_of_columns: # rows without YOY-grow
 
                 for i in range(len(item_list)):
                     output_temp.append(item_list[i].replace(
                         '\u202a', '').replace('\u202c', ''))
             else:  # rows with YOY-grow
-                if 'YoY growth' in item_list:  # Quarterly
-                    for i in range(0, len(item_list), 2):  # skip YOY-grow row
+                if 'YoY Growth' in item_list:  # Quarterly
+                    for i in range(1, len(item_list), 2): # skip YOY-grow row
                         output_temp.append(item_list[i].replace(
                             '\u202a', '').replace('\u202c', ''))
                 else:  # Anual report
@@ -776,84 +677,121 @@ class ScrapeTrendingView():
                     for i in range(1, len(item_list), 2):  # skip YOY-grow row
                         output_temp.append(item_list[i].replace(
                             '\u202a', '').replace('\u202c', ''))
-
             output.append(output_temp)
-
         return output
-
-
     def fix_data_values(self, input_data):
         output = []
-
         for row in input_data:
             output_row = []
             for item in row:
                 # print(f'item={item}')
-
                 if '−' in item:  # convert minus sign to real minus, for some reason the sign is not recognized as minus
                     item = item.replace('−', '-')
-
                 if 'T' in item:  # convert Trillion-values to numeric
                     item = item.replace('T', '')
                     item = float(item)
                     item = item*1000000000000
                     # item = int(item)
-
                 elif 'B' in item:  # convert Billion-values to numeric
                     item = item.replace('B', '')
                     item = float(item)
                     item = item*1000000000
                     # item = int(item)
-
                 elif 'M' in item:  # convert Milion-values to numeric
                     item = item.replace('M', '')
                     item = float(item)
                     item = item*1000000
                     # item = int(item)
-
                 elif 'K' in item:  # convert Thousants-values to numeric
                     item = item.replace('K', '')
                     item = float(item)
                     item = item*1000
                     # item = int(item)
-
                 if isinstance(item, str):  # if item is not integer (0.00, ---, -)
-
                     if '—' in item:  # set value to None
                         item = None
-
                     elif '.' in item:  # convert value to float
                         item = float(item)
-
                 if self.currency != 'USD':  # convert values to USD
-
                     if self.currency == 'KRW':
                         self.multiplier = 0.000700680009950
-
                     # check if item is int or float
                     if isinstance(item, float) or isinstance(item, int):
                         item = item*self.multiplier
-
                 output_row.append(item)
-
             output.append(output_row)
-
         return output
 
-    def wait_page_to_load(self):
-        """wait the page to be fully loaded before proceeding with the scraping procedures"""
+class scrapYahooFinance:
+    @staticmethod
+    def get_financial_data(symbol):
+        # Get financial data
+        data = yf.Ticker(symbol)
+        financials = data.financials
+        IncomeStatement=data.incomestmt
+        balance_sheet = data.balance_sheet
+        cashflow = data.cashflow
 
-        price_css = "div[class='tv-symbol-price-quote__value js-symbol-last']"
-        price_element = self.driver.find_element(By.CSS_SELECTOR, price_css)
+        # Extract data of interest
+        revenue = financials.loc['Total Revenue'][0]
+        net_income = financials.loc['Net Income'][0]
+        total_assets = balance_sheet.loc['Total Assets'][0]
+        total_liabilities = balance_sheet.loc['Total Liab'][0]
+        operating_cashflow = cashflow.loc['Total Cash From Operating Activities'][0]
+        free_cashflow = cashflow.loc['Free Cash Flow'][0]
 
-        currency_symbol_css = ".tv-symbol-price-quote__currency.js-symbol-currency"
-        currency_symbol_element = self.driver.find_element(By.CSS_SELECTOR, currency_symbol_css)
+        # Return financial data as dictionary
+        financial_data_dict = {
+            'symbol': symbol,
+            'revenue': revenue,
+            'net_income': net_income,
+            'total_assets': total_assets,
+            'total_liabilities': total_liabilities,
+            'operating_cashflow': operating_cashflow,
+            'free_cashflow': free_cashflow,
+        }
 
-        prince_increase_css = ".js-symbol-change.tv-symbol-price-quote__change-value"
-        prince_increase_element = self.driver.find_element(By.CSS_SELECTOR, prince_increase_css)
+        return financial_data_dict
 
-        prince_increase_percent_css = ".js-symbol-change-pt.tv-symbol-price-quote__change-value"
-        prince_increase_percent_element = self.driver.find_element(By.CSS_SELECTOR, prince_increase_percent_css)
+    @classmethod
+    def scrap_yahoo_finance(cls, symbol):
+        # Get stock price and change
+        data = yf.Ticker(symbol)
+        info = data.info
+        current_price = info['currentPrice']
+        previous_close = info['regularMarketPreviousClose']
+        price_change = round((current_price - previous_close) / previous_close * 100, 2)
+        if price_change > 0:
+            price_change = f'+{price_change}%'
+        else:
+            price_change = f'{price_change}%'
+        
+        # Get company data
+        company_name = info['shortName']
+        company_exchange = info['exchange']
+        currency = info['financialCurrency']
+        industry = info['industry']
+        website = info['website']
+        description = info['longBusinessSummary']
+        
+        # Get financial data
+        financial_data_dict = cls.get_financial_data(symbol)
+        
+        # Return data as dictionary
+        data_dict = {
+            'symbol': symbol,
+            'current_price': current_price,
+            'price_change': price_change,
+            'company_name': company_name,
+            'company_exchange': company_exchange,
+            'currency': currency,
+            'industry': industry,
+            'description': description,
+            'website': website,
+            'financial_data': financial_data_dict,
+        }
+        
+        return data_dict
 
 class ScrapeTrandingViewScreener():
 
@@ -1820,7 +1758,6 @@ class CompareCompaniesVisualizer():
         self.statistics_params = StatisticsRatiosVisualizer(company_data=companies_data[0])
         self.dividents_params = DividentsVisualizer(company_data=companies_data[0])
 
-    """
     def income_statement_visualizer_new(self, parameter_name):
         self.singleplot(parameter_name=parameter_name, type='income_statement')
 
@@ -1859,8 +1796,6 @@ class CompareCompaniesVisualizer():
         fig.update_traces(mode="markers+lines", hovertemplate=None) #enable hover-mode, interactively display values on the graph when pointed with mouse
         fig.update_layout(hovermode="x", hoverlabel_namelength=-1,  title=parameter_name) #display the full parameter name
         fig.show()
-    """
-    ##################################################################################################
       
     def income_statement_subplots(self, parameter_name):
         self.subplots(parameter_name=parameter_name, type='income_statement')
@@ -1991,7 +1926,7 @@ class CustomCalculations():
         """
         Convert company dataframes to growth-rate dataframes:
         -Income Statemnt
-        -Balanse Sheet
+        -balance Sheet
         -Cashflow Statement
         -Statistics/Ratios
         -Dividents
@@ -2013,6 +1948,7 @@ class CustomCalculations():
 
         df_transposed = input_data.statistics.transpose()
         df_transposed_growth_rate = df_transposed.pct_change(periods = periods)
+     
         self.statistics_growth_rate = df_transposed_growth_rate.transpose()
 
         df_transposed = input_data.dividents.transpose()

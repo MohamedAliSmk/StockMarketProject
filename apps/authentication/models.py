@@ -10,7 +10,7 @@ user_collection = db['users']
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=254, blank=True)
-    # add additional fields as needed
+    id = models.BigAutoField(primary_key=True)  # define a primary key field
 
     def __str__(self):
         return self.user.username
@@ -19,28 +19,8 @@ class UserProfile(models.Model):
         # Convert the Django model instance to a dictionary
         user_dict = {
             'username': self.user.username,
-            'email': self.user.email,
-            'lastName': self.user.lastName,
-            'country': self.user.country,
-            'dateOfBirth': self.user.dateOfBirth,
-            'jobTitle': self.user.jobTitle,
-            'yearsOfExperience': self.user.yearsOfExperience,
-            'paymentMethod': self.user.paymentMethod,
-            'subscription': self.user.subscription,
-            'photo': self.user.photo, 
-            'points': self.user.points,
-            'phoneNumber': self.user.phoneNumber,
-            'skills': [self.user.skills],
-            'latestActivities': [self.user.latestActivities],
-            'bio': self.user.bio,
-            'socialLinks': {
-                'twitter': self.user.twitter,
-                'facebook': self.user.facebook,
-                'linkedin': self.user.linkedin,
-                'youtube': self.user.youtube
-            },
-            'portfolio': [self.user.portfolio] 
-                                              }
+            'email': self.user.email, 
+                    }
 
 
         # Insert or update the document in the MongoDB collection
@@ -61,3 +41,31 @@ class UserProfile(models.Model):
 
         # If the document doesn't exist, return None
         return None
+    
+class UserProfileExtended(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    lastName = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=255, blank=True)
+    country = models.CharField(max_length=255, blank=True)
+    dateOfBirth = models.DateField(blank=True, null=True)
+    jobTitle = models.CharField(max_length=255, blank=True)
+    yearsOfExperience = models.IntegerField(blank=True, null=True)
+    paymentMethod = models.CharField(max_length=255, blank=True)
+    subscription = models.CharField(max_length=255, blank=True)
+    photo = models.ImageField(upload_to='profile_photos', blank=True)
+    points = models.IntegerField(default=0)
+    phoneNumber = models.CharField(max_length=255, blank=True)
+    skills = models.TextField(blank=True)
+    latestActivities = models.TextField(blank=True)
+    bio = models.TextField(blank=True)
+    twitter = models.CharField(max_length=255, blank=True)
+    facebook = models.CharField(max_length=255, blank=True)
+    linkedin = models.CharField(max_length=255, blank=True)
+    youtube = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+
+
+

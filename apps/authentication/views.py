@@ -1,9 +1,14 @@
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login 
 from .forms import LoginForm, SignUpForm
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from .models import UserProfile
 
-
+        
 def login_view(request):
     form = LoginForm(request.POST or None)
 
@@ -19,12 +24,14 @@ def login_view(request):
                 login(request, user)
                 return redirect("/")
             else:
-                msg = 'Invalid credentials'
+                msg = 'wrong password or Email Address'
         else:
             msg = 'Error validating the form'
 
-    return render(request, "sign_in.html", {"form": form, "msg": msg})
+    # Check if the user is logged in
+    is_logged_in = request.user.is_authenticated
 
+    return render(request, "sign_in.html", {"form": form, "msg": msg, "is_logged_in": is_logged_in})
 
 def register_user(request):
     msg = None
@@ -50,3 +57,7 @@ def register_user(request):
 
     return render(request, "sign_up.html", {"form": form, "msg": msg, "success": success})
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)

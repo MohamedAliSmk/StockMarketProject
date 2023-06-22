@@ -182,8 +182,8 @@
                                 <div class="img-box  text-center  p-20">
                                     <span class=" "> <i class="fa-solid fa-user  rad-half  mb-10  fs-20  fs-70"></i> </span>
                                         <!--<img src="" alt="" class=" rad-half  mb-10"> -->
-                                        <h3 class="m-0 "> Your Name  </h3>
-                                        <p class="  mt-10"> Stocs Numbers </p>
+                                        <h3 class="m-0 "> {{ user_profile.user.username }}  </h3>
+                                        <p class="  mt-10"> Stocks Numbers </p>
                                         <div class="level   rad-6    bg-eee  p-relative">
                                             <span style="width:70%"> </span>
                                         </div>
@@ -203,15 +203,19 @@
                                         <h4 class="w-full   c-blue   fa-14   m-0">  General Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Full Name: </span>
-                                            <span>   YourName  </span>
+                                            <span>   {{ user_profile.user.username }}  </span>
+                                        </div>
+                                        <div class=" fs-14    ">
+                                            <span  class="c-gray">  Last  Name: </span>
+                                            <span>   {{ user_profile.user.lastName }}  </span>
                                         </div>
                                         <div class=" fs-14    ">
                                             <span class="c-gray" >  Gender: </span>
-                                            <span>   YourGender  </span>
+                                            <span>    {{ user_profile.user.gender }}  </span>
                                         </div>
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Country: </span>
-                                            <span>   YourCountry  </span>
+                                            <span>   {{ user_profile.user.gender }} </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -228,17 +232,17 @@
                                         <h4 class="w-full   c-blue   fa-14   m-0"> Personal Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Email:  </span>
-                                            <span>  YourEmail  </span>
+                                            <span>  {{ user_profile.user.gender }}  </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray" >  Phone:  </span>
-                                            <span>    YourPhone  </span>
+                                            <span>    {{ user_profile.user.gender }}  </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Date Of Birth:  </span>
-                                            <span>     YourDate  </span>
+                                            <span>     {{ user_profile.user.gender }}  </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -257,17 +261,13 @@
                                         <h4 class="w-full   c-blue   fa-14   m-0">  Job Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Title: </span>
-                                            <span>   JobTitle  </span>
+                                            <span>   {{ user_profile.user.gender }}  </span>
                                         </div>
             
-                                        <div class=" fs-14    ">
-                                            <span class="c-gray" >  jop:  </span>
-                                            <span>  jop   </span>
-                                        </div>
-            
+                                
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Years Of Experience: </span>
-                                            <span>   Experience  </span>
+                                            <span>   {{ user_profile.user.gender }}  </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -284,17 +284,17 @@
                                         <h4 class="w-full   c-blue  fa-14   m-0"> Billing Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Payment Method: </span>
-                                            <span>   YourPaymentMethod </span>
+                                            <span>   {{ user_profile.user.gender }} </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray" >  Email: </span>
-                                            <span>   YourEmail  </span>
+                                            <span>   {{ user_profile.user.gender }}  </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Subscription </span>
-                                            <span>   Monthly  </span>
+                                            <span>   {{ user_profile.user.gender }}  </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -313,6 +313,8 @@
                             <br>
                             <br>
                             <br>
+                            {% if not is_logged_in %}
+
                             <div class="create-account    d-flex gap-20   ">
                                 <h3 class="">  Dont Have An Account !   </h3>
                                 <div>
@@ -392,6 +394,8 @@
                             <br>
                             <br>
                             <br>
+                            {% endif %}
+
                                     <!-- start other data -->
                                     <div class="other-data   d-flex   gap-20">
                                         <div class="skills-card  p-20     rad-10   mt-20">
@@ -402,10 +406,8 @@
                                                     <span> project manger </span> 
                                                 </li>
                                                 <li>
-                                                    <span> 3 years experiance at position co  </span>
-                                                </li>
-                                                <li>   <span> 2 years head of the information depatment  </span> 
-                                                </li>
+                                                    <span> {{ user_profile.user.skills }}  </span>
+                                                </li> 
                                             </ul>
                                         </div>
             
@@ -423,38 +425,7 @@
 
                                                 <img src="../static/images/activity-01.png" alt="logo photo">
                                                 <div class="info">
-                                                    <span> market us  </span>
-                                                    <span>   Bought  23 arrow  at rised company work at trade </span>
-                                                </div>
-                                                <div class="date">
-                                                    <span class="d-block   mb-10">  time </span>
-                                                    <span class="c-gray">   last fraiday     </span>
-                                                </div>
-                                            </div>
-            
-                                            <br>
-                                            <div class="activity  d-flex  align-center  text-center-mobile">
-                                                <img src="../static/images/activity-01.png" alt="logo photo">
-                                                <div class="info">
-                                                    <span> market us  </span>
-                                                    <span>   Bought  23 arrow  at rised company work at trade </span>
-                                                </div>
-                                                <div class="date">
-                                                    <span class="d-block   mb-10">  time </span>
-                                                    <span class="c-gray">   last fraiday     </span>
-                                                </div>
-                                            </div>
-            
-                                            <br>
-                                            <div class="activity  d-flex  align-center  text-center-mobile">
-                                                <img src="../static/images/activity-01.png" alt="logo photo">
-                                                <div class="info">
-                                                    <span> market us  </span>
-                                                    <span>   Bought  23 arrow  at rised company work at trade </span>
-                                                </div>
-                                                <div class="date">
-                                                    <span class="d-block   mb-10">  time </span>
-                                                    <span class="c-gray">   last fraiday     </span>
+                                                    <span> {{ user_profile.user.latestActivities }}  </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -468,7 +439,7 @@
                                         <h2  class=""> Change Your Bio  </h2>
                                         <div class="text-area d-flex c-gray">
                                             <br>
-                                            <textarea name="bio" id="bio"  class="mb-20  c-gray" cols="95" rows="7"> write more about your self 
+                                            <textarea name="bio" id="bio"  class="mb-20  c-gray" cols="95" rows="7"> {{ user_profile.user.bio }}
                                             </textarea>
                                             <a href="#" class=" change-bio  "> Change </a>
                                         </div>

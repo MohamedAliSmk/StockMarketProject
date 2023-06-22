@@ -33,7 +33,7 @@ class TestCode(unittest.TestCase):
         companies = START.get_data(companies_urls)
         self.assertTrue(len(companies) == 3)
         self.assertTrue(hasattr(companies[0], 'income_statement'))
-        self.assertTrue(hasattr(companies[0], 'balance_sheet'))
+        self.assertTrue(hasattr(companies[0], 'balanse_sheet'))
         self.assertTrue(hasattr(companies[0], 'cashflow_statement'))
         self.assertTrue(hasattr(companies[0], 'statistics'))
         self.assertTrue(hasattr(companies[0], 'company_data'))

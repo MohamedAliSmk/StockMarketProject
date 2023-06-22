@@ -6,11 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
     path("", include("apps.authentication.urls")), # Auth routes - login / register
-
-    # ADD NEW Routes HERE
-
-    # Leave `Home.Urls` as last the last line
     path("", include("apps.home.urls")),
     path('outh/',include('social_django.urls'), name='social'),
-    
+    path("companys/", include("Model.urls")),
 ]
