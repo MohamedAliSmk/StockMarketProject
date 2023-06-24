@@ -56,13 +56,13 @@
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20   rad-6  p-10 " href={% url 'profile' %} >  
+                    <a  class="   d-flex  align-center  fs-20   rad-6  p-10 " /profile >  
                         <i class="fa-regular fa-user  fa-fw"></i>
                         <span class="hide-mobile"> Profile </span>
                     </a>
                 </li>
                 <li>
-                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="{% url 'Companys' companies_urls='EGX-ORHD' %}" >  
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="/Companys/{{ Ticker }}/" >  
                         <i class="fa-regular fa-building"></i>
                         <span class="hide-mobile" > Companys </span>
                     </a>
@@ -388,8 +388,8 @@
                         <h5 class="text-light">  LINKS </h5>
                         <ul class="list-unstyled lh-lg c-gray">
                             <li> <a  href="/" class="c-gray"> Home </a>   </li>
-                            <li> <a href="{% url 'Companys' companies_urls='EGX-ORHD' %}" class="c-gray"> Our Services </a>  </li>
-                            <li> <a href={% url 'profile' %}  class="c-gray">   Portfolio </a></li>
+                            <li> <a href="/Companys/{{ Ticker }}/" class="c-gray"> Our Services </a>  </li>
+                            <li> <a /profile  class="c-gray">   Portfolio </a></li>
                             <li><a href="{% url 'chart' Ticker='GOOG' %}"  class="c-gray"> chart </a></li>
                             <li > <a href={% url 'setting' %}  class="c-gray"> Support </a></li>
                             <li > <a href={% url 'LastNews' %}  class="c-gray"> Newes </a></li>

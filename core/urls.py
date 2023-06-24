@@ -9,4 +9,5 @@ urlpatterns = [
     path("", include("apps.home.urls")),
     path('outh/',include('social_django.urls'), name='social'),
     path("companys/", include("Model.urls")),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

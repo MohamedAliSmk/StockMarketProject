@@ -12,6 +12,7 @@ from django.utils.translation import gettext as _
 import matplotlib.pyplot as plt
 import io
 import urllib, base64 
+from django.urls import reverse
 from django.http import JsonResponse
 from TrandingViewClasses import *
 from stocknews import StockNews
@@ -158,7 +159,7 @@ def setting(request):
     
     return render(request, "setting.html")
 
-#@login_required
+@login_required
 def profile(request):
     user_profile = None
     user_profile_extended = None
@@ -190,9 +191,9 @@ def profile(request):
 
     context = {'user_profile': user_profile, 'form': form}
     return render(request, 'profile.html', context)
-def Companys(request,symbol,next_days):
+def Companys(request,Ticker,next_days):
     date_today=dt.datetime.now().strftime("%Y-%m-%d")
-    Prediction_Comp(symbol=symbol,date_today=date_today,next_days=next_days)
+    Prediction_Comp(symbol=Ticker,date_today=date_today,next_days=next_days)
     return render(request, 'companys.html')
  
 def LastNews(request):

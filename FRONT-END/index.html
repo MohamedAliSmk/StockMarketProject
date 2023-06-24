@@ -1,0 +1,1674 @@
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="enn" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  Dashboard  </title>
+    <!--  boostrap link  -->
+    <link rel="stylesheet" href="{% static '../static/css/bootstrap.min.css' %}">
+    <!--  boostrap  icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <!-- css link  framework -->
+    <link rel="stylesheet" href="{% static '../static/css/framework.css' %}">
+    <!--  css link  master -->
+    <link rel="stylesheet" href="{% static '../static/css/master.css' %}">
+    <!--  normalize link -->
+    <link rel="stylesheet" href="{% static '../static/css/normalise.css' %}">
+    <!--  all link   -->
+    <link rel="stylesheet" href="{% static '../static/css/all.min.css' %}">
+    <!--  font link  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&#038;display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div >
+        <!--   start head  -->
+
+        <div class="head   fixed-top   navbar-expand-lg stiky-top  between-flex   ">
+            <nav   class="navbar navbar-expand-lg stiky-top   fixed-top   bg-black  w-full  " >
+                <div class="container "  >
+                    <ul  >
+                        <li >
+                            <div   class="  newsidebar" style="padding: 6px; ;"  >
+                                Fintec
+                            </div>
+                            <div>
+                                <!-- <h2 style="margin-top: 17px;"> <span style="color:yellow;">Fin</span><span style="color:dodgerblue ;">tickers</span> </h2> -->
+                                <!--<img src="../static/images/logo (1)/logo/logo.png"  class="bg-black  logo p-relative" alt=""> -->
+                                </div>
+                        </li>
+                    
+                        <!-- <li>
+                            <div class="search mt-2 p-relative">
+                                <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                                </div>  </span>
+                                <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                            </div>
+                        </li> -->
+                    </ul>
+                        <!--<div class="search  p-relative">
+                        <span>  <div class="search  ps-3  pe-3  d-none   d-lg-block">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                        <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+                    </div>-->
+                    
+                    <button class="navbar-toggler  bg-eee" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon ">
+                            
+                        </span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <!-- <li>
+                                <nav class="navbar navbar-light bg-black ">
+                                    <div class="container-fluid">
+                                        <form class="d-flex  w-100">
+                                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                            <button class="btn btn-outline-success" type="submit">Search</button>
+                                        </form>
+                                    </div>
+                                </nav>
+                            </li> -->
+                            <!-- <li class="btn btn-primary rounded-pill">
+                                Home
+                            </li>
+                            <li class="btn btn-primary rounded-pill">
+                                profile
+                            </li>
+                            <li class="btn btn-primary rounded-pill">
+                                setting
+                            </li>
+                            <li class="btn btn-primary rounded-pill">
+                                company
+                            </li>
+                            <li class="btn btn-primary rounded-pill">
+                                LastNewes
+                            </li>
+                            <li class="btn btn-primary rounded-pill">
+                                EducationCommunity
+                            </li> -->
+
+
+                            <li style="margin-right: 10px; margin-top: 16px;">
+                                <a   class=""    data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                                    <i  style="color: #bbb;   cursor: pointer; " class="fa-solid fa-magnifying-glass    fs-20">  </i>
+                                </a> 
+                            </li>
+                            
+                            <li>
+                                <div class="mr-10 mt-2 " >
+                                    <div class="dropdown ">
+                                        <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Get start
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                            <li > <a class="dropdown-item between-flex active  fs-20" href={% url 'register' %}> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
+                                            <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="#"> 
+                                                <span> MODE </span>
+                                                <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center  " id="toggleDark">   </i> 
+                                                </a>
+                                            </li>
+                                            <li > <a class="dropdown-item between-flex active  fs-20" href={% url 'login' %}> </a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="mr-10 mt-2 " >
+                                    <div class="dropdown ">
+                                        <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Language
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                            <li > <a class="dropdown-item between-flex active  fs-20" href="#">  <span> English  </span> </a> </li>
+                                            <li > <a class="dropdown-item between-flex   fs-20" href="#">  <span> Arbic  </span> </a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        
+                        
+                            {% if not is_logged_in %}
+
+                                <li>
+                                    <a href={% url 'login' %} class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
+
+                                </li>
+                                {% endif %}
+                                    <li>
+                                <div class="icons  fs-20  d-flex  space-between">
+                                
+                                    <div class=" p-relative mt-2  align-items-center   notification ">
+                                        <i class="fa-regular fa-bell fa-lg c-gray ">   </i>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                        <span></span>
+                    </span>
+                </div>
+            </div>
+        </nav>
+            <!--<div class="search  p-relative">
+                <span> <i class="fa-sharp fa-solid fa-magnifying-glass"></i> </span>
+                <input  class="p-10" type="search" name="search" id="search"  placeholder="search">
+            </div>-->
+            
+    </div>
+    <!--  end head -->
+    </div>
+    <div class="page d-flex">
+        <div class="sidebar   mt-90   p-15 " style="" >
+            <ul class="  list-none   mt-20  " >
+                <li>
+                    <a  class="active   d-flex  align-center  fs-20     rad-6  p-10 " href={% url '' %} >  
+                        <i class="fa-solid fa-chart-simple  fa-fw"></i>
+                        <span class="hide-mobile" > Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class=" d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'setting' %} >  
+                        <i class="fa-solid fa-gear fa-fw "></i>
+                        <span class="hide-mobile" > Setting </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " /profile >  
+                        <i class="fa-regular fa-user  fa-fw"></i>
+                        <span class="hide-mobile"> Profile </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href="/Companys/{{ Ticker }}/" >  
+                        <i class="fa-regular fa-building"></i>
+                        <span class="hide-mobile" > Companys </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href={% url 'LastNews' %} >  
+                        <i class="fa-solid fa-newspaper"></i>
+                        <span class="hide-mobile" > LastNews </span>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a  class="   d-flex  align-center  fs-20     rad-6  p-10 " href={% url 'Trending' %} >  
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                        <span class="hide-mobile" > Trending </span>
+                    </a>
+                </li> -->
+                <li>
+                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href="{% url 'chart' Ticker='GOOG' %}" >  
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span class="hide-mobile" > Chart </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20    rad-6  p-10 " href={% url 'Community' %} >  
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span class="hide-mobile" > Education Com </span>
+                    </a>
+                </li>
+    
+            </ul>
+            
+        </div> 
+    
+        <!-- start content  -->
+        <div class="content w-full  ">
+
+        <br>
+        <br>
+        <br>
+        <br>
+            <h1 class="p-relative"> Dashboard </h1>
+            
+            
+            <!--   start  carousel   -->
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+
+                <div class="carousel-item  active" data-bs-interval="2000">
+                    <img src="../static/imgs/photo-background-2-.avif"  class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5 class="fs-20  text-white">WELCOME TO Our App</h5>
+                    <p class="text-white fs-20"> We offour Some Greate services for finanes and stocks.  </p>
+                    </div>
+                </div>
+                <div class="carousel-item " data-bs-interval="10000">
+                    <img src="../static/imgs/photo-background-4-.avif"   class="d-block   w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5 class="fs-20 text-white"> Look The Graph Down!   </h5>
+                    <p class=" fs-20 text-white">  the graph show the history of stocs and company data through specific. </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/imgs/photo-background-3-.avif "    class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                    <h5 class="fs-20"> Wall Street !</h5>
+                    <p class="text-black fs-20">Wall Street has been the historic headquarters of some of the largest U.S. brokerages and investment banks and is also the home of the New York Stock Exchange.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        <!--   end   carousel   -->
+            <br>
+            <br>
+            <p class="typeEffect"> welcome to Fintec Application   </p>
+            <!--<div class=" space-around  ">
+                <div class="spinner-grow" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>-->
+        
+            <div class="wrapper   d-grid   gap-20">
+                <!--  start  welcome  widget   
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div>
+                            <h2  class="m-0" > Welcome  </h2>
+                            <p class="c-gray    mt-5">  FINTEC APP.  </p>
+                        </div>
+                        <img src="../static/images/welcome.png" class="hide-mobile " alt="">
+                    </div>
+                    <img src="../static/images/avatar.png" class="avatar" alt="">
+                    <div class="body   text-center   d-flex   p-20   mt-20   mb-20    block-mobile">
+                        <div> mohmed ali <span class="d-block    c-gray    fs-14    mt-10"> Business Man </span> </div>
+                        <div>80 <span class="d-block    c-gray   fs-14    mt-10"> Stocs </span> </div>
+                        <div> $8500 <span class="d-block    c-gray    fs-14    mt-10"> Earned </span> </div>
+                    </div>
+                    <a /profile class="visit   d-block  fs-14    rad-6   bg-blue    w-fit    button-shape"  > profile  </a>
+                </div>
+                end  welcome  widget   -->
+
+                <!--  start   quick  widget   -
+                <div class="quick-draft   p-20     rad-10     ">
+                    <h2  class="mt-0    mb-20   ">  quick News </h2>
+                    <p class="mt-0   mb-20   c-gray   fs-15  "> write adraft for yours ideas.  </p>
+                    <form >
+                        <input type="text" class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6 " placeholder="title">
+                        <textarea class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6  "  placeholder="Your Thought" name="" id="" cols="30" rows="10"></textarea>
+                        <input  class="save   d-block    fs-14    bg-blue   c-white    b-none   w-fit  button-shape " type="submit" value="Save">
+                    </form>
+                </div>
+                <  end  quick   widget   -->
+
+                <!--  start tagets 
+                <div class="targets    p-20     rad-10 ">
+                    <h2  class="mt-0    mb-10"> Yearly Target  </h2>
+                    <p class="mt-0   mb-20   fs-15"> Tagets Of Years   </p>
+                    <div class="targets-row   mb-20      align-center   d-flex ">
+                        <div class="icon   center-flex    blue">
+                            <i class="fa-solid  fa-dollar  fa-lg   c-blue"></i>
+                        </div>
+                        <div class="details">
+                            <span class="fs-14    c-gray"> Money </span>
+                            <span class="d-block   mt-5   mb-10    fw-bold">  $YourMoney </span>
+                            <div class="progress   p-relative  blue">
+                                <span  class="bg-blue  " style="width:60%">
+                                    <span class="bg-blue  "> 64% </span>   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="targets-row   mb-20    orange  align-center   d-flex ">
+                        <div class="icon   center-flex    blue">
+                            <i class="fa-solid fa-arrow-trend-up  orange  "></i>
+                        </div>
+                        <div class="details">
+                            <span class="fs-14    c-gray"> My Stocs </span>
+                            <span class="d-block   mt-5   mb-10     col-black  fw-bold">  StocsNoumber </span>
+                            <div class="progress   p-relative  blue">
+                                <span  class="bg-orange    orange " style="width:40%">
+                                    <span class="bg-orange  "> 34% </span>   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="targets-row   mb-20   green   align-center   d-flex ">
+                        <div class="icon   center-flex    blue">
+                            <i class="fa-solid   fa-user  green     fa-lg   "></i>
+                        </div>
+                        <div class="details">
+                            <span class="fs-14    c-gray"> Teams </span>
+                            <span class="d-block   mt-5   mb-10  col-black   fw-bold">  TeamsNumber  </span>
+                            <div class="progress   p-relative  blue">
+                                <span  class="bg-green  green " style="width:70%">
+                                    <span class="bg-green  "> 75% </span>   
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            end  targets  -->
+                <!--  start    carousel  -->
+            </div>
+    <br>
+    <br>
+            
+            <!--  start  chart  -->
+            <h1 class="p-relative"> Chart </h1>
+            <div class="wrapper   d-grid   gap-20">
+                <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container " id="tradingGraph">
+    <div id="tradingview_71c90"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "width": 1160,
+    "height": 610,
+    "symbol": "NASDAQ:AAPL",
+    "interval": "D",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_71c90"
+    }
+    );
+    </script>
+    </div>
+    <!-- TradingView Widget END -->
+
+            </div>
+            <!--  end  chart  -->
+            <br>
+            <br>
+
+            <section class="questions" style="position: relative;">
+                <div class="title">
+                    <h2 style="text-align: center; margin-top: 50px;  margin-bottom: 50px; " class="generalQuestion"> general Questipn </h2>
+        
+                </div>
+                <div class="sectionCenter" style="text-align: center; ">
+                    <!-- start  single question  -->
+                    <article class="question showText">
+                        <div  >
+                            <div class="questionTitle " style="">
+                                <p> do all accept major credit cards ? </p>
+                                <button type="button"  class="questionBtn  ">
+                                    <span class="plusIcon">
+                                        <i class="fa-regular fa-square-plus"></i>
+                                    </span>
+                                    <span class="minusIcon">
+                                        <i  class="fa-sharp fa-regular fa-square-minus"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="questionText">
+                            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab nulla voluptate sit adipisci, saepe mollitia laudantium, amet dignissimos, error at voluptatum porro dolorem. Quam, amet cupiditate distinctio nulla minima placeat. 
+                            </p>
+                        </div>
+                    </article>
+                    <!-- end  single question  -->
+        
+                    <!-- start  single question  -->
+                    <article class="question showText">
+                        <div >
+                            <div class="questionTitle" style="position: relative;">
+                                <p> do all accept major credit cards ? </p>
+                                <button type="button"  class="questionBtn">
+                                    <span class="plusIcon">
+                                        <i class="fa-regular fa-square-plus"></i>
+                                    </span>
+                                    <span class="minusIcon">
+                                        <i class="fa-sharp fa-regular fa-square-minus"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="questionText">
+                            <p class="" > Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab nulla voluptate sit adipisci, saepe mollitia laudantium, amet dignissimos, error at voluptatum porro dolorem. Quam, amet cupiditate distinctio nulla minima placeat. 
+        
+                            </p>
+                        </div>
+                    </article>
+                    <!-- end  single question  -->
+
+                    <!-- start  single question  -->
+                    <article class="question  showText">
+                        <div style="">
+                            <div class="questionTitle" style="position: relative;">
+                                <p> do all accept major credit cards ? </p>
+                                <button type="button"  class="questionBtn">
+                                    <span class="plusIcon">
+                                        <i class="fa-regular fa-square-plus"></i>
+                                    </span>
+                                    <span class="minusIcon">
+                                        <i class="fa-sharp fa-regular fa-square-minus"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="questionText ">
+                            <p class=""> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab nulla voluptate sit adipisci, saepe mollitia laudantium, amet dignissimos, error at voluptatum porro dolorem. Quam, amet cupiditate distinctio nulla minima placeat. 
+                            </p>
+                        </div>
+                    </article>
+                    <!-- end  single question  -->
+                </div>
+            </section>
+           
+            <!--  start  Companys  -->
+            <h1 class="p-relative" style="margin-top: 0px;"> Companys </h1>
+            <br>
+            <a href="/Companys/{{ Ticker }}/">
+                <h1 class="p-relative"> Us companyes </h1>
+            </a>
+
+                <div class=" companes-block  ">
+                    <div class="tesla-block  ">
+                        <img src="../static/images/tesla-symbol.jpg" class="logoes"  alt="logo photo">
+                        <div class="company-details">
+                            <a href="companyTesla.html"> <h2> Tesla </h2> </a>
+                        </div>
+                        <div class="scrap-value">
+                            
+                        </div>
+                    </div>
+                    <div class="Apple-block   ">
+                        <a href="Apple.html">
+                            <img src="../static/images/apple-logo-1656693488392.webp" class="logoes"   alt="logo photo">
+                            <div class="company-details">
+                                <a href="companyApple.html"> <h2 > Apple </h2> </a>
+                            </div>
+                        </a>
+                        <div class="scrap-value">
+                            
+                        </div>
+                    </div>
+                    <div class="meta-block ">
+                        <a href="Meta.html">
+                            <img src="../static/images/images.png" class="logoes"   alt="logo photo">
+                            <div class="company-details">
+                                <a href="companyMeta.html"> <h2> Meta </h2> </a>
+                            </div>
+                        </a>
+                        <br>
+                        <div class="scrap-value">
+                        </div>
+                    </div>
+                    <div class="google-block   ">
+                        <img src="../static/images/mkXgKuGBww7TQUASvxRxmR-320-80.jpg" class="logoes"   alt="logo photo">
+                        <div class="company-details">
+                            <a href="companyGoogle.html"> <h2> Google </h2> </a>
+                        </div>
+                        <div class="scrap-value"> 
+                        </div>
+                    </div>
+                    <div class=" microsoft-block   ">
+                        <img src="../static/images/microsoft-logo-icon-editorial-free-vector.webp" class="logoes"   alt="logo photo">
+                        <div class="company-details">
+                            <a href="companymicrosoft.html"> <h2> microsoft </h2> </a>
+                        </div>
+                        <div class="scrap-value">  
+                        </div>
+                    </div>
+                    <div class="see-more">
+                        <a href="/Companys/{{ Ticker }}/">
+                            <h2> see more </h2>
+                        </a>
+                    </div>
+    
+                </div>
+                <br>
+                <br>
+                
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                    {
+                    "symbols": [
+                    {
+                        "description": "",
+                        "proName": "NASDAQ:TSLA"
+                    },
+                    {
+                        "description": "",
+                        "proName": "NASDAQ:GOOGL"
+                    },
+                    {
+                        "description": "",
+                        "proName": "NASDAQ:AAPL"
+                    },
+                    {
+                        "description": "",
+                        "proName": "NASDAQ:MSFT"
+                    },
+                    {
+                        "description": "",
+                        "proName": "NASDAQ:META"
+                    },
+                    {
+                        "description": "",
+                        "proName": "BVC:AMZN"
+                    }
+                    ],
+                    "showSymbolLogo": true,
+                    "colorTheme": "light",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+                    </script>
+                </div>
+    <!-- TradingView Widget END -->
+
+                <br>
+                <br>
+                <br>
+            <a href="/Companys/{{ Ticker }}/">
+                <h1 class="p-relative"> EG stock Companes </h1>
+            </a>
+            <div class="companes-block  ">
+                <div class="starpucs-block   ">
+                    <img src="../static/images/1604490577573.jpg" class="logoes"   alt="logo photo">
+                    <div class="company-details">
+                        <a href="BankCIB.html"> <h2> CIB </h2> </a>
+                    </div>
+                    <div class="scrap-value">  
+                    </div>
+                </div>
+                <div class="starpucs-block   ">
+                    <img src="../static/images/بنك قطر الوطني.jpg" class="logoes"   alt="logo photo">
+                    <div class="company-details">
+                        <a href="QNB.html"> <h2> QNB </h2> </a>
+                    </div>
+                    <div class="scrap-value">  
+                    </div>
+                </div>
+                <div class="starpucs-block   ">
+                    <img src="../static/images/المصرية للاتصالات.jpg" class="logoes"   alt="logo photo">
+                    <div class="company-details">
+                        <a href="companyGoogle.html"> <h2> We </h2> </a>
+                    </div>
+                    <div class="scrap-value">  
+                    </div>
+                </div>
+                <div class="starpucs-block   ">
+                    <img src="../static/images/7e797731-ef48-494e-abf7-f3017230af35.jpg" class="logoes"   alt="logo photo">
+                    <div class="company-details">
+                        <a href="elsewedy.html"> <h3> elsewedy ELe </h3> </a>
+                    </div>
+                    <div class="scrap-value">  
+                    </div>
+                </div>
+                <div class="starpucs-block   ">
+                    <img src="../static/images/aroscum.png" class="logoes"   alt="logo photo">
+                    <div class="company-details">
+                        <a href="orascom.html"> <h2> ORASCOM </h2> </a>
+                    </div>
+                    <div class="scrap-value">  
+                    </div>
+                </div>
+                <div class="starpucs-block   ">
+                    <img src="../static/images/twitter.png" class="logoes"   alt="logo photo">
+                    <div class="company-details">
+                        <a href="ezzstell.html"> <h2> ezzsteel </h2> </a>
+                    </div>
+                    <div class="scrap-value">  
+                    </div>
+                </div>
+            </div>
+            <ul> </ul>
+            <br>
+             <!-- TradingView Widget BEGIN -->
+             <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text"></span></a> </div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                "symbols": [
+                {
+                    "description": "",
+                    "proName": "NASDAQ:CIBR"
+                },
+                {
+                    "description": "",
+                    "proName": "NYSE:CIB"
+                },
+                {
+                    "description": "",
+                    "proName": "QSE:QNBK"
+                },
+                {
+                    "description": "",
+                    "proName": "EGX:SWDY"
+                },
+                {
+                    "description": "",
+                    "proName": "EGX:ESRS"
+                },
+                {
+                    "description": "",
+                    "proName": "EGX:ORHD"
+                }
+                ],
+                "showSymbolLogo": true,
+                "colorTheme": "light",
+                "isTransparent": false,
+                "displayMode": "adaptive",
+                "locale": "en"
+            }
+                </script>
+            </div>
+    <!-- TradingView Widget END -->
+            <!--  end  Companys  -->
+            <br>
+            <br>
+
+            <!--  start  LastNewes  -->
+            <h1 class="p-relative">  LastNewes </h1>
+
+            <div class="wrapper   d-grid   gap-20">
+                
+                <!-- start tesla newes -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nt1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;"> Apr 03 </span>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > TSLA: Tesla Tops Vehicle Deliveries in a Record Quarter </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nt1.jpg" style="max-width: 100%;" alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        
+                        <div >  <span class="d-block  c-gray     fs-14    mt-10" > Shares of the EV maker are up almost double year-to-date, boasting a 92% rise.
+                            Tesla posted its delivery figures for the first quarter, surprising analysts with record-high figures. The electric-car maker shipped 422,875 vehicles, and produced 440,808 units. Both numbers are quarterly records. Wall Street was looking for just about 420,000 deliveries.
+                            The Q1 deliveries were 36% higher compared to the 310,048 cars shipped in the year-ago quarter. The Model 3 and the Model Y accounted for 412,180 units, while 10,695 units of the higher-priced Model S and X were delivered to people around the globe.
+                            Tesla needed strong quarterly performance to back up the monster rally in its shares. Over the first three months, Tesla’s stock is up roughly 92%, boasting some of the loftiest gains in the equity market. It’s Tesla’s sixth best quarter share-wise, out of 51 quarters of trading. </span> </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nt2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;"> Mar 07 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > TSLA: Tesla Expands its Price Cuts in the US </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nt2.jpg" style="max-width: 100%;" alt="">
+                    <div class="body   text-center   d-flex   p-15   mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">Tesla has announced price cuts to some of its EV models in the US.
+                                It hopes that the reduced price tags can restore slipping demand in the market.
+                                The reduced prices could allow the vehicles to qualify for US tax credits.
+
+                                After lowering the cost of its EV models in China proved to be a positive move for sales in the region, Tesla is hoping that the same magic can be applied in the US market. With inflation rates making customers less willing to part ways with their cash, steps need to be taken to fire up demand for the Musk-made vehicles.
+
+                                What has Tesla done?
+
+                                The price of the Tesla Model S and Model X (two of the most expensive models the manufacturer offers) will reportedly be reduced by 5% and 9% respectively in the US. It comes after Ford already reduced the cost of its EV truck by 8% after Tesla’s price reductions in China. The EV giant is reportedly also investing in means of producing electric vehicles without the need for rare earth metals – a requirement of electric motors which often elevates their price.
+                                    
+                            </span> 
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nt3.jpg" style="  width: 50px;   height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;">Mar 01
+                                    </span>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > Tesla’s Investor Day is Here and Things May Get Wild </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nt3.jpg"   style="max-width: 100%;" alt="">
+                    <div class="body   text-center   d-flex      p-15   mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">  
+                            
+                                Tesla’s Investor Day is Here and Things May Get Wild
+                                Cheaper EV model, robotaxis, and a new Master Plan are expected by analysts at today’s event.
+
+                                Today is Investor Day for Tesla and all the geeks are feeling giddy for what’s to come. In the list of expectations is a new plan for Tesla’s future, one that is likely to highlight steps to extreme-size expansion. Also, a brand-new EV model priced under $30,000, and some robotaxis.
+                                Tesla’s recent run, however, is putting the stock at a vulnerable spot ahead, during, and after the event. Shares of Elon Musk’s EV maker are up over 90% so far in 2023 – enough to return the meme king and Dogecoin lover to the #1 spot among the world’s wealthiest.
+                                With these lofty expectations pinned to the event, an underwhelming delivery might trip investors, pushing Tesla’s volatile stock on a slippery slope. If so, short sellers may get a field day, turning this Investors Day event into a sell-the-news event. So beware - stock may go for a ride in either direction.
+
+                            </span> 
+                        </div>
+                    </div>
+                
+                </div>
+                <!--  end tesla newes  -->
+
+                <!--  start apple newes  -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/napple1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;"> Mar 30 </span>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > AAPL: Apple Pins June Dates for Annual Dev Conference  </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/napple1.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Apple set the dates for its big annual developer conference WWDC. Between June 5 and June 9, tech lovers will get the latest news and see the latest products from the iPhone maker. Rumor has it, the company’s much-anticipated virtual reality headset will be unveiled.
+                                What’s the hype about? Apple holds a launch event every year where CEO Tim Cook announces new iPhones, Macs, or other gadgets. Last year, the $2.5tn tech heavyweight made known its plans for Apple Pay Later – the “buy now, pay later” service that just launched a couple of days ago.
+                                Shares of Apple have performed fabulously this year. The stock is up about 30% from early January and is roughly 10% off from its all-time high at $180 a pop touched in December 2021. Back then, Apple became the first company to be worth $3tn.
+
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/napple2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;">Mar 07  </span>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > Apple Shares Gain on Bullish Goldman Sachs Call  </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/napple2.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Apple shares closed Monday’s session higher by 1.85% as money allocators dropped some capital into the tech giant. Behind the move was a bullish projection from Goldman Sachs. The investment banking heavyweight put a buy rating on Apple and a $199 12-month price target.
+                                The mark was among Wall Street’s highest and a sign that there’s more room to the upside for the Tim Cook-led firm. If Apple, presently trading at $153.83 a share, closes this month higher, it will mark its first quarter in the green since the final three months of December 2021.
+                                Apple’s all-time high? That’d be $182.01 a pop set in January 2022. That’s when Apple became the first company to cross a $3tn market value. So far into 2023, the stock has gained 23%, outgaining even the best
+                                                            
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/napple3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;"> Jan 27 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" >
+                                Apple suffers smartphone decline  </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/napple3.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Shipments of smartphones are plunging globally in their steepest decline in the history of the sector. While 2022’s shipments of $1.21bn smartphones might sound like a lot, it’s the lowest number of annual shipments seen since in almost a decade. Analysts reckon that inflation and changes in consumer spending habits are what’s causing the decline.
+                                Apple is still the dominant force in the smartphone market, but it's far from immune to the slump. In its fourth quarter, the tech giant shipped 72.3m iPhones, marking a decline of almost 15% YoY. Competitor Samsung fared even worse, with a 15.6% decline in its shipments YoY.
+                                Not even its new iPhone 14 could save Apple from plunging demand, and it’s also had to deal with supply chain issues at its largest manufacturing plant in China – where worker protests impacted production. With any luck, the improvement of global economic conditions will help bolster the downtrodden smartphone industry.
+                                                            
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <!--  end apple newes -->
+
+                <!-- start microsoft newes  -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nmicrosoft1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <span style="padding-top:5px;"> Feb 08 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > Wait, Microsoft’s Bing back in fashion? </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nmicrosoft1.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                If you never thought Bing would pose a threat to Google, here you are. Microsoft’s $10bn bet on ChatGPT parent OpenAI is booming. The software giant is integrating some features of the viral bot tool into its Bing search engine, throwing down a challenge to Google.
+                                Microsoft shares popped 4% on Tuesday as chief executive Satya Nadella didn’t mince words, saying what’s coming will demolish the high profit margins of search. If you don't know what this means, it underpins Google’s core business. Google holds 90% of all online search.
+                                Can an AI-powered Bing chip away at Google’s dominance of the search market? But ChatGPT’s breakout success shot it into the stratosphere with everyone and their dogs talking about it. So now Google scrambles to launch its own AI bot Bard. Get the popcorn, this one’s gonna be big.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nmicrosoft2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                
+                                <br><span style="padding-top:5px;"> Jan 27 </span>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > To the clouds and back  </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nmicrosoft2.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Microsoft has reported disappointing results for its most recent financial quarter. The tech giant beat earnings with $2.32 per share compared to estimates of $2.29, but missed on revenue predictions with $52.75bn against estimates of $52.94bn. It comes just a week after it made the decision to let go of 10k employees.
+                                What was more concerning however, was a forecast about its Azure cloud computing unit. Microsoft predicts growth in that area of its business to slow by up to 5% in the current quarter. The news sent cloud computing stocks like Datadog and Snowflake down by 2.13% and 3% respectively yesterday.
+                                Adding to its cloud computing woes, Microsoft Teams experienced an outage today – and it’s estimated to have affected millions of users around the world. The service is used by over 280m people, so an outage is far from ideal. If Microsoft’s acquisition of Activision Blizzard is also blocked, it really won’t have been its year.                   
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nmicrosoft3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Jan 19 </span>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" >
+                                Let the layoffs continue  </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nmicrosoft3.jpg" style="max-width: 100%;" alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Microsoft has announced plans to let go of 10k employees as part of its plan to weather a forecasted slow in revenue growth. In October last year, the tech giant reported its slowest growth for the quarter since 2016.
+                                The company already laid off around 1k employees in October last year, and it was far from the only tech company to do so – driven by diminished tech stock values and changes in consumer spending. Amazon also announced plans this week to let go of another 18k of its workers.
+                                The last time Microsoft cut its headcount by close to this amount was in 2017, when its sales unit underwent a major reorganization. CEO, Satya Nadella, said that as a global company, it was always going to be affected by “what’s happening in the macro.”                      
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <!-- end microsoft newes  -->
+                <!-- start  meta newes  -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nmeta1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Feb 06 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > 
+                                Meta finally moves fast and breaks things </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nmeta1.jpg" style="max-width: 100%;" alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Facebook parent Meta Platforms soared 25% last week, notching its best daily gain on Thursday in nearly a decade. The social media behemoth posted better-than-expected sales, upbeat guidance, and pledged an investor-friendly move to initiate a $40bn share buyback.
+                                The stock is making a super strong comeback so far in 2023 as shares are up more than 50% since the turn of the year. What’s more, Meta has doubled in valuation since its multi-year low of $87 a share in October and is now flaunting a market value of just under $500bn.
+                                The owner of Facebook, WhatsApp, and Instagram reported Q4 revenue of $32.2bn and cut 2023 expenses outlook by $5bn. Metaverse efforts, tho, flopped with $13.7bn incinerated in 2022 as the company struggles to gain traction in the immersive but amorphous virtual world.
+
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nmeta2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Dec 20 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" >    
+                                In for a penny..</h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nmeta2.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Facebook parent Meta Platforms soared 25% last week, notching its best daily gain on Thursday in nearly a decade. The social media behemoth posted better-than-expected sales, upbeat guidance, and pledged an investor-friendly move to initiate a $40bn share buyback.
+                                The stock is making a super strong comeback so far in 2023 as shares are up more than 50% since the turn of the year. What’s more, Meta has doubled in valuation since its multi-year low of $87 a share in October and is now flaunting a market value of just under $500bn.
+                                The owner of Facebook, WhatsApp, and Instagram reported Q4 revenue of $32.2bn and cut 2023 expenses outlook by $5bn. Metaverse efforts, tho, flopped with $13.7bn incinerated in 2022 as the company struggles to gain traction in the immersive but amorphous virtual world.
+
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/nmeta3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Nov 29 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > 
+                                Meta's multi-million mistake </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/nmeta3.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Meta has been fined $276m by Ireland’s Data Protection Commission for failing to adequately protect user data from “data-scrapers”. The case related to roughly 530m Facebook users having their phone numbers hacked and published last year, for which Meta was found to have not taken appropriate steps to prevent.
+                                The tech giant has been racking up the fines recently – accumulating over $900m worth of fines over three separate cases in the last 15 months. European authorities have been turning up the heat on privacy laws for large tech companies recently, and fined Meta subsidiary WhatsApp for handling data improperly last year.
+                                Speaking of Meta, the company’s been in the limelight for all the wrong reasons recently. Its metaverse gamble hasn’t exactly paid off and its share price has tumbled by almost 33% in the last three months – making it the worst performing FAANG stock over the period.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+                <!-- end meta newes  -->
+
+                <!--  start google newes -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/ngoogle1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Feb 07 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > AI wars here already?</h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/ngoogle1.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                The formidable search engine giant is launching a chatbot to rival OpenAI’s super popular ChatGPT, Google parent Alphabet announced on Monday. Without going into the nitty-gritty – it’s called Bard, it’s in a trial phase, and it will be released to the public in the coming weeks.
+                                Despite the news, shares of Alphabet stayed fairly muted and in line with the broader market sentiment. The stock finished Monday down 1.8% but is up a decent 15% since the start of the year as tech stocks have enjoyed a sweeping rebound after some heavy blows in 2022.
+                                The AI wars appear to be moving at break-neck speed, especially after ChatGPT soared from a casual bot tool to a threat that had Google on code red. Microsoft is not far behind – the software giant pumped $10bn in ChatGPT and wants it in its Bing search engine.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/ngoogle2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Jan 23 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > Join the club </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/ngoogle2.jpg" style="max-width: 100%;" alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Google has announced plans to let go of 12k employees – representing 6% of its global workforce. In a staff memo, it was said that the company faces a “different economic reality” than the one in which they hired. It's just the latest in the tech-layoff frenzy of 2023, with Microsoft, Amazon and others already having done the same.
+                                The layoffs are part of a wider effort to refocus the company towards its AI projects – something which Microsoft is also doubling down on with plans to invest $10bn in OpenAI. With tech stocks down YoY across the board, they’re looking to reinvent themselves to weather current economic conditions.
+                                The Alphabet Workers Union (Alphabet is Google’s parent company) was far from pleased, claiming that jobs have been placed on the chopping block so that shareholders can see marginal benefit next quarter. In the current economic climate however, it seems the rulebook is out the window.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/NGOOGLE3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Jan 20 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > Google's Android woes </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/NGOOGLE3.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                India’s Supreme Court has ruled that Google should not be allowed to force pre-install its apps on smartphones running its mobile OS Android. It’s a major financial setback for the tech giant in one of its key growth markets. It has also hit Google with a $161m fine.
+                                The regulator also ruled that it should not be allowed to prevent the deletion of its apps, such as Maps, YouTube and Chrome. With 97% of smartphones in India running Android, the impact of the ruling on its revenue in the region could be substantial. By comparison, Apple’s iOS only commands 3% of the market.
+                                It’s not the first jurisdiction to consider some of Google’s practices a step too far. In Europe, the tech giant was fined $4.3bn in 2018 for its Android licensing terms – in a ruling which the company has challenged. Google even claimed that India’s ruling was so similar to that of Europe, that they had “copy-and-pasted” the ruling and didn’t properly examine the evidence.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <!--  end google newes -->
+
+                <!-- start amazon newes -->
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/namz1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Dec 07 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > 
+                                Laying down the law </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/namz1.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Antitrust regulators in the EU may have finally reached a deal with Amazon, more than three years after opening a probe into the company for anti-competitive practices. The tech giant has agreed to give rival products more visibility on the website, and merchants using Amazon Prime will no longer be forced to use Amazon logistics.
+                                It’s a victory for the EU regulator and it’s a pretty big deal for the industry. It shows that regulators are serious about the Digital Markets Act which it adopted in September, and tech giants will have to obey the new rules or risk fines of up to 10% of their global revenue. An Amazon representative however said that the company had been “unfairly targeted.”
+                                2022 has been a year to forget for Amazon. Aside from a bleak Q4 outlook and having to let go of over 10,000 employees, shares in the FAANG stock have dropped by around 48% since the start of the year. Sales in its Amazon Web Services division have also been coming in short this year – perhaps 2023 will bring the company some welcome relief?
+                            </span> 
+                    </div>
+                        </div>
+        
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/namz2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Nov 15 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > A storm brewing </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/namz2.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Amazon has plans to axe around 10k employees in the biggest mass layoff in company history – it represents about 1% of Amazon’s workforce, including 3% of its corporate employees. The e-commerce giant joins other tech firms like Meta and Twitter, who laid off a huge percentage of employees to cut costs.
+                                It means the holiday season could be filled with drear instead of cheer for retailers. The December quarter is historically a great month for not only Amazon but retailers at large cause of all that present buying – but this quarter it looks like the inflation grinch will be grinning at his stolen gains, especially with Amazon down nearly 3% on the news already.
+                                Daddy Bezos is giving a Christmas gift of his own this year, though it came with a rather glum card. The billionaire CEO said on Monday that during his lifetime he plans to give away a majority of his $124bn wealth. That’s great. But he also once again warned consumers to significantly reduce their risk because “if we’re not in a recession right now, we’re likely to be in one very soon”.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                        <div class="d-flex">
+                            <div >
+                                <img src="./lastNewes-Picture/namz3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                                <br>
+                                <span style="padding-top:5px;"> Nov 04 </span>
+                                <br>
+                                <span> 2023 </span>
+                            </div>
+                            <h3  class="m-0" > The other endangered Amazon </h3>
+                        </div> 
+                    </div>
+                    <img src="./lastNewes-Picture/namz3.jpg" style="max-width: 100%; " alt="">
+                    <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+                        <div>  
+                            <span class="d-block  c-gray     fs-14    mt-10">
+                                Amazon has dipped below a $1tn valuation with its share price dropping by more than 6% since Wednesday. The company’s pandemic gains have been largely erased and its share price closed on Tuesday at its lowest level since April 2020.
+                                Some of the sell-off is being driven by a pessimistic Q4 forecast with growth over the holiday period expected to be only 2%-8% which is significantly below analyst predictions. Its Amazon Web Services division also disappointed with sales missing on estimates last quarter.
+                                The tech giant’s been making efforts to reduce its costs to weather economic conditions, but is still the second-worst performing of the tech ‘Big Five’. Most hiring has now been paused after jobs cuts already took place earlier this year – driven by shoppers returning to in-person stores as lockdowns eased.
+                            </span> 
+                    </div>
+                        </div>
+                    
+                </div>
+
+                <!-- end amazon newes -->
+
+                <!--  start mercedes newes  -->
+
+                <!--  end mercedes  newes -->
+            </div>
+            <!--  end  LastNewes  -->
+            
+            <br>
+            <br>
+            <button id="up"> Up </button>
+
+            <!--  start  EducationCommunity  -->
+            <h1 class="p-relative">  Community </h1>
+            <div class="  dasboaed-community  ">
+                <ul class="finance-education">
+                    <!--<li class="activee  community" data-cont=".finance-ideaContent  .education-ideaContent  .video-ideaContent"> Community  </li> -->
+                    <li class=" finance-idea   " data-cont=".finance-ideaContent" >  Coins  </li>
+                    <li class="   Eduction-Ideas " data-cont=".education-ideaContent" >   Eduction Ideas </li>
+                    <!-- <li  class="   Video-Ideas" data-cont=".video-ideaContent" >  Video Ideas </li> -->
+                    <li class="infulance-People" data-cont=".Infulance-PeopleContent"> infulance People </li>
+                </ul>
+                <br>
+                <div class="community-content">
+                    <div class="finance-ideaContent">
+                        <div class="coins" style="margin: 50px;">
+                            <div class="egy"> 
+                                <img src="../static/images/2016-635998053139637033-963_main.jpg"  style="width: 80px; max-width: 100%; height: 80px; border-radius: 50%;" alt="">
+                                <div class="egydeatails">
+                                    <span class="egyrate">  </span>
+                                    
+                                    <br>
+                                    <span class="egyratedate">  </span>
+                                    
+                                    <br>
+                                    <span class="baseone">  </span>
+                                </div>
+                            </div>
+                    
+                            <div class="usd"> 
+                                <img src="../static/images/Usdollar100front.jpg"  style="width: 80px; max-width: 100%; height: 80px; border-radius: 50%;" alt="">
+                                <div class="usddeatails">
+                                    <span class="usdrate">  </span>
+                                    <br>
+                                    <span class="usdratedate">  </span>
+                                    <br>
+                                    <span class="basetwo">  </span>
+                                </div>
+                            </div>
+                            <div class="raw"> 
+                                <img src="../static/images/6ae16067-5239-482f-8335-3348976f8b4c_16x9_1200x676 (1).webp"  style="width: 80px; max-width: 100%; height: 80px; border-radius: 50%;" alt="">
+                                <div class="usddeatails">
+                                    <span class="raerate">  </span>
+                                    <br>
+                                    <span class="rawratedate">  </span>
+                                    <br>
+                                    <span class="basethree">  </span>
+                                </div>
+                            </div>
+                    
+                    
+                            <div class="qar"> 
+                                <img src="../static/images/202210191027402740.jpg"  style="width: 80px; max-width: 100%; height: 80px; border-radius: 50%;" alt="">
+                                <div class="usddeatails">
+                                    <span class="qarrate">  </span>
+                                    <br>
+                                    <span class="qarratedate">  </span>
+                                    <br>
+                                    <span class="qarbase">  </span>
+                                </div>
+                            </div>
+                    
+                            <div class="raw"> 
+                                <img src="../static/images/elaosboa67031.jpeg"  style="width: 80px; max-width: 100%; height: 80px; border-radius: 50%;" alt="">
+                                <div class="usddeatails">
+                                    <span class="kwdrate">  </span>
+                                    <br>
+                                    <span class="kwdratedate">  </span>
+                                    <br>
+                                    <span class="kwdbase">  </span>
+                                </div>
+                            </div>
+                    
+                            <div class="raw"> 
+                                <img src="../static/images/سعر-اليورو-اليوم-4-1-1024x548.jpg"  style="width: 80px; max-width: 100%; height: 80px; border-radius: 50%;" alt="">
+                                <div class="usddeatails">
+                                    <span class="eurrate">  </span>
+                                    <br>
+                                    <span class="eurratedate">  </span>
+                                    <br>
+                                    <span class="eurbase">  </span>
+                                </div>
+                            </div>
+
+                            <br>
+                        
+
+                            
+                        </div>
+                        
+
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="education-ideaContent">
+                        <p> 2 </p>
+                    </div>
+                    <!-- <div class="video-ideaContent">
+                        <p> 3 </p>
+                    </div> -->
+                    
+                    <div class="Infulance-PeopleContent">
+                        <h3 style="margin: 20px;"> follow Infulance People newes >  </h3>
+                        <div class="infulance">
+                            <ul class="infulancetweetes">
+                                <li class="tweeteProfile" style="position: relative;">
+                                    <div class="" style="position: relative;">
+                                        <img src="./infulancepeople/Elon_Musk_Royal_Society_(crop2).jpg"  style="background-color: white; padding: 2px;  position: absolute; left: 50%; top:70%; transform: translate(-50%,50%); text-align: center; width: 70px; height: 70px; border-radius: 50%;" alt=""> 
+                                    
+                                        <h4 class="name" style="position: absolute; left: 50%; margin-top: 100px; transform: translate(-50%,80%);"> Elon mask </h4>
+                                    </div>
+                                    <div  style=" ">
+                                        <p style="text-align: center; margin: 0 10px 0px 10px;  position: absolute; top: 45%;"> He is the founder, CEO and chief engineer of SpaceX; angel investor, CEO and product architect of Tesla, Inc.; owner and CEO of Twitter; founder of the Boring Company; co-founder of Neuralink and OpenAI </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button  class="btn btn-primary" style="text-align: center; position: absolute;  top: 87%; margin-top:10px; left: 50%; transform: translate(-50%,-50%);">   <a href="https://twitter.com/elonmusk" style="color: white;"> View More  </a> </button>
+
+                                </li>
+
+                                <li class="tweeteProfile" style="position: relative;">
+                                    <div class="" style="position: relative;">
+                                        <img src="./infulancepeople/Jeff_Bezos_visits_LAAFB_SMC_(3908618)_(cropped).jpeg"  style="background-color: white; padding: 2px;  position: absolute; left: 50%; top:70%; transform: translate(-50%,50%); text-align: center; width: 70px; height: 70px; border-radius: 50%;" alt=""> 
+                                    
+                                        <h4 class="name" style="position: absolute; left: 50%; margin-top: 100px; transform: translate(-50%,80%);"> Jeff Bezos </h4>
+                                    </div>
+                                    <div  style=" ">
+                                        <p style="text-align: center; margin: 0 10px 0px 10px;  position: absolute; top: 45%;"> He is the founder, executive chairman, and former president and CEO of Amazon, the world's largest e-commerce and cloud computing company. With a net worth of US$125 billion as of April 2023 </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button  class="btn btn-primary" style="text-align: center; position: absolute;  top: 87%; margin-top:10px; left: 50%; transform: translate(-50%,-50%);">   <a href="https://twitter.com/JeffBezos" style="color: white;"> View More  </a> </button>
+                                </li>
+
+                                <li class="tweeteProfile" style="position: relative;">
+                                    <div class="" style="position: relative;">
+                                        <img src="./infulancepeople/M-hffw5a_400x400.jpg"  style="background-color: white; padding: 2px;  position: absolute; left: 50%; top:70%; transform: translate(-50%,50%); text-align: center; width: 70px; height: 70px; border-radius: 50%;" alt=""> 
+                                    
+                                        <h4 class="name" style="position: absolute; left: 50%; margin-top: 100px; transform: translate(-50%,80%);"> Bill Gates </h4>
+                                    </div>
+                                    <div  style=" ">
+                                        <p style="text-align: center; margin: 0 10px 0px 10px;  position: absolute; top: 45%;">  He is best known for co-founding software giant Microsoft, along with his late childhood friend Paul Allen.[2][3] During his career at Microsoft, Gates held the positions of chairman, chief executive officer (CEO) </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button  class="btn btn-primary" style="text-align: center; position: absolute;  top: 87%; margin-top:10px; left: 50%; transform: translate(-50%,-50%);">   <a href="https://twitter.com/JeffBezos" style="color: white;"> View More  </a> </button>
+
+                                </li>
+
+                                <li class="tweeteProfile" style="position: relative;">
+                                    <div class="" style="position: relative;">
+                                        <img src="./infulancepeople/nmUq34m9_400x400.png"  style="background-color: white; padding: 2px;  position: absolute; left: 50%; top:70%; transform: translate(-50%,50%); text-align: center; width: 70px; height: 70px; border-radius: 50%;" alt=""> 
+                                    
+                                        <h4 class="name" style="position: absolute; margin-left: 70px;  margin-top: 100px; transform: translatey(80%);"> Federal Reserve System  </h4>
+                                    </div>
+                                    <div  style=" ">
+                                        <p style="text-align: center; margin: 0 10px 0px 10px;  position: absolute; top: 45%;">  is the central banking system of the United States. It was created on December 23, 1913, with the enactment of the Federal Reserve Act, after a series of financial panics (particularly the panic of 1907) . </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button  class="btn btn-primary" style="text-align: center; position: absolute;  top: 87%; margin-top:10px; left: 50%; transform: translate(-50%,-50%);">   <a href="https://twitter.com/mavigol" style="color: white;"> View More  </a> </button>
+
+                                </li>
+
+                                <li class="tweeteProfile" style="position: relative;">
+                                    <div class="" style="position: relative;">
+                                        <img src="./infulancepeople/6ZcjdSaB_400x400.jpg"  style="background-color: white; padding: 2px;  position: absolute; left: 50%; top:70%; transform: translate(-50%,50%); text-align: center; width: 70px; height: 70px; border-radius: 50%;" alt=""> 
+                                    
+                                        <h4 class="name" style="position: absolute; left: 50%; margin-top: 100px; transform: translate(-50%,80%);"> Nick Leeson </h4>
+                                    </div>
+                                    <div  style=" ">
+                                        <p style="text-align: center; margin: 0 10px 0px 10px;  position: absolute; top: 45%;"> Leeson was convicted of financial crime in a Singapore court and served over four years in Changi Prison.
+
+                                            Between 2005 and 2011, Leeson had senior management roles at League of Ireland club Galway United. </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button  class="btn btn-primary" style="text-align: center; position: absolute;  top: 87%; margin-top:10px; left: 50%; transform: translate(-50%,-50%);">   <a href="https://twitter.com/JeffBezos" style="color: white;"> View More  </a> </button>
+
+                                </li>
+
+                                <li class="tweeteProfile" style="position: relative;">
+                                    <div class="" style="position: relative;">
+                                        <img src="./infulancepeople/pUSI1yPZ_400x400.png"  style="background-color: white; padding: 2px;  position: absolute; left: 50%; top:70%; transform: translate(-50%,50%); text-align: center; width: 70px; height: 70px; border-radius: 50%;" alt=""> 
+                                    
+                                        <h4 class="name" style="position: absolute; left: 50%; margin-top: 100px; transform: translate(-50%,80%);"> Investing.com </h4>
+                                    </div>
+                                    <div  style=" ">
+                                        <p style="text-align: center; margin: 0 10px 0px 10px;  position: absolute; top: 45%;"> Real-time global financial market data, news, analysis, charts, tools & more • In 30 languages via our app or website • FREE, for everyone, anywhere!  </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <button  class="btn btn-primary" style="text-align: center; position: absolute;  top: 87%; margin-top:10px; left: 50%; transform: translate(-50%,-50%);">   <a href="https://twitter.com/JeffBezos" style="color: white;"> View More  </a> </button>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  end  EducationCommunity  -->
+            <br>
+            <br>
+            <h2 style="text-align: center;"> About Us  </h2>
+            <p class="" style="text-align: center; margin: 50px;"> hi welcome we are fintic team we are happy to help you to learn and understand enough about finance general concept and technical an analysis in deep we offer you last data about company we offer some company and bank as sample to test model and technical and financial on it and ablity to acces to company in database we provide you with last newes and event in this company and acoomunity to understand and learn about stocks and financial .    </p>
+
+            
+            <br>
+            <br>
+            <!-- start our review -->
+            <h2 style="text-align: center;"> our reviews </h2>
+            <br>
+            <br>
+            <div >
+                <!-- <div class="container">
+                    <div class="title">
+                        <h2 style="text-align: center;"> our reviews </h2>
+                        <div class="underline">
+        
+                        </div>
+                    </div>
+                </div> -->
+                <article class="review">
+                    <div class="img-container"  >
+                        <!-- <span style="font-size: larger; position: sticky; top: 15%; left: 40%; transform: translate(50%,50%);  color: white; width: 40px; z-index: 999; height: 40px; border-radius: 50%;  display: flex; justify-content: center; align-items: center;  background-color: dodgerblue;"> <i sty class="fa-solid fa-quote-left"></i> </span>
+                        -->
+                        <br>
+                        <br>
+                        <div style="position: relative;">
+                            <img src="" id="personimg"  style="border-right: 8px solid dodgerblue; position: absolute; left: 50%; margin-top: 40px;  transform: translate(-50%,-50%); max-width: 100% ; border-radius: 50%; width: 150px; height: 150px; "   alt="logophoto">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4 id="autor" style=" margin-top: 50px; font-size: large; text-align: center; ">  </h4>
+                    <p id="jop" style="   text-align: center;  font-size: large;">  </p>
+                    
+                    <p id="info" style=" font-size: large;  text-align: center; margin: 50px;">
+                        
+                    </p>
+                    <div class="button-container" style="  font-size: large; text-align: center;">
+                        <button class="prev-btn" >
+                            <i class="fas fa-chevron-left">  </i>
+                        </button>
+                        <button class="next-btn">
+                            <i class="fas fa-chevron-right"> </i>
+                        </button>
+                    </div>
+                    <br>
+                    <br>
+                    <div style="position: relative;">
+                        <button class="random-btn " style="position: absolute; left: 50%; transform: translate(-50%,-50%);  font-size: large; text-align: center;  "> suprise me </button>
+                    </div>
+        
+                </article>
+            </div>
+            <!-- end our review  -->
+            <div id="articl"></div>
+            
+            <!--  start  Trending  -->
+            <!-- <h1 class="p-relative">  Trending </h1>
+            <div class="wrapper   d-grid   gap-20">
+            </div>  -->
+            <!--  end  Trending  -->
+            <br>
+            <br> 
+        </div>
+        <!-- end  content  --> 
+    </div>
+    
+    <div  class="offcanvas offcanvas-start  " tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        
+            <nav class="navbar navbar-light  " style="margin-top: 30px;">
+                <div class="container-fluid">
+                    <form class="d-flex  w-100">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        
+        <div class="offcanvas-header">
+            
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">sidebar</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+            <ul class="  list-none  ">
+                <li>
+                    <a  class="   d-flex  align-center  space-between  fs-20     rad-6  p-10 " href={% url '' %} >  
+                        <i class="fa-solid fa-chart-simple  fa-fw"></i>
+                        <span class="" > Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class=" d-flex  align-center space-between  fs-20    rad-6  p-10 " href={% url 'setting' %} >  
+                        <i class="fa-solid fa-gear fa-fw "> </i>
+                        <span class="   d-flex" > Setting </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20   space-between   rad-6  p-10 " /profile >  
+                        <i class="fa-regular fa-user  fa-fw"></i>
+                        <span class=""> Profile </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20   space-between   rad-6  p-10 " href="/Companys/{{ Ticker }}/" >  
+                        <i class="fa-regular fa-building"></i>
+                        <span class="" > Companys </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20  space-between    rad-6  p-10 " href={% url 'LastNews' %} >  
+                        <i class="fa-solid fa-newspaper"></i>
+                        <span class="" > LastNews </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class=" active  d-flex  align-center  fs-20   space-between   rad-6  p-10 " href={% url 'Trending' %} >  
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                        <span class="" > Trending </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="  d-flex  align-center  fs-20   space-between   rad-6  p-10 " href="{% url 'chart' Ticker='GOOG' %}" >  
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span class="" > Chart </span>
+                    </a>
+                </li>
+                <li>
+                    <a  class="   d-flex  align-center  fs-20   space-between   rad-6  p-10 " href={% url 'Community' %} >  
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span class="" > Education Com </span>
+                    </a>
+                </li>
+
+
+
+                
+            </ul>
+            
+          </div>
+          
+        </div>
+
+    </div>  
+    
+    <!--  start footer -->
+    <div   class= "footer  mt-5  pt-5 pb-5  text-center   bg-black  text-md-start">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="info mb-5">
+                        <img src="../static/images/logo (1)/logo/logo.png" class="mb-4" alt="">
+                        <p class="mb-4 c-gray">
+                            Hi! Welcome to our website we are happy to help you to learn about 
+                            Finance and to provide you with best preditcion stocs algorithms.
+                        </p>
+                        <div class="copyright c-gray">
+                            Created By <span class=>  ahmedsalehbasuony </span>
+                            <div> &copy; <span> 2023 -  FinTec   </span> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-2">
+                    <div class="liks">
+                        <h5 class="text-light">  LINKS </h5>
+                        <ul class="list-unstyled lh-lg c-gray">
+                            <li> <a  href={% url '' %} class="c-gray"> Home </a>   </li>
+                            <li> <a href="/Companys/{{ Ticker }}/" class="c-gray"> Our Services </a>  </li>
+                            <li> <a /profile  class="c-gray">   Portfolio </a></li>
+                            <li><a href="{% url 'chart' Ticker='GOOG' %}"  class="c-gray"> Chart </a></li>
+                            <li > <a href={% url 'setting' %}  class="c-gray"> Support </a></li>
+                            <li > <a href={% url 'LastNews' %}  class="c-gray"> Newes </a></li>
+                            <li > <a href={% url 'Trending' %}  class="c-gray"> Trending </a></li>
+                            <li > <a href={% url 'Community' %}  class="c-gray"> Learn ! </a></li>
+                            <li>Terms and Condition</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-2">
+                    <div class="links">
+                        <h5 class="text-light"> About Us </h5>
+                        <ul class="list-unstyled  lh-lg c-gray">
+                            <li>  <a href={% url 'login' %} class="c-gray">  Sign In  </a></li>
+                            <li> <a href={% url 'register' %} class="c-gray"> Register</a></li>
+                            <li>  <a href="abouus.html" class="c-gray"> About Us </a></li>
+                            <li>Blog</li>
+                            <li>Contact Us</li>
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="contact">
+                        <h5 class="text-light"> Contact Us </h5>
+                        <p class="lh-lg mt-3 mb-5  c-gray"> Get in touch with us via mail phone.We are waiting for your call or message </p>
+                    
+                        <a href="#" class="btn rounded-pill main-btn   c-gray  w-100"> graphberry@gmail.com </a>
+                        <ul class="d-flex  mt-5  list-unstyled  gap-3">
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-facebook fa-lg facebook rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-twitter fa-lg twitter rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-linkedin fa-lg linkedin rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                                <li>
+                                    <a class="d-block text-light" href="#"
+                                    ><i class="fa-brands fa-youtube fa-lg youtube rounded-circle p-2"></i
+                                    ></a>
+                                </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--  end footer -->
+
+    
+    
+    <!-- link to java-script file  -->
+
+    <!--  api links  -->
+    <script src="./Api/AppleApi.js"></script>
+    
+    <!--- <script src="./Api/CIBApi.js"></script>
+    <script src="./Api/GoogleApi.js"></script>
+    <script src="./Api/TESLAApi.js"></script>
+    <script src="./Api/MICROSOFTApi.js"></script>
+    <script src="./Api/METAApi.js"></script>
+    <script src="./Api/AmazonApi.js"></script>
+    <script src="./Api/CIBApi.js"></script>
+    <script src="./Api/ELSWEDAYApi.js"></script>
+    <script src="./Api/WEApi.js"></script>
+
+    -->
+    
+        <script src="{% static 'static/Java-script/generalQuestion.js' %}"></script>
+        <!-- api for coin  -->
+        <script src="{% static 'static/Java-script/Apiforcoin.js' %}"></script>
+        <script src="{% static 'static/Java-script/ourReview.js' %}"></script>
+        <script src="{% static 'static/Java-script/community.js' %}"></script>
+        <script src="{% static 'static/Java-script/articleapi.js' %}"></script>
+        <!-- link to java-script file  -->
+       <script src="{% static 'static/Java-script/upbotton.js' %}"></script>
+       <script src="{% static 'static/Java-script/Translation.js' %}"></script>
+       <script src="{% static 'static/Java-script/main.js' %}"></script>
+       <script src="{% static 'static/js/all.min.js' %}"></script>
+       <script src="{% static 'static/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
+
+{% endblock content %}
