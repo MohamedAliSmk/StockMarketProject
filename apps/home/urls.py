@@ -18,8 +18,7 @@ urlpatterns = [
     path('Trending/',views.Trending , name="Trending"),
     path('chart/<str:Ticker>',views.chart , name="chart"),
     path('Community/',views.Community , name="Community"),
-    path('predict/<str:ticker_value>/<str:number_of_days>/', views.predict),
-
+    #path('predict/<str:ticker_value>/<str:number_of_days>/', views.predict),
     path('i18n/', include(i18n_urlpatterns)),#for translation
 
 ]

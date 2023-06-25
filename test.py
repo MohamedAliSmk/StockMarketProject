@@ -3,18 +3,6 @@ import yfm
 import yfinance as yf
 import pandas as pd
 import requests
-
-def CompanyDetails(Ticker):
-    # Define the API endpoint and parameters
-    apikey = "8263508c794d9fc6c347f4670860b1a8"
-    url = f"https://financialmodelingprep.com/api/v3/profile/{Ticker}?apikey={apikey}"
-    # Send a GET request to the API and parse the JSON response
-    response = requests.get(url)
-    company_data = response.json()
-    if len(company_data) > 0:
-        return company_data[0]
-    else:
-        return print("there is no values")
     
 """"
 tickers = ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
@@ -246,10 +234,11 @@ def yf_Scraper(symbol):
         'website': website,
     }
     
-    return data_dict
+    return data_dict["current_price"]
 
 
-
+data=yf_Scraper("GOOG")
+print("TSLA")
 """companies_urls = ['EGX-ORHD'] #get from https://www.tradingview.com/symbols/NASDAQ-AAPL/ Support multiple tickers.
     companies_data = START.get_data(companies_urls) #Get from DataBase or Website
     company = companies_data[0] #get the first company
@@ -353,4 +342,31 @@ def yf_Scraper(symbol):
             'symbol': Ticker,
             'financial_data': financial_data}
     return render(request, 'companys.html', context)
+"""
+
+
+
+
+"""from pymongo import MongoClient
+
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017")
+db = client["Fintechers"]
+collection = db["Model_stocks"]
+
+tickers = ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
+data_flow = []
+
+for ticker in tickers:
+    try:
+        data = yf_Scraper(ticker)
+        data_flow.append(data)
+    except KeyError:
+        print(f"Error retrieving data for ticker: {ticker}")
+
+# Insert data into MongoDB
+collection.insert_many(data_flow)
+
+# Close the MongoDB connection
+client.close()
 """

@@ -7,18 +7,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-    <!-- Bootstrap link -->
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+   <!-- Bootstrap link -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <!-- CSS link: framework -->
-    <link rel="stylesheet" href="../static/css/framework.css">
+    <link rel="stylesheet" href="{% static 'css/framework.css' %}">
     <!-- CSS link: master -->
-    <link rel="stylesheet" href="../static/css/master.css">
+    <link rel="stylesheet" href="{% static 'css/master.css' %}">
     <!-- Normalize link -->
-    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <!-- All link -->
-    <link rel="stylesheet" href="../static/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <!-- Font link -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -111,9 +111,9 @@
               </a>
             </li> 
             <li>
-              <a class="d-flex align-center fs-20 rad-6 p-10" href="/Chart/{{ Ticker }}/">
+              <a class="d-flex align-center fs-20 rad-6 p-10" href="/chart/{{ Ticker }}/">
                 <i class="fa-solid fa-chart-pie"></i>
-                <span class="hide-mobile">Chart</span>
+                <span class="hide-mobile">chart</span>
               </a>
             </li>
             <li>
@@ -154,7 +154,7 @@
                 <ul class="list-unstyled lh-lg c-gray">
                     <li><a href="/" class="c-gray">Home</a></li>
                     <li><a href="/Companys/{{ Ticker }}/" class="c-gray">Our Services</a></li>
-                    <li><a href="/chart/{{ Ticker }}/" class="c-gray">Chart</a></li>
+                    <li><a href="/chart/{{ Ticker }}/" class="c-gray">chart</a></li>
                     <li><a href="/setting." class="c-gray">Support</a></li>
                     <li><a href="/profile" class="c-gray">Profile</a></li>
                     <li><a href="/LastNews" class="c-gray">News</a></li>

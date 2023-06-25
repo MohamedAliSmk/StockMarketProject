@@ -66,6 +66,40 @@ def yf_Scraper(symbol):
     
     return data_dict
 
+def plotTicker(Ticker):
+    try:
+        ticker_value = Ticker.upper()
+        df = yf.download(tickers=ticker_value, period='1d', interval='1m')
+        print("Downloaded ticker = {} successfully".format(ticker_value))
+        fig = go.Figure()
+        fig.add_trace(go.Candlestick(x=df.index,
+                                     open=df['Open'],
+                                     high=df['High'],
+                                     low=df['Low'],
+                                     close=df['Close'], name='market data'))
+        fig.update_layout(
+            title='{} live share price evolution'.format(ticker_value),
+            yaxis_title='Stock Price (USD per Share)')
+        fig.update_xaxes(
+            rangeslider_visible=True,
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=15, label="15m", step="minute", stepmode="backward"),
+                    dict(count=45, label="45m", step="minute", stepmode="backward"),
+                    dict(count=1, label="HTD", step="hour", stepmode="todate"),
+                    dict(count=3, label="3h", step="hour", stepmode="backward"),
+                    dict(step="all")
+                ])
+            )
+        )
+        fig.update_layout(paper_bgcolor="#14151b", plot_bgcolor="#14151b", font_color="white")
+        plot_div = plot(fig, auto_open=False, output_type='div')
+        return plot_div
+    except Exception as e:
+        error_message = f"Error retrieving chart data: {str(e)}"
+        return error_message
+
+
 @login_required
 def index(request):   
     is_logged_in = request.user.is_authenticated
@@ -191,10 +225,17 @@ def profile(request):
 
     context = {'user_profile': user_profile, 'form': form}
     return render(request, 'profile.html', context)
-def Companys(request,Ticker,next_days):
-    date_today=dt.datetime.now().strftime("%Y-%m-%d")
-    Prediction_Comp(symbol=Ticker,date_today=date_today,next_days=next_days)
-    return render(request, 'companys.html')
+
+def Companys(request, Ticker):
+    try:
+        data_dict = yf_Scraper(Ticker)
+        chart_op=plotTicker(Ticker)
+        context={data_dict,chart_op}
+        return render(request, 'companys.html', context=context)
+    except Exception as e:
+        # Handle any errors that occur during the retrieval of company information
+        error_message = f"Error retrieving company information: {str(e)}"
+        return render(request, 'page-500.html', {'error_message': error_message})
  
 def LastNews(request):
     stocks = ['AAPL', 'MSFT', 'NFLX']
@@ -205,13 +246,16 @@ def LastNews(request):
 def Trending(request):
     return render(request, "Trending.html")
 
-def chart(request,Ticker):
-    return render(request, 'chart.html')
-  
+#@login_required
+def chart(request, Ticker):
+    chart_op=plotTicker(Ticker)
+    return render(request, "chart.html",context=chart_op)
+
+      
 def Community(request):
     return render(request, "Community.html")
 
-# The Predict Function to implement Machine Learning as well as Plotting
+#The Predict Function to implement Machine Learning as well as Plotting
 
 """
 here in error html message we should typing error messages

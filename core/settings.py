@@ -6,7 +6,6 @@ from unipath import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).parent
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 env = environ.Env(
     # set casting, default value
@@ -56,7 +55,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
+LOGIN_REDIRECT_URL = "home"  # Route defined in home/urls.py
+LOGOUT_REDIRECT_URL = "home"  # Route defined in home/urls.py
 TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
+MEDIA_ROOT = 'apps\home\data'
 
 AUTH_PROFILE_MODULE = 'apps.authentication.models.UserProfile'
 
@@ -176,8 +178,8 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 LOGIN_URL ='apps.authentication:login'
-LOGIN_REDIRECT_URL='apps.home:index'
-LOGOUT_REDIRECT_URL='apps.authentication:login'
+#LOGIN_REDIRECT_URL='apps.home:index'
+#LOGOUT_REDIRECT_URL='apps.authentication:login'
 LOGOUT_URL='apps.authentication:logout'
 
 
