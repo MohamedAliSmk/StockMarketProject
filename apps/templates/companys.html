@@ -32,9 +32,16 @@
                         <h2 style="margin-left: 40px;"> {{ company_name }}  <p><strong>Symbol:</strong> {{ symbol }}</p> </h2>
                         <br>
                         <br>                    
+                                                       {% block Left_Plot %}
+                                                        {% autoescape off %}
+                                                            {{ plot_div }}
+                                                        {% endautoescape %}
+                                                        {% endblock Left_Plot %}
+
                     </div>
                     <div class="financeContent">
                         <p> financeContent </p>
+                        
                     </div>
                     <div class="ComanyhistoryDataContent">
                         <ul class="companyContent " style=" padding: 10px; margin: 5px; ">
