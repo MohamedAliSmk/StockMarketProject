@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-                <h1 class="p-relative"> Settings  </h1>
+      <h1 class="p-relative"> Settings  </h1>
                 <div class="setting-page   m-20   g-20">
-        
                     <!--   start setting box -->
                 {% if messages %}
                 <ul class="messages">
@@ -32,8 +31,7 @@
                           </label>
                         </div>
                       </div>
-                      <textarea name="close_message" class="close-message b-none p-10 rad-10 d-block w-full" placeholder="Close message content">{{ request.user.profile.close_message }}</textarea>
-                      <button type="submit" class="btn btn-primary mt-20">Save changes</button>
+
                     </form>
                   </div>
                   <div id="general-info-settings" class="p-20 rad-10">
@@ -58,7 +56,7 @@
                           
                           <div class="between-flex">
                             <input class="b-none border-ccc p-10 w-full rad-6 d-block" type="email" name="email" value="{{ request.user.email }}" placeholder="Email">
-                            <button type="submit" class="c-blue button-shape">Save</button>
+                            <button type="submit" class="c-blue button-shape" style="margin-left: 9px;">Save</button>
                           </div>
                         </form>
                       </div>
@@ -121,26 +119,26 @@
                         <p class="mt-0 mb-20 c-gray fs-15">Social media information</p>
                         <!-- twitter -->
                         <div class="sec-box d-flex align-center mb-15">
-                            <i class="fa-brands fa-twitter center-flex c-gray"></i>
-                            <input class="w-full" type="text" name="twitter" placeholder="Twitter UserName" value="{{ request.user.profile.twitter_username }}">
+                            <i class="fa-brands fa-twitter center-flex c-gray" style="margin-right: 7px;"></i>
+                            <input class="w-full" type="text" name="twitter" placeholder="Twitter UserName" value="{{ request.user.profile.twitter_username }}" >
                         </div>
                     
                         <!-- facebook -->
                         <div class="sec-box d-flex align-center mb-15">
-                            <i class="fa-brands fa-facebook center-flex c-gray"></i>
-                            <input class="w-full" type="text" name="facebook" placeholder="Facebook UserName" value="{{ request.user.profile.facebook_username }}">
+                            <i class="fa-brands fa-facebook center-flex c-gray" style="margin-right: 7px;"></i>
+                            <input class="w-full" type="text" name="facebook" placeholder="Facebook UserName" value="{{ request.user.profile.facebook_username }}" >
                         </div>
                     
                         <!-- linked-in -->
                         <div class="sec-box d-flex align-center mb-15">
-                            <i class="fa-brands fa-linkedin center-flex c-gray"></i>
-                            <input class="w-full" type="text" name="linkedin" placeholder="LinkedIn UserName" value="{{ request.user.profile.linkedin_username }}">
+                            <i class="fa-brands fa-linkedin center-flex c-gray" style="margin-right: 7px;"></i>
+                            <input class="w-full" type="text" name="linkedin" placeholder="LinkedIn UserName" value="{{ request.user.profile.linkedin_username }}" >
                         </div>
 
                         <!-- you-tube -->
                         <div class="  d-flex  align-center   mb-15">
-                            <i class="fa-brands  fa-youtube  center-flex  c-gray"></i>
-                            <input class="w-full" type="text" name="linkedin" placeholder="LinkedIn UserName" value="{{ request.user.profile.youtube_username }}">
+                            <i class="fa-brands  fa-youtube  center-flex  c-gray" style="margin-right: 7px;"></i>
+                            <input class="w-full" type="text" name="linkedin" placeholder="LinkedIn UserName" value="{{ request.user.profile.youtube_username }}" >
                         </div>
                       
                     </div>
@@ -186,10 +184,8 @@
                         </form>
                       </div>
                       <!-- end setting box  -->
-                </div>
+                      </div>
         </div>
-    </div>
-</div>
 </body>
 </html>
 

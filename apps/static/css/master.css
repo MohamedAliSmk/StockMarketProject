@@ -1450,3 +1450,7 @@ background-color:#bbb;
     background-color: #ff0000;
 }
 /*   end footer */
+
+.com-blk {
+    flex-basis: 33.33333
+}
