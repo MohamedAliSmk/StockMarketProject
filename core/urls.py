@@ -8,6 +8,6 @@ urlpatterns = [
     path("", include("apps.authentication.urls")), # Auth routes - login / register
     path("", include("apps.home.urls")),
     path('outh/',include('social_django.urls'), name='social'),
-    path("companys/", include("Model.urls")),
+    path("Companys/", include("Model.urls")),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -1,6 +1,7 @@
 <!-- index.html -->
 {% extends 'base.html' %}
-{% block content %}  
+{% block content %}
+{% load static %}  
         <!-- start content  -->
         <div class="content w-full  ">
             <h1 class="p-relative"> Dashboard </h1>
@@ -46,7 +47,7 @@
         <!--   end   carousel   -->
             <br>
             <br>
-            <p class="typeEffect"> welcome to Fintec Application   </p>
+            <p class="typeEffect"> welcome to Fintechers Application   </p>
             <!--<div class=" space-around  ">
                 <div class="spinner-grow" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -256,159 +257,136 @@
                 <h1 class="p-relative"> Us companyes </h1>
             </a>
 
-                <div class=" companes-block  ">
-                    <div class="tesla-block  ">
-                        <img src="../static/images/tesla-symbol.jpg" class="logoes"  alt="logo photo">
+            <div class="companes-block">
+                <div class="tesla-block">
+                    <img src="{% static 'images/tesla-symbol.jpg' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/TSLA"><h2>Tesla</h2></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="Apple-block">
+                    <a href="/Companys/Apple">
+                        <img src="{% static 'images/apple-logo-1656693488392.webp' %}" class="logoes" alt="logo photo">
                         <div class="company-details">
-                            <a href="companyTesla.html"> <h2> Tesla </h2> </a>
+                            <a href="/Companys/AAPL"><h2>Apple</h2></a>
                         </div>
-                        <div class="scrap-value">
-                            
-                        </div>
+                    </a>
+                    <div class="scrap-value">
                     </div>
-                    <div class="Apple-block   ">
-                        <a href="Apple.html">
-                            <img src="../static/images/apple-logo-1656693488392.webp" class="logoes"   alt="logo photo">
-                            <div class="company-details">
-                                <a href="companyApple.html"> <h2 > Apple </h2> </a>
-                            </div>
-                        </a>
-                        <div class="scrap-value">
-                            
-                        </div>
-                    </div>
-                    <div class="meta-block ">
-                        <a href="Meta.html">
-                            <img src="../static/images/images.png" class="logoes"   alt="logo photo">
-                            <div class="company-details">
-                                <a href="companyMeta.html"> <h2> Meta </h2> </a>
-                            </div>
-                        </a>
-                        <br>
-                        <div class="scrap-value">
-                        </div>
-                    </div>
-                    <div class="google-block   ">
-                        <img src="../static/images/mkXgKuGBww7TQUASvxRxmR-320-80.jpg" class="logoes"   alt="logo photo">
+                </div>
+                <div class="meta-block">
+                    <a href="/Companys/Meta">
+                        <img src="{% static 'images/images.png' %}" class="logoes" alt="logo photo">
                         <div class="company-details">
-                            <a href="companyGoogle.html"> <h2> Google </h2> </a>
+                            <a href="/Companys/META"><h2>Meta</h2></a>
                         </div>
-                        <div class="scrap-value"> 
-                        </div>
+                    </a>
+                    <br>
+                    <div class="scrap-value">
                     </div>
-                    <div class=" microsoft-block   ">
-                        <img src="../static/images/microsoft-logo-icon-editorial-free-vector.webp" class="logoes"   alt="logo photo">
-                        <div class="company-details">
-                            <a href="companymicrosoft.html"> <h2> microsoft </h2> </a>
-                        </div>
-                        <div class="scrap-value">  
-                        </div>
-                    </div>
-                    <div class="see-more">
-                        <a href="/Companys/{{ Ticker }}/">
-                            <h2> see more </h2>
-                        </a>
-                    </div>
-    
                 </div>
-                <br>
-                <br>
-                
-                <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text"></span></a></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-                    {
-                    "symbols": [
-                    {
-                        "description": "",
-                        "proName": "NASDAQ:TSLA"
-                    },
-                    {
-                        "description": "",
-                        "proName": "NASDAQ:GOOGL"
-                    },
-                    {
-                        "description": "",
-                        "proName": "NASDAQ:AAPL"
-                    },
-                    {
-                        "description": "",
-                        "proName": "NASDAQ:MSFT"
-                    },
-                    {
-                        "description": "",
-                        "proName": "NASDAQ:META"
-                    },
-                    {
-                        "description": "",
-                        "proName": "BVC:AMZN"
-                    }
-                    ],
-                    "showSymbolLogo": true,
-                    "colorTheme": "light",
-                    "isTransparent": false,
-                    "displayMode": "adaptive",
-                    "locale": "en"
-                }
-                    </script>
-                </div>
-    <!-- TradingView Widget END -->
-
-                <br>
-                <br>
-                <br>
-            <a href="/Companys/{{ Ticker }}/">
-                <h1 class="p-relative"> EG stock Companes </h1>
-            </a>
-            <div class="companes-block  ">
-                <div class="starpucs-block   ">
-                    <img src="../static/images/1604490577573.jpg" class="logoes"   alt="logo photo">
+                <div class="google-block">
+                    <img src="{% static 'images/mkXgKuGBww7TQUASvxRxmR-320-80.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="BankCIB.html"> <h2> CIB </h2> </a>
+                        <a href="/Companys/GOOG"><h2>Google</h2></a>
                     </div>
-                    <div class="scrap-value">  
-                    </div>
-                </div>
-                <div class="starpucs-block   ">
-                    <img src="../static/images/بنك قطر الوطني.jpg" class="logoes"   alt="logo photo">
-                    <div class="company-details">
-                        <a href="QNB.html"> <h2> QNB </h2> </a>
-                    </div>
-                    <div class="scrap-value">  
+                    <div class="scrap-value">
                     </div>
                 </div>
-                <div class="starpucs-block   ">
-                    <img src="../static/images/المصرية للاتصالات.jpg" class="logoes"   alt="logo photo">
+                <div class="amazon-block">
+                    <img src="{% static 'images/Amazon-Logo-Font-1-scaled.webp' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="companyGoogle.html"> <h2> We </h2> </a>
+                        <a href="/Companys/AMZN"><h2>amazon</h2></a>
                     </div>
-                    <div class="scrap-value">  
+                    <div class="scrap-value">
                     </div>
                 </div>
-                <div class="starpucs-block   ">
-                    <img src="../static/images/7e797731-ef48-494e-abf7-f3017230af35.jpg" class="logoes"   alt="logo photo">
+                <div class="microsoft-block">
+                    <img src="{% static 'images/microsoft-logo-icon-editorial-free-vector.webp' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="elsewedy.html"> <h3> elsewedy ELe </h3> </a>
+                        <a href="/Companys/MSFT"><h2>microsoft</h2></a>
                     </div>
-                    <div class="scrap-value">  
+                    <div class="scrap-value">
                     </div>
                 </div>
-                <div class="starpucs-block   ">
-                    <img src="../static/images/aroscum.png" class="logoes"   alt="logo photo">
+                <div class="starpucs-block">
+                    <img src="{% static 'images/8tEvBrHEeMTTBt26SiniHM-1200-80.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="orascom.html"> <h2> ORASCOM </h2> </a>
+                        <a href="/Companys/SBUX"><h2>starpucs</h2></a>
                     </div>
-                    <div class="scrap-value">  
+                    <div class="scrap-value">
                     </div>
                 </div>
-                <div class="starpucs-block   ">
-                    <img src="../static/images/twitter.png" class="logoes"   alt="logo photo">
+                <div class="starpucs-block">
+                    <img src="{% static 'images/تنزيل (1).jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="ezzstell.html"> <h2> ezzsteel </h2> </a>
+                        <a href="/Companys/MBG"><h2>Mercedes</h2></a>
                     </div>
-                    <div class="scrap-value">  
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="google-block">
+                    <img src="{% static 'images/تنزيل.jpg' %}" width="50px" height="50px" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/2222.SR"><h2>Aramcou</h2></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <h1 class="p-relative"> EG stock Companes </h1>
+            <div class="companes-block">
+                <div class="starpucs-block">
+                    <img src="{% static 'images/1604490577573.jpg' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/CIBEY"><h2>CIB</h2></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="starpucs-block">
+                    <img src="{% static 'images/بنك قطر الوطني.jpg' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/egs60081c014.ca"><h2>QNB</h2></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="starpucs-block">
+                    <img src="{% static 'images/المصرية للاتصالات.jpg' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/EGS48031C016.CA"><h2>We</h2></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="starpucs-block">
+                    <img src="{% static 'images/7e797731-ef48-494e-abf7-f3017230af35.jpg' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/EGS3G0Z1C014.CA"><h3>elsewedy ELe</h3></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="starpucs-block">
+                    <img src="{% static 'images/aroscum.png' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/ODHN.SW"><h2>ORASCOM</h2></a>
+                    </div>
+                    <div class="scrap-value">
+                    </div>
+                </div>
+                <div class="starpucs-block">
+                    <img src="{% static 'images/twitter.png' %}" class="logoes" alt="logo photo">
+                    <div class="company-details">
+                        <a href="/Companys/EGS3C251C013.CA"><h2>ezzsteel</h2></a>
+                    </div>
+                    <div class="scrap-value">
                     </div>
                 </div>
             </div>

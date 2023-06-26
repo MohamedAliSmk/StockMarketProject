@@ -1,28 +1,28 @@
-companys.html
+Companys.html
 <div class="companes-block">
                 <div class="tesla-block">
                     <img src="{% static 'images/tesla-symbol.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/TSLA"><h2>Tesla</h2></a>
+                        <a href="/Companys/TSLA"><h2>Tesla</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
                 </div>
                 <div class="Apple-block">
-                    <a href="/company/Apple">
+                    <a href="/Companys/Apple">
                         <img src="{% static 'images/apple-logo-1656693488392.webp' %}" class="logoes" alt="logo photo">
                         <div class="company-details">
-                            <a href="/company/AAPL"><h2>Apple</h2></a>
+                            <a href="/Companys/AAPL"><h2>Apple</h2></a>
                         </div>
                     </a>
                     <div class="scrap-value">
                     </div>
                 </div>
                 <div class="meta-block">
-                    <a href="/company/Meta">
+                    <a href="/Companys/Meta">
                         <img src="{% static 'images/images.png' %}" class="logoes" alt="logo photo">
                         <div class="company-details">
-                            <a href="/company/META"><h2>Meta</h2></a>
+                            <a href="/Companys/META"><h2>Meta</h2></a>
                         </div>
                     </a>
                     <br>
@@ -32,7 +32,7 @@ companys.html
                 <div class="google-block">
                     <img src="{% static 'images/mkXgKuGBww7TQUASvxRxmR-320-80.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/GOOG"><h2>Google</h2></a>
+                        <a href="/Companys/GOOG"><h2>Google</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -40,7 +40,7 @@ companys.html
                 <div class="amazon-block">
                     <img src="{% static 'images/Amazon-Logo-Font-1-scaled.webp' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/AMZN"><h2>amazon</h2></a>
+                        <a href="/Companys/AMZN"><h2>amazon</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -48,7 +48,7 @@ companys.html
                 <div class="microsoft-block">
                     <img src="{% static 'images/microsoft-logo-icon-editorial-free-vector.webp' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/MSFT"><h2>microsoft</h2></a>
+                        <a href="/Companys/MSFT"><h2>microsoft</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -56,7 +56,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/8tEvBrHEeMTTBt26SiniHM-1200-80.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/SBUX"><h2>starpucs</h2></a>
+                        <a href="/Companys/SBUX"><h2>starpucs</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -64,7 +64,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/تنزيل (1).jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/MBG"><h2>Mercedes</h2></a>
+                        <a href="/Companys/MBG"><h2>Mercedes</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -72,7 +72,7 @@ companys.html
                 <div class="google-block">
                     <img src="{% static 'images/تنزيل.jpg' %}" width="50px" height="50px" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/2222.SR"><h2>Aramcou</h2></a>
+                        <a href="/Companys/2222.SR"><h2>Aramcou</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -86,7 +86,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/1604490577573.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/CIBEY"><h2>CIB</h2></a>
+                        <a href="/Companys/CIBEY"><h2>CIB</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -94,7 +94,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/بنك قطر الوطني.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/egs60081c014.ca"><h2>QNB</h2></a>
+                        <a href="/Companys/egs60081c014.ca"><h2>QNB</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -102,7 +102,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/المصرية للاتصالات.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/EGS48031C016.CA"><h2>We</h2></a>
+                        <a href="/Companys/EGS48031C016.CA"><h2>We</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -110,7 +110,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/7e797731-ef48-494e-abf7-f3017230af35.jpg' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/EGS3G0Z1C014.CA"><h3>elsewedy ELe</h3></a>
+                        <a href="/Companys/EGS3G0Z1C014.CA"><h3>elsewedy ELe</h3></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -118,7 +118,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/aroscum.png' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/ODHN.SW"><h2>ORASCOM</h2></a>
+                        <a href="/Companys/ODHN.SW"><h2>ORASCOM</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>
@@ -126,7 +126,7 @@ companys.html
                 <div class="starpucs-block">
                     <img src="{% static 'images/twitter.png' %}" class="logoes" alt="logo photo">
                     <div class="company-details">
-                        <a href="/company/EGS3C251C013.CA"><h2>ezzsteel</h2></a>
+                        <a href="/Companys/EGS3C251C013.CA"><h2>ezzsteel</h2></a>
                     </div>
                     <div class="scrap-value">
                     </div>

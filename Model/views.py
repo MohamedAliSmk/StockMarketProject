@@ -1,5 +1,4 @@
 # Create your views here.
-
 from django.shortcuts import render
 import numpy as np
 import matplotlib.pyplot as plt
@@ -26,7 +25,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 
 
-def train(symbol):
+def train(Ticker):
     
     global day_step
     global prediction
@@ -39,7 +38,7 @@ def train(symbol):
     global date_today
 
     day_step = 150
-    data = yf.download(tickers=symbol, period='1y', interval='1d')
+    data = yf.download(tickers=Ticker, period='1y', interval='1d')
     df = data.filter(['Close'])
     df = df.values
     # get the lengh of training set
@@ -78,19 +77,19 @@ def train(symbol):
     # save_model
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     model.save(
-        f"apps\Model\saved_data\saved_{symbol}-{date_today}.h5")
+        f"Model\saved_data\saved_{Ticker}-{date_today}.h5py")
 
-    return data, train_len, day_step, df, scaler, scaled_df, symbol, date_today
+    return data, train_len, day_step, df, scaler, scaled_df, Ticker, date_today
 
 
-def pred(symbol, next_days):
+def pred(Ticker, next_days):
     
     global prediction
     global output
     # -day_step to fit the y_test
     test_data = scaled_df[train_len - day_step:, :]
     saved_model = tf.keras.models.load_model(
-        f"apps\Model\saved_data\saved_{symbol}-{date_today}.h5")
+        f"Model\saved_data\saved_{Ticker}-{date_today}.h5py")
 
     x_test = []
     y_test = df[train_len:, :]
@@ -147,13 +146,14 @@ def plot_data(next_days):
     plt.plot(day_pred,output)
     
 
-def Prediction_Comp(symbol,date_today,next_days):
-    if f"saved_{symbol}-{date_today}.h5" in os.listdir("Model/saved_data"):
-         pred(symbol, next_days)
-         
+def Prediction_Comp(request,Ticker,next_days):
+    date_today = dt.datetime.now().strftime("%Y-%m-%d")
+    if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
+         pred(Ticker, next_days)         
     else:
-         train(symbol)
-         pred(symbol, next_days)         
+         train(Ticker)
+         pred(Ticker, next_days)         
     plotData=plot_data(next_days)
-    return plotData
+    return render(request, 'Companys.html', {'plotData': plotData})
+
 

@@ -33,3 +33,28 @@ tex.forEach((ele) => {
 //         this.classList.add("activee"); 
 //     };
 // });
+
+
+let financebar = document.querySelectorAll(".financemainbar li ");
+//let texArray = Array.from(tex);
+//console.log(texArray);
+let financeanalusiscontent  = document.querySelectorAll(".financeanalusiscontent > div");
+//let community = document.querySelector(".community");
+//console.log(content);
+//   console.log(tex);
+
+financebar.forEach((ele) => {
+    ele.addEventListener("click",function(e){
+        //console.log(e);
+        financebar.forEach((ele)=>{
+            ele.classList.remove("activee");
+        });
+        e.currentTarget.classList.add("activee");
+        financeanalusiscontent.forEach((div) => {
+            div.style.display='none';
+        });
+        //console.log(e.currentTarget.dataset.cont);
+        document.querySelector(e.currentTarget.dataset.cont).style.display='block';
+        //document.querySelector(e.currentTarget.dataset.cont).style.display='block';
+    });
+});

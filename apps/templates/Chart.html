@@ -4,11 +4,9 @@
         <!--  end head -->
             <h1 class="p-relative "> chart </h1>        
             {% block Left_Plot %}
-            {% autoescape off %}
-                {{ plot_div }}
-            {% endautoescape %}
-            {% endblock Left_Plot %}
-
+            {{ chart_op.plot_div|safe }}
+        {% endblock Left_Plot %}
+                
 </body>
 </html>
 {% endblock %}

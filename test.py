@@ -87,10 +87,10 @@ def stocks(request):
             'change': stock.info['regularMarketChange'],
         }
         print(data)
-    return render(request, 'companys.html', {'data': data})
+    return render(request, 'Companys.html', {'data': data})
 
 def stock_prices(request):
-    return render(request, 'companys.html')
+    return render(request, 'Companys.html')
 
 def stocks_data(request):
     companies =  ["TSLA", "APPL", "FB", "GOOG" , "MSFT" ,"SBUX","MBG.DE","2222.SR", "CIB" , "QNBK" ,"ETEL" ,"EGS3G0Z1C014.CA" ,"EGS3C251C013.CA"]
@@ -341,7 +341,7 @@ print("TSLA")
             'changes': changes,
             'symbol': Ticker,
             'financial_data': financial_data}
-    return render(request, 'companys.html', context)
+    return render(request, 'Companys.html', context)
 """
 
 

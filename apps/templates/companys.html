@@ -1,77 +1,239 @@
 {% extends 'base.html' %}
 {% block content %}  
+{% load static %}
             <h1 class="p-relative"> Company Page </h1>
             <!-- start up botton -->
-            <h1 class="p-relative"> Us stock Companes </h1>             
+            <h1 class="p-relative"> Us stock Companies </h1>             
             <div class="wrapper   d-grid   gap-20">
             </div>
             <div class="companyContentChaned">
                 <div class="comanyDetails">
-                    <img src="{% static '../static/images/المصرية للاتصالات.jpg' %}"  width="70px" height="50px" style="border-radius: 50%;" alt="">
-                    <h3 class="d-flex" >    {{ company_name }}  <p><strong>Symbol:</strong> {{ symbol }}</p>  <span style="margin-left: 10px;"> (WE) </span>  </h3>
+                    <img src=""  width="70px" height="50px" style="border-radius: 50%;" alt="">
+                    <h3 class="d-flex" >{{ data_dict.company_name }}  <p><strong>Symbol:</strong> {{ data_dict.symbol }}</p></h3>
                 </div>
             </div>
             <br>
             <br>
             <br>
             <br>
-            <div class="  companyChange  pt-15">
-                <ul class="allEllement">
+            <div class="  dasboaed-community  ">
+                <ul class="finance-education" style="list-style: none; display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr));" >
                     <!--<li class="activee  community" data-cont=".finance-ideaContent  .education-ideaContent  .video-ideaContent"> Community  </li> -->
-                    <li class="OverView activee " data-cont=".OverViewContent" >            OverView </li>
-                    <li class="  finance " data-cont=".financeContent" >                    finance   </li>
-                    <li  class=" ComanyhistoryData" data-cont=".ComanyhistoryDataContent" > Comany history data  </li>
-                    <li  class=" companyNewes" data-cont=".companyNewesContent" >           Technical  </li>
-                    <li  class=" testModel" data-cont=".testModelContent" >                 test Model  </li>
+                    <li class=" finance-idea   " data-cont=".finance-ideaContent" > overview </li>
+                    <li class="   Eduction-Ideas " data-cont=".education-ideaContent" >     Technical analysis</li>
+                    <li  class="   Video-Ideas" data-cont=".video-ideaContent" >  finacial analysis </li>
+                    <li class="infulance-People" data-cont=".Infulance-PeopleContent"> test model </li>
                 </ul>
                 <br>
-                <div class="theChildContent">
-                    <div class="OverViewContent">
-                        <br>
-                        <br>
-                        <h2 style="margin-left: 40px;"> {{ company_name }}  <p><strong>Symbol:</strong> {{ symbol }}</p> </h2>
-                        <br>
-                        <br>                    
-                                                       {% block Left_Plot %}
-                                                        {% autoescape off %}
-                                                            {{ plot_div }}
-                                                        {% endautoescape %}
-                                                        {% endblock Left_Plot %}
-
+                <div class="community-content">
+                    <div class="finance-ideaContent activee">
+                        <div class="container">
+                            <h1>Company Information</h1>
+                            {% if error_message %}
+                            <p>{{ error_message }}</p>
+                            {% else %}
+                            <div class="info">
+                              <label>Symbol:</label>
+                              <span id="symbol">{{ data_dict.symbol }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Current Price:</label>
+                              <span id="current-price">{{ data_dict.current_price }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Price Change:</label>
+                              <span id="price-change">{{ data_dict.price_change }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Company Name:</label>
+                              <span id="company-name">{{ data_dict.company_name }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Company Exchange:</label>
+                              <span id="company-exchange">{{ data_dict.company_exchange }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Currency:</label>
+                              <span id="currency">{{ data_dict.currency }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Industry:</label>
+                              <span id="industry">{{ data_dict.industry }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Description:</label>
+                              <p id="description">{{ data_dict.description }}</p>
+                            </div>
+                            <div class="info">
+                              <label>Website:</label>
+                              <a id="website" href="{{ data_dict.website }}">{{ data_dict.website }}</a>
+                            </div>
+                            <div>
+                              <!-- Display the chart here using the 'chart_op' data -->
+                              {% block Left_Plot %}
+                              {{ chart_op.plot_div|safe }}
+                              {% endblock Left_Plot %}                
+                            </div>
+                            {% endif %}
+                          </div>
                     </div>
-                    <div class="financeContent">
-                        <p> financeContent </p>
-                        
+                    <div class="education-ideaContent">
+                        2
                     </div>
-                    <div class="ComanyhistoryDataContent">
-                        <ul class="companyContent " style=" padding: 10px; margin: 5px; ">
-                            <label for="select"> choose year </label>
-                            <select style="width: 120px; margin-left: 10px;" name="" id="">
-                                <option value="2022"> 2022 </option>
-                                <option value=""> 2021 </option>
-                            </select>
-                            <br>
-                            <br>
+                    <div class="video-ideaContent">
+                        <h1>Finance Analysis</h1>
+                        <br>
+                        <br>
+                        <ul class="financemainbar" style="list-style: none; display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr));" >
+                            <!--<li class="activee  community" data-cont=".finance-ideaContent  .education-ideaContent  .video-ideaContent"> Community  </li> -->
+                            <li class="income-statment" data-cont=".income-statmentcontent" > income-statment  </li>
+                            <li class="cashFlow" data-cont=".cashFlowContent" >  cash-flow   </li>
+                            <li  class="balanceSheet" data-cont=".balanceSheetContent" > Balance-Sheet  </li>
                         </ul>
+                        <br>
+                        <br>
+        
+                        <div class="container">
+                            
+                            <h2>Financial Factors</h2>
+                            <div class="info">
+                              <label>Market Cap:</label>
+                              <span id="market-cap">{{ data_dict.market_cap }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Price-to-Sales:</label>
+                              <span id="price-to-sales">{{ data_dict.price_to_sales }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Trailing P/E:</label>
+                              <span id="trailing-pe">{{ data_dict.trailing_pe }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Forward P/E:</label>
+                              <span id="forward-pe">{{ data_dict.forward_pe }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Profit Margins:</label>
+                              <span id="profit-margins">{{ data_dict.profit_margins }}</span>
+                            </div>
+                            <div class="info">
+                              <label>50-Day Average:</label>
+                              <span id="fifty-day-average">{{ data_dict.fifty_day_average }}</span>
+                            </div>
+                            <div class="info">
+                              <label>200-Day Average:</label>
+                              <span id="two-hundred-day-average">{{ data_dict.two_hundred_day_average }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Book Value:</label>
+                              <span id="book-value">{{ data_dict.book_value }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Earnings Quarterly Growth:</label>
+                              <span id="earnings-quarterly-growth">{{ data_dict.earnings_quarterly_growth }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Net Income to Common:</label>
+                              <span id="net-income-to-common">{{ data_dict.net_income_to_common }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Trailing EPS:</label>
+                              <span id="trailing-eps">{{ data_dict.trailing_eps }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Forward EPS:</label>
+                              <span id="forward-eps">{{ data_dict.forward_eps }}</span>
+                            </div>
+                            <div class="info">
+                              <label>PEG Ratio:</label>
+                              <span id="peg-ratio">{{ data_dict.peg_ratio }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Total Cash:</label>
+                              <span id="total-cash">{{ data_dict.total_cash }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Total Debt:</label>
+                              <span id="total-debt">{{ data_dict.total_debt }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Total Revenue:</label>
+                              <span id="total-revenue">{{ data_dict.total_revenue }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Gross Profits:</label>
+                              <span id="gross-profits">{{ data_dict.gross_profits }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Free Cash Flow:</label>
+                              <span id="free-cashflow">{{ data_dict.free_cashflow }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Operating Cash Flow:</label>
+                              <span id="operating-cashflow">{{ data_dict.operating_cashflow }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Earnings Growth:</label>
+                              <span id="earnings-growth">{{ data_dict.earnings_growth }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Revenue Growth:</label>
+                              <span id="revenue-growth">{{ data_dict.revenue_growth }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Gross Margins:</label>
+                              <span id="gross-margins">{{ data_dict.gross_margins }}</span>
+                            </div>
+                            <div class="info">
+                              <label>EBITDA Margins:</label>
+                              <span id="ebitda-margins">{{ data_dict.ebitda_margins }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Operating Margins:</label>
+                              <span id="operating-margins">{{ data_dict.operating_margins }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Return on Assets:</label>
+                              <span id="return-on-assets">{{ data_dict.return_on_assets }}</span>
+                            </div>
+                            <div class="info">
+                              <label>Return on Equity:</label>
+                              <span id="return-on-equity">{{ data_dict.return_on_equity }}</span>
+                            </div>
+                          </div>
+                        <div class="financeanalusiscontent">
+                            <div class="income-statmentcontent">
+                                <p> income statment  </p>
+                                <!-- Income Statement content goes here -->
+                            </div>
+                            <div class="cashFlowContent">
+                                <p> cash Flow </p>
+        
+                                <!-- Cash Flow content goes here -->
+                            </div>
+                            <div class="balanceSheetContent">
+                                <p> Balance sheete </p>
+        
+                                <!-- Balance Sheet content goes here -->
+                            </div>
+                        </div>
+                        <br>
                     </div>
-                    <div class="companyNewesContent">
-                        <p> companyNewesContent </p>
-                    </div>
-
-                    <div class="testModelContent">
-                        <p> testModelContent </p>
+                    <div class="Infulance-PeopleContent">
+                        {% block Left_Plot %}
+                        {{ plotData|safe }}
+                        {% endblock Left_Plot %}
+                
                     </div>
                 </div>
-            </div>
-
         </div>
-        <!-- end  content  -->
 </body>
 </html>
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
 <!-- link to java-script file  -->
+<script src="../static/Java-script/community.js" ></script>
 <script src="../static/Java-script/upbotton.js"></script>
 <script src="../static/Java-script/Translation.js"></script>
 <script src="../static/Java-script/main.js"></script>

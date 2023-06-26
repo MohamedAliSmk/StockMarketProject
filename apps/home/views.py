@@ -51,26 +51,85 @@ def yf_Scraper(symbol):
     website = info['website']
     description = info['longBusinessSummary']
     
+    # Accessing specific financial factors
+    market_cap = info['marketCap']
+    price_to_sales = info['priceToSalesTrailing12Months']
+    trailing_pe = info['trailingPE']
+    forward_pe = info['forwardPE']
+    profit_margins = info['profitMargins']
+    fifty_day_average = info['fiftyDayAverage']
+    two_hundred_day_average = info['twoHundredDayAverage']
+    book_value = info['bookValue']
+    earnings_quarterly_growth = info['earningsQuarterlyGrowth']
+    net_income_to_common = info['netIncomeToCommon']
+    trailing_eps = info['trailingEps']
+    forward_eps = info['forwardEps']
+    peg_ratio = info['pegRatio']
+    total_cash = info['totalCash']
+    total_debt = info['totalDebt']
+    total_revenue = info['totalRevenue']
+    gross_profits = info['grossProfits']
+    free_cashflow = info['freeCashflow']
+    operating_cashflow = info['operatingCashflow']
+    earnings_growth = info['earningsGrowth']
+    revenue_growth = info['revenueGrowth']
+    gross_margins = info['grossMargins']
+    ebitda_margins = info['ebitdaMargins']
+    operating_margins = info['operatingMargins']
+    return_on_assets = info['returnOnAssets']
+    return_on_equity = info['returnOnEquity']
+
     # Return data as dictionary
     data_dict = {
-        'symbol': symbol,
-        'current_price': current_price,
-        'price_change': price_change,
-        'company_name': company_name,
-        'company_exchange': company_exchange,
-        'currency': currency,
-        'industry': industry,
-        'description': description,
-        'website': website,
-    }
+    'symbol': symbol,
+    'current_price': current_price,
+    'price_change': price_change,
+    'company_name': company_name,
+    'company_exchange': company_exchange,
+    'currency': currency,
+    'industry': industry,
+    'description': description,
+    'website': website,
+    'market_cap': market_cap,
+    'price_to_sales': price_to_sales,
+    'trailing_pe': trailing_pe,
+    'forward_pe': forward_pe,
+    'profit_margins': profit_margins,
+    'fifty_day_average': fifty_day_average,
+    'two_hundred_day_average': two_hundred_day_average,
+    'book_value': book_value,
+    'earnings_quarterly_growth': earnings_quarterly_growth,
+    'net_income_to_common': net_income_to_common,
+    'trailing_eps': trailing_eps,
+    'forward_eps': forward_eps,
+    'peg_ratio': peg_ratio,
+    'total_cash': total_cash,
+    'total_debt': total_debt,
+    'total_revenue': total_revenue,
+    'gross_profits': gross_profits,
+    'free_cashflow': free_cashflow,
+    'operating_cashflow': operating_cashflow,
+    'earnings_growth': earnings_growth,
+    'revenue_growth': revenue_growth,
+    'gross_margins': gross_margins,
+    'ebitda_margins': ebitda_margins,
+    'operating_margins': operating_margins,
+    'return_on_assets': return_on_assets,
+    'return_on_equity': return_on_equity
+}
+  
     
     return data_dict
+
+import plotly.graph_objects as go
+from plotly.offline import plot
 
 def plotTicker(Ticker):
     try:
         ticker_value = Ticker.upper()
         df = yf.download(tickers=ticker_value, period='1d', interval='1m')
         print("Downloaded ticker = {} successfully".format(ticker_value))
+        
         fig = go.Figure()
         fig.add_trace(go.Candlestick(x=df.index,
                                      open=df['Open'],
@@ -93,11 +152,18 @@ def plotTicker(Ticker):
             )
         )
         fig.update_layout(paper_bgcolor="#14151b", plot_bgcolor="#14151b", font_color="white")
-        plot_div = plot(fig, auto_open=False, output_type='div')
-        return plot_div
+        
+        plot_div = plot(fig, output_type='div')
+
+        chart_data = {
+            'plot_div': plot_div
+        }
+        
+        return chart_data
+    
     except Exception as e:
         error_message = f"Error retrieving chart data: {str(e)}"
-        return error_message
+        return {'error_message': error_message}
 
 
 @login_required
@@ -121,7 +187,6 @@ def index(request):
                'user_profile': user_profile,
                'is_logged_in': is_logged_in ,
         }
- 
     return render(request, 'index.html', context)
 
 def setting(request):
@@ -226,30 +291,43 @@ def profile(request):
     context = {'user_profile': user_profile, 'form': form}
     return render(request, 'profile.html', context)
 
-def Companys(request, Ticker):
-    try:
-        data_dict = yf_Scraper(Ticker)
-        chart_op=plotTicker(Ticker)
-        context={data_dict,chart_op}
-        return render(request, 'companys.html', context=context)
-    except Exception as e:
-        # Handle any errors that occur during the retrieval of company information
-        error_message = f"Error retrieving company information: {str(e)}"
-        return render(request, 'page-500.html', {'error_message': error_message})
+def Companys(request, Ticker=None):
+    if Ticker is None:
+        # Handle the case when Ticker is not provided
+        return render(request, 'Companys.html', {'message': 'No Ticker specified'})
+    else:
+        try:
+            data_dict = yf_Scraper(Ticker)
+            chart_op = plotTicker(Ticker)
+            context = {'data_dict': data_dict, 'chart_op': chart_op}  # Corrected syntax for defining the context dictionary
+            return render(request, 'Companys.html', context=context)
+        except Exception as e:
+            # Handle any errors that occur during the retrieval of company information
+            error_message = f"Error retrieving company information: {str(e)}"
+            return render(request, 'page-500.html', {'error_message': error_message})
+
  
 def LastNews(request):
-    stocks = ['AAPL', 'MSFT', 'NFLX']
-    sn = StockNews(stocks, wt_key='MY_WORLD_TRADING_DATA_KEY')
-    news_data = sn.summarize()
-    return render(request, 'LastNews.html', {'news_data': news_data})
-
+    api_key = 'd0feca09487f4619b994283a1004d7ba' 
+ 
+    # API endpoint URL
+    url = f"https://newsapi.org/v2/everything?q=tesla&from=2023-05-26&sortBy=publishedAt&apiKey={api_key}"
+ 
+    # Send the HTTP GET request to the API endpoint
+    response = requests.get(url)
+    
+    # Retrieve the JSON response
+    json_data = response.json()
+   
+    return render(request, 'LastNews.html', {'news_data': json_data})
 def Trending(request):
     return render(request, "Trending.html")
 
 #@login_required
 def chart(request, Ticker):
-    chart_op=plotTicker(Ticker)
-    return render(request, "chart.html",context=chart_op)
+    chart_op = plotTicker(Ticker)
+    context = {'chart_op': chart_op}  # Create a dictionary with 'chart_op' as the value
+    return render(request, "chart.html", context=context)
 
       
 def Community(request):
