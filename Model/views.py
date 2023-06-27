@@ -27,6 +27,11 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 39c99ae7b97af5e72f09322f3f624490996580e6
 day_step = None
 prediction = None
 data = None
@@ -37,6 +42,10 @@ df = None
 scaler = None
 date_today = None
 
+<<<<<<< HEAD
+=======
+>>>>>>> 7a072695a1c113d78474f796cc3a60c97b52fe9d
+>>>>>>> 39c99ae7b97af5e72f09322f3f624490996580e6
 def train(Ticker):
     
     global day_step
@@ -171,6 +180,21 @@ def plot_data(next_days, df, day_step, output, save_path1, save_path2):
     plt.savefig(save_path1, format='png')
     plt.close()
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+def Prediction_Comp(request,Ticker,next_days):
+    date_today = dt.datetime.now().strftime("%Y-%m-%d")
+    if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
+         pred(Ticker, next_days)         
+    else:
+         train(Ticker)
+         pred(Ticker, next_days)         
+    plotData=plot_data(next_days)
+    return render(request, 'Companys.html', {'plotData': plotData})
+
+=======
+>>>>>>> 39c99ae7b97af5e72f09322f3f624490996580e6
     # Plot 2
     plt.figure(figsize=(25, 5))  # Adjust the figure size as needed
     plt.plot(test[['Close', 'Prediction']])
@@ -194,6 +218,10 @@ def Prediction_Comp(Ticker, next_days):
     save_path1 = "apps/Data/plot1.png"
     save_path2 = "apps/Data/plot2.png"
     plotData1, plotData2 = plot_data(next_days, df, day_step, output, save_path1, save_path2)
+<<<<<<< HEAD
+=======
+>>>>>>> 7a072695a1c113d78474f796cc3a60c97b52fe9d
+>>>>>>> 39c99ae7b97af5e72f09322f3f624490996580e6
 
     context = {
         'plotData1': plotData1,

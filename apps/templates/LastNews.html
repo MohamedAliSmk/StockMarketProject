@@ -1,29 +1,501 @@
 {% extends 'base.html' %}
 {% block content %}
-                <h1 class="p-relative"> LastNewes </h1>
-                <div class="wrapper d-grid gap-20">
-                    <!-- start tesla news -->
-                    {% for news in news_data %}
-                    <div class="welcome rad-10 text-center-mobile block-mobile">
-                      <div class="intro p-20 d-flex space-between bg-ccc">
-                        <div class="d-flex">
-                          <div>
-                            <img src="{{ news.image }}" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
-                            <span style="padding-top: 5px;">{{ news.publishedDate }}</span>
-                          </div>
-                          <h3 class="m-0">{{ news.title }}</h3>
-                        </div>
-                      </div>
-                      <img src="{{ news.urlToImage }}" style="max-width: 100%;" alt="">
-                      <div class="body text-center d-flex p-15 mb-20 block-mobile">
-                        <div>
-                          <span class="d-block c-gray fs-14 mt-10">{{ news.description }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    {% endfor %}
-                  </div>
-                  
+<h1 class="p-relative"> LastNews </h1>
+<div class="wrapper   gap-20" style=" display:flex; flex-wrap: wrap;">
+
+    <!-- start tesla newes -->
+    <div class="welcome      rad-10    text-center-mobile    block-mobile  com-blk " style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nt1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;"> Apr 03 </span>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > TSLA: Tesla Tops Vehicle Deliveries in a Record Quarter </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nt1.jpg" style="max-width: 100%;" alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            
+            <div >  <span class="d-block  c-gray     fs-14    mt-10" > Shares of the EV maker are up almost double year-to-date, boasting a 92% rise.
+                Tesla posted its delivery figures for the first quarter, surprising analysts with record-high figures. The electric-car maker shipped 422,875 vehicles, and produced 440,808 units. Both numbers are quarterly records. Wall Street was looking for just about 420,000 deliveries.
+                The Q1 deliveries were 36% higher compared to the 310,048 cars shipped in the year-ago quarter. The Model 3 and the Model Y accounted for 412,180 units, while 10,695 units of the higher-priced Model S and X were delivered to people around the globe.
+                Tesla needed strong quarterly performance to back up the monster rally in its shares. Over the first three months, Tesla’s stock is up roughly 92%, boasting some of the loftiest gains in the equity market. It’s Tesla’s sixth best quarter share-wise, out of 51 quarters of trading. </span> </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile  com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nt2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;"> Mar 07 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > TSLA: Tesla Expands its Price Cuts in the US </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nt2.jpg" style="max-width: 100%;" alt="">
+        <div class="body   text-center   d-flex   p-15   mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">Tesla has announced price cuts to some of its EV models in the US.
+                    It hopes that the reduced price tags can restore slipping demand in the market.
+                    The reduced prices could allow the vehicles to qualify for US tax credits.
+
+                    After lowering the cost of its EV models in China proved to be a positive move for sales in the region, Tesla is hoping that the same magic can be applied in the US market. With inflation rates making customers less willing to part ways with their cash, steps need to be taken to fire up demand for the Musk-made vehicles.
+
+                    What has Tesla done?
+
+                    The price of the Tesla Model S and Model X (two of the most expensive models the manufacturer offers) will reportedly be reduced by 5% and 9% respectively in the US. It comes after Ford already reduced the cost of its EV truck by 8% after Tesla’s price reductions in China. The EV giant is reportedly also investing in means of producing electric vehicles without the need for rare earth metals – a requirement of electric motors which often elevates their price.
+                        
+                </span> 
+            </div>
+        </div>
+      </div>
+     <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nt3.jpg" style="  width: 50px;   height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;">Mar 01
+                        </span>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > Tesla’s Investor Day is Here and Things May Get Wild </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nt3.jpg"   style="max-width: 100%;" alt="">
+        <div class="body   text-center   d-flex      p-15   mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">  
+                
+                    Tesla’s Investor Day is Here and Things May Get Wild
+                    Cheaper EV model, robotaxis, and a new Master Plan are expected by analysts at today’s event.
+
+                    Today is Investor Day for Tesla and all the geeks are feeling giddy for what’s to come. In the list of expectations is a new plan for Tesla’s future, one that is likely to highlight steps to extreme-size expansion. Also, a brand-new EV model priced under $30,000, and some robotaxis.
+                    Tesla’s recent run, however, is putting the stock at a vulnerable spot ahead, during, and after the event. Shares of Elon Musk’s EV maker are up over 90% so far in 2023 – enough to return the meme king and Dogecoin lover to the #1 spot among the world’s wealthiest.
+                    With these lofty expectations pinned to the event, an underwhelming delivery might trip investors, pushing Tesla’s volatile stock on a slippery slope. If so, short sellers may get a field day, turning this Investors Day event into a sell-the-news event. So beware - stock may go for a ride in either direction.
+
+                </span> 
+            </div>
+        </div>
+    
+    </div>
+    <!--  end tesla newes  -->
+
+    <!--  start apple newes  -->
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/napple1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;"> Mar 30 </span>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > AAPL: Apple Pins June Dates for Annual Dev Conference  </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/napple1.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Apple set the dates for its big annual developer conference WWDC. Between June 5 and June 9, tech lovers will get the latest news and see the latest products from the iPhone maker. Rumor has it, the company’s much-anticipated virtual reality headset will be unveiled.
+                    What’s the hype about? Apple holds a launch event every year where CEO Tim Cook announces new iPhones, Macs, or other gadgets. Last year, the $2.5tn tech heavyweight made known its plans for Apple Pay Later – the “buy now, pay later” service that just launched a couple of days ago.
+                    Shares of Apple have performed fabulously this year. The stock is up about 30% from early January and is roughly 10% off from its all-time high at $180 a pop touched in December 2021. Back then, Apple became the first company to be worth $3tn.
+
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/napple2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;">Mar 07  </span>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > Apple Shares Gain on Bullish Goldman Sachs Call  </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/napple2.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Apple shares closed Monday’s session higher by 1.85% as money allocators dropped some capital into the tech giant. Behind the move was a bullish projection from Goldman Sachs. The investment banking heavyweight put a buy rating on Apple and a $199 12-month price target.
+                    The mark was among Wall Street’s highest and a sign that there’s more room to the upside for the Tim Cook-led firm. If Apple, presently trading at $153.83 a share, closes this month higher, it will mark its first quarter in the green since the final three months of December 2021.
+                    Apple’s all-time high? That’d be $182.01 a pop set in January 2022. That’s when Apple became the first company to cross a $3tn market value. So far into 2023, the stock has gained 23%, outgaining even the best
+                                                
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/napple3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;"> Jan 27 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" >
+                    Apple suffers smartphone decline  </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/napple3.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Shipments of smartphones are plunging globally in their steepest decline in the history of the sector. While 2022’s shipments of $1.21bn smartphones might sound like a lot, it’s the lowest number of annual shipments seen since in almost a decade. Analysts reckon that inflation and changes in consumer spending habits are what’s causing the decline.
+                    Apple is still the dominant force in the smartphone market, but it's far from immune to the slump. In its fourth quarter, the tech giant shipped 72.3m iPhones, marking a decline of almost 15% YoY. Competitor Samsung fared even worse, with a 15.6% decline in its shipments YoY.
+                    Not even its new iPhone 14 could save Apple from plunging demand, and it’s also had to deal with supply chain issues at its largest manufacturing plant in China – where worker protests impacted production. With any luck, the improvement of global economic conditions will help bolster the downtrodden smartphone industry.
+                                                
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <!--  end apple newes -->
+
+    <!-- start microsoft newes  -->
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nmicrosoft1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <span style="padding-top:5px;"> Feb 08 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > Wait, Microsoft’s Bing back in fashion? </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nmicrosoft1.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    If you never thought Bing would pose a threat to Google, here you are. Microsoft’s $10bn bet on ChatGPT parent OpenAI is booming. The software giant is integrating some features of the viral bot tool into its Bing search engine, throwing down a challenge to Google.
+                    Microsoft shares popped 4% on Tuesday as chief executive Satya Nadella didn’t mince words, saying what’s coming will demolish the high profit margins of search. If you don't know what this means, it underpins Google’s core business. Google holds 90% of all online search.
+                    Can an AI-powered Bing chip away at Google’s dominance of the search market? But ChatGPT’s breakout success shot it into the stratosphere with everyone and their dogs talking about it. So now Google scrambles to launch its own AI bot Bard. Get the popcorn, this one’s gonna be big.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nmicrosoft2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    
+                    <br><span style="padding-top:5px;"> Jan 27 </span>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > To the clouds and back  </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nmicrosoft2.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Microsoft has reported disappointing results for its most recent financial quarter. The tech giant beat earnings with $2.32 per share compared to estimates of $2.29, but missed on revenue predictions with $52.75bn against estimates of $52.94bn. It comes just a week after it made the decision to let go of 10k employees.
+                    What was more concerning however, was a forecast about its Azure cloud computing unit. Microsoft predicts growth in that area of its business to slow by up to 5% in the current quarter. The news sent cloud computing stocks like Datadog and Snowflake down by 2.13% and 3% respectively yesterday.
+                    Adding to its cloud computing woes, Microsoft Teams experienced an outage today – and it’s estimated to have affected millions of users around the world. The service is used by over 280m people, so an outage is far from ideal. If Microsoft’s acquisition of Activision Blizzard is also blocked, it really won’t have been its year.                   
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nmicrosoft3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Jan 19 </span>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" >
+                    Let the layoffs continue  </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nmicrosoft3.jpg" style="max-width: 100%;" alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Microsoft has announced plans to let go of 10k employees as part of its plan to weather a forecasted slow in revenue growth. In October last year, the tech giant reported its slowest growth for the quarter since 2016.
+                    The company already laid off around 1k employees in October last year, and it was far from the only tech company to do so – driven by diminished tech stock values and changes in consumer spending. Amazon also announced plans this week to let go of another 18k of its workers.
+                    The last time Microsoft cut its headcount by close to this amount was in 2017, when its sales unit underwent a major reorganization. CEO, Satya Nadella, said that as a global company, it was always going to be affected by “what’s happening in the macro.”                      
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <!-- end microsoft newes  -->
+    <!-- start  meta newes  -->
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nmeta1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Feb 06 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > 
+                    Meta finally moves fast and breaks things </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nmeta1.jpg" style="max-width: 100%;" alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Facebook parent Meta Platforms soared 25% last week, notching its best daily gain on Thursday in nearly a decade. The social media behemoth posted better-than-expected sales, upbeat guidance, and pledged an investor-friendly move to initiate a $40bn share buyback.
+                    The stock is making a super strong comeback so far in 2023 as shares are up more than 50% since the turn of the year. What’s more, Meta has doubled in valuation since its multi-year low of $87 a share in October and is now flaunting a market value of just under $500bn.
+                    The owner of Facebook, WhatsApp, and Instagram reported Q4 revenue of $32.2bn and cut 2023 expenses outlook by $5bn. Metaverse efforts, tho, flopped with $13.7bn incinerated in 2022 as the company struggles to gain traction in the immersive but amorphous virtual world.
+
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nmeta2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Dec 20 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" >    
+                    In for a penny..</h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nmeta2.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Facebook parent Meta Platforms soared 25% last week, notching its best daily gain on Thursday in nearly a decade. The social media behemoth posted better-than-expected sales, upbeat guidance, and pledged an investor-friendly move to initiate a $40bn share buyback.
+                    The stock is making a super strong comeback so far in 2023 as shares are up more than 50% since the turn of the year. What’s more, Meta has doubled in valuation since its multi-year low of $87 a share in October and is now flaunting a market value of just under $500bn.
+                    The owner of Facebook, WhatsApp, and Instagram reported Q4 revenue of $32.2bn and cut 2023 expenses outlook by $5bn. Metaverse efforts, tho, flopped with $13.7bn incinerated in 2022 as the company struggles to gain traction in the immersive but amorphous virtual world.
+
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile   com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/nmeta3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Nov 29 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > 
+                    Meta's multi-million mistake </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/nmeta3.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Meta has been fined $276m by Ireland’s Data Protection Commission for failing to adequately protect user data from “data-scrapers”. The case related to roughly 530m Facebook users having their phone numbers hacked and published last year, for which Meta was found to have not taken appropriate steps to prevent.
+                    The tech giant has been racking up the fines recently – accumulating over $900m worth of fines over three separate cases in the last 15 months. European authorities have been turning up the heat on privacy laws for large tech companies recently, and fined Meta subsidiary WhatsApp for handling data improperly last year.
+                    Speaking of Meta, the company’s been in the limelight for all the wrong reasons recently. Its metaverse gamble hasn’t exactly paid off and its share price has tumbled by almost 33% in the last three months – making it the worst performing FAANG stock over the period.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+    <!-- end meta newes  -->
+
+    <!--  start google newes -->
+    <div class="welcome      rad-10    text-center-mobile    block-mobile   com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/ngoogle1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Feb 07 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > AI wars here already?</h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/ngoogle1.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    The formidable search engine giant is launching a chatbot to rival OpenAI’s super popular ChatGPT, Google parent Alphabet announced on Monday. Without going into the nitty-gritty – it’s called Bard, it’s in a trial phase, and it will be released to the public in the coming weeks.
+                    Despite the news, shares of Alphabet stayed fairly muted and in line with the broader market sentiment. The stock finished Monday down 1.8% but is up a decent 15% since the start of the year as tech stocks have enjoyed a sweeping rebound after some heavy blows in 2022.
+                    The AI wars appear to be moving at break-neck speed, especially after ChatGPT soared from a casual bot tool to a threat that had Google on code red. Microsoft is not far behind – the software giant pumped $10bn in ChatGPT and wants it in its Bing search engine.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile   com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/ngoogle2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Jan 23 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > Join the club </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/ngoogle2.jpg" style="max-width: 100%;" alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Google has announced plans to let go of 12k employees – representing 6% of its global workforce. In a staff memo, it was said that the company faces a “different economic reality” than the one in which they hired. It's just the latest in the tech-layoff frenzy of 2023, with Microsoft, Amazon and others already having done the same.
+                    The layoffs are part of a wider effort to refocus the company towards its AI projects – something which Microsoft is also doubling down on with plans to invest $10bn in OpenAI. With tech stocks down YoY across the board, they’re looking to reinvent themselves to weather current economic conditions.
+                    The Alphabet Workers Union (Alphabet is Google’s parent company) was far from pleased, claiming that jobs have been placed on the chopping block so that shareholders can see marginal benefit next quarter. In the current economic climate however, it seems the rulebook is out the window.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile   com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/NGOOGLE3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Jan 20 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > Google's Android woes </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/NGOOGLE3.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    India’s Supreme Court has ruled that Google should not be allowed to force pre-install its apps on smartphones running its mobile OS Android. It’s a major financial setback for the tech giant in one of its key growth markets. It has also hit Google with a $161m fine.
+                    The regulator also ruled that it should not be allowed to prevent the deletion of its apps, such as Maps, YouTube and Chrome. With 97% of smartphones in India running Android, the impact of the ruling on its revenue in the region could be substantial. By comparison, Apple’s iOS only commands 3% of the market.
+                    It’s not the first jurisdiction to consider some of Google’s practices a step too far. In Europe, the tech giant was fined $4.3bn in 2018 for its Android licensing terms – in a ruling which the company has challenged. Google even claimed that India’s ruling was so similar to that of Europe, that they had “copy-and-pasted” the ruling and didn’t properly examine the evidence.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <!--  end google newes -->
+
+    <!-- start amazon newes -->
+    <div class="welcome      rad-10    text-center-mobile    block-mobile  com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/namz1.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Dec 07 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > 
+                    Laying down the law </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/namz1.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Antitrust regulators in the EU may have finally reached a deal with Amazon, more than three years after opening a probe into the company for anti-competitive practices. The tech giant has agreed to give rival products more visibility on the website, and merchants using Amazon Prime will no longer be forced to use Amazon logistics.
+                    It’s a victory for the EU regulator and it’s a pretty big deal for the industry. It shows that regulators are serious about the Digital Markets Act which it adopted in September, and tech giants will have to obey the new rules or risk fines of up to 10% of their global revenue. An Amazon representative however said that the company had been “unfairly targeted.”
+                    2022 has been a year to forget for Amazon. Aside from a bleak Q4 outlook and having to let go of over 10,000 employees, shares in the FAANG stock have dropped by around 48% since the start of the year. Sales in its Amazon Web Services division have also been coming in short this year – perhaps 2023 will bring the company some welcome relief?
+                </span> 
+        </div>
+            </div>
+
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile  com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/namz2.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Nov 15 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > A storm brewing </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/namz2.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Amazon has plans to axe around 10k employees in the biggest mass layoff in company history – it represents about 1% of Amazon’s workforce, including 3% of its corporate employees. The e-commerce giant joins other tech firms like Meta and Twitter, who laid off a huge percentage of employees to cut costs.
+                    It means the holiday season could be filled with drear instead of cheer for retailers. The December quarter is historically a great month for not only Amazon but retailers at large cause of all that present buying – but this quarter it looks like the inflation grinch will be grinning at his stolen gains, especially with Amazon down nearly 3% on the news already.
+                    Daddy Bezos is giving a Christmas gift of his own this year, though it came with a rather glum card. The billionaire CEO said on Monday that during his lifetime he plans to give away a majority of his $124bn wealth. That’s great. But he also once again warned consumers to significantly reduce their risk because “if we’re not in a recession right now, we’re likely to be in one very soon”.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <div class="welcome      rad-10    text-center-mobile    block-mobile  com-blk" style="width: 400px;">
+        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+            <div class="d-flex">
+                <div >
+                    <img src="../static/lastNewes-Picture/namz3.jpg" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; margin-bottom: 10px;" alt="">
+                    <br>
+                    <span style="padding-top:5px;"> Nov 04 </span>
+                    <br>
+                    <span> 2023 </span>
+                </div>
+                <h3  class="m-0" > The other endangered Amazon </h3>
+            </div> 
+        </div>
+        <img src="../static/lastNewes-Picture/namz3.jpg" style="max-width: 100%; " alt="">
+        <div class="body   text-center   d-flex   p-15  mb-20    block-mobile">
+            <div>  
+                <span class="d-block  c-gray     fs-14    mt-10">
+                    Amazon has dipped below a $1tn valuation with its share price dropping by more than 6% since Wednesday. The company’s pandemic gains have been largely erased and its share price closed on Tuesday at its lowest level since April 2020.
+                    Some of the sell-off is being driven by a pessimistic Q4 forecast with growth over the holiday period expected to be only 2%-8% which is significantly below analyst predictions. Its Amazon Web Services division also disappointed with sales missing on estimates last quarter.
+                    The tech giant’s been making efforts to reduce its costs to weather economic conditions, but is still the second-worst performing of the tech ‘Big Five’. Most hiring has now been paused after jobs cuts already took place earlier this year – driven by shoppers returning to in-person stores as lockdowns eased.
+                </span> 
+        </div>
+            </div>
+        
+    </div>
+
+    <!-- end amazon newes -->
+
+    <!--  start mercedes newes  -->
+
+    <!--  end mercedes  newes -->
+</div>
     </body>
 </html>
 
