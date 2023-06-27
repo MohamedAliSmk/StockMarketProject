@@ -17,7 +17,8 @@ import pickle as pk
 import yfinance as yf
 import os
 import plotly.graph_objs as go
-
+import io
+import urllib, base64
 
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
@@ -25,6 +26,19 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 
 
+<<<<<<< HEAD
+=======
+day_step = None
+prediction = None
+data = None
+train_len = None
+model = None
+scaled_df = None
+df = None
+scaler = None
+date_today = None
+
+>>>>>>> 7a072695a1c113d78474f796cc3a60c97b52fe9d
 def train(Ticker):
     
     global day_step
@@ -84,7 +98,12 @@ def train(Ticker):
 
 def pred(Ticker, next_days):
     
+    global day_step
     global prediction
+    global scaled_df
+    global df
+    global scaler
+    global date_today
     global output
     # -day_step to fit the y_test
     test_data = scaled_df[train_len - day_step:, :]
@@ -139,13 +158,22 @@ def pred(Ticker, next_days):
     
     return data, train_len, prediction,day_step,next_days,df,output
 
-def plot_data(next_days):
-    day_new=np.arange(1,day_step+1)
-    day_pred=np.arange(day_step+1,day_step+next_days+1)
-    plt.plot(day_new,df[len(df)-day_step:])
-    plt.plot(day_pred,output)
+def plot_data(next_days, df, day_step, output, save_path1, save_path2):
+    test = data[train_len:]
+    test['Prediction'] = prediction
+    day_new = np.arange(1, day_step+1)
+    day_pred = np.arange(day_step+1, day_step+next_days+1)
     
+    # Plot 1
+    plt.figure(figsize=(8, 6))  # Adjust the figure size as needed
+    plt.plot(day_new, df[len(df)-day_step:])
+    plt.plot(day_pred, output)
+    plt.legend(['Actual', 'Predicted'])
+    plt.xticks(rotation=45)
+    plt.savefig(save_path1, format='png')
+    plt.close()
 
+<<<<<<< HEAD
 def Prediction_Comp(request,Ticker,next_days):
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
@@ -156,4 +184,39 @@ def Prediction_Comp(request,Ticker,next_days):
     plotData=plot_data(next_days)
     return render(request, 'Companys.html', {'plotData': plotData})
 
+=======
+    # Plot 2
+    plt.figure(figsize=(25, 5))  # Adjust the figure size as needed
+    plt.plot(test[['Close', 'Prediction']])
+    plt.legend(['Actual', 'Predicted'])
+    plt.xticks(rotation=45)
+    plt.savefig(save_path2, format='png')
+    plt.close()
 
+    return save_path1, save_path2
+
+def Prediction_Comp(Ticker, next_days):
+    date_today = dt.datetime.now().strftime("%Y-%m-%d")
+    if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
+        # data, train_len, prediction, day_step, _, df, output = pred(Ticker, next_days)
+        return
+        
+    else:
+        train(Ticker)
+        data, train_len, prediction, day_step, _, df, output = pred(Ticker, next_days)
+    
+    save_path1 = "apps/Data/plot1.png"
+    save_path2 = "apps/Data/plot2.png"
+    plotData1, plotData2 = plot_data(next_days, df, day_step, output, save_path1, save_path2)
+>>>>>>> 7a072695a1c113d78474f796cc3a60c97b52fe9d
+
+    context = {
+        'plotData1': plotData1,
+        'plotData2': plotData2,
+        'imagePath1': save_path1,
+        'imagePath2': save_path2,
+    }
+
+    return render('Companys.html', context)
+
+Prediction_Comp("GOOG",next_days=30)
