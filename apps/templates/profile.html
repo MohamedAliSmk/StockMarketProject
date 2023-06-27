@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-                        <h1 class="p-relative "> Profile </h1>
-                        <div class="profile-page  m-20">
+
+                    <h1 class="p-relative "> Profile </h1>
+                    {% if user.is_authenticated %}
+                    <div class="profile-page  m-20">
                             <!--   start overview -->
                             <div class="overview     rad-10   d-flex   align-center ">
                                 <div class="img-box  text-center  p-20">
                                     <span class=" "> <i class="fa-solid fa-user  rad-half  mb-10  fs-20  fs-70"></i> </span>
                                         <!--<img src="" alt="" class=" rad-half  mb-10"> -->
-                                        <h3 class="m-0 "> Your Name  </h3>
-                                        <p class="  mt-10"> Stocs Numbers </p>
+                                        <h3 class="m-0 "> {{ user.fullName }}  </h3>
+                                        <p class="  mt-10"> Stocks Numbers </p>
                                         <div class="level   rad-6    bg-eee  p-relative">
                                             <span style="width:70%"> </span>
                                         </div>
@@ -20,7 +22,7 @@
                                             <i class="fa-solid   fa-star   c-orange   fs-14"></i>
                                             <i class="fa-solid   fa-star   c-orange   fs-14"></i>
                                         </div>
-                                        <p class="c-gray   m-0   fs-14">   34 correct    </p>
+                                        <p class="c-gray   m-0   fs-14">  {{ user.profile.points }}    </p>
                                 </div>
                                 <div class="info-box  w-full">
                                     <!--    start  information rows    1 -->
@@ -28,15 +30,15 @@
                                         <h4 class="w-full   c-blue   fa-14   m-0">  General Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Full Name: </span>
-                                            <span>   YourName  </span>
+                                            <span>   {{ user.fullName }}  </span>
                                         </div>
                                         <div class=" fs-14    ">
                                             <span class="c-gray" >  Gender: </span>
-                                            <span>   YourGender  </span>
+                                            <span>   {{ user.profile.gender }}  </span>
                                         </div>
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Country: </span>
-                                            <span>   YourCountry  </span>
+                                            <span>   {{ user.profile.country }}  </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -53,17 +55,17 @@
                                         <h4 class="w-full   c-blue   fa-14   m-0"> Personal Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Email:  </span>
-                                            <span>  YourEmail  </span>
+                                            <span>  {{ user.email }}  </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray" >  Phone:  </span>
-                                            <span>    YourPhone  </span>
+                                            <span>    {{ user.profile.phoneNumber }}  </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Date Of Birth:  </span>
-                                            <span>     YourDate  </span>
+                                            <span>     {{ user.profile.dateOfBirth }}  </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -82,17 +84,12 @@
                                         <h4 class="w-full   c-blue   fa-14   m-0">  Job Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Title: </span>
-                                            <span>   JobTitle  </span>
-                                        </div>
-            
-                                        <div class=" fs-14    ">
-                                            <span class="c-gray" >  jop:  </span>
-                                            <span>  jop   </span>
+                                            <span>   {{ user.profile.Job }}  </span>
                                         </div>
             
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Years Of Experience: </span>
-                                            <span>   Experience  </span>
+                                            <span>  {{ user.profile.yearsOfExperience }}   </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -109,17 +106,11 @@
                                         <h4 class="w-full   c-blue  fa-14   m-0"> Billing Information </h4>
                                         <div class=" fs-14    ">
                                             <span  class="c-gray">  Payment Method: </span>
-                                            <span>   YourPaymentMethod </span>
+                                            <span>   {{ user.profile.paymentMethod }} </span>
                                         </div>
-            
-                                        <div class=" fs-14    ">
-                                            <span class="c-gray" >  Email: </span>
-                                            <span>   YourEmail  </span>
-                                        </div>
-            
                                         <div class=" fs-14    ">
                                             <span class="c-gray">  Subscription </span>
-                                            <span>   Monthly  </span>
+                                            <span>   {{ user.profile.subscription }}  </span>
                                         </div>
                                         <div class="label">
                                             <label >
@@ -133,11 +124,75 @@
                                     <!--    end information   rows  4-->
                                 </div>
                             </div>
-            
+               <div class="create-account    d-flex gap-20   ">
+                                <h3 class="">  Dont Have An Account !   </h3>
+                                <div>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                            Lets create an Account
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel"> User Information </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <form id="userProfileForm" action="" class="was-validated">
+                                                            <div class="form-group">
+                                                                <label for="">  Full Name </label>
+                                                                <p> <input type="text"  class="w-full  form-control p-2"  placeholder="please write Your Name" required> </p>
+                                                            </div>
+                                                            
+
+                                                            <div class="form-group">
+                                                                <label for="">  Gender </label>
+                                                                <p> <input type="text"  class="w-full form-control   p-2"   placeholder="please write Your Gender" required> </p>
+                                                            </div>
+                                                        
+                                                            <div class="form-group">
+                                                                <label for="">  Country </label>
+                                                                <p> <input type="text"  class="w-full form-control  p-2"   placeholder=" please write your  Country" required> </p>
+
+                                                            </div>
+                                                        
+                                                            <div class="form-group">
+                                                                <label for="">  Email </label>
+                                                            <p> <input type="email"  class="w-full  form-control  p-2"   placeholder="please write your Email" required> </p>
+
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="">  Phone </label>
+                                                                <p> <input type="number"  class="w-full  form-control   p-2"   placeholder="please write your  Phone" required> </p>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label for="">  
+                                                                    Date Of Birth </label>
+                                                                <p> <input type="date"  class="w-full   form-control  p-2"   placeholder="please write your Date Of Birth" required> </p>
+                                                            </div>
+                                                            
+
+                                                            <div class="form-group">
+                                                                <label for="">  jop </label>
+                                                                <p> <input type="text"  class="w-full  form-control   p-2"   placeholder="please write your jop" required> </p>
+                                                            </div>
+
+                                                                <div class="form-check pb-2">
+                                                                <label class="form-check-label">
+                                                                    <input  class="form-check-input" type="checkbox">
+                                                                Remember Me</label>
+                                                            </div>
+                                                            <input type="submit"  class="btn btn-primary" value="submit">
+                                                            </form>
+                                                    </div>
+                                                </div>
+
                             <!--   end   overview -->
-                            <br>
-                            <br>
-                            <br>
+                        {% else %}   
                             <div class="create-account    d-flex gap-20   ">
                                 <h3 class="">  Dont Have An Account !   </h3>
                                 <div>
@@ -155,7 +210,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div>
-                                                        <form action="" class="was-validated">
+                                                        <form id="userProfileForm" action="" class="was-validated">
                                                             <div class="form-group">
                                                                 <label for="">  Full Name </label>
                                                                 <p> <input type="text"  class="w-full  form-control p-2"  placeholder="please write Your Name" required> </p>
@@ -234,7 +289,8 @@
                                             <a href="#" class=" change-bio  "> Change </a>
                                         </div>
                                     </div>
-                                    
+                      
+                {% endif %}              
                                 <!--  end  bio  -->
                         </div>
                     </div>
@@ -243,3 +299,46 @@
 </html>
 
 {% endblock %}
+{% block javascripts %}
+
+
+<script>
+    document.getElementById("userProfileForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        // Extract the form values
+        var fullName = document.getElementById("fullName").value;
+        var gender = document.getElementById("gender").value;
+        var country = document.getElementById("country").value;
+        var email = document.getElementById("email").value;
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var dateOfBirth = document.getElementById("dateOfBirth").value;
+        var Job = document.getElementById("Job").value;
+
+        // ... extract other form values in a similar manner
+
+        // Create a new UserProfile object
+        var userProfile = new UserProfile(fullName, gender, country, email, phoneNumber, dateOfBirth,Job /* , other properties */);
+
+        // Do something with the userProfile object (e.g., save to a database or display the data)
+        console.log(userProfile);
+
+        // Reset the form
+        event.target.reset();
+    });
+</script>
+<script>
+    function UserProfile(fullName, gender, country /* , other properties */) {
+        this.fullName = fullName;
+        this.gender = gender;
+        this.country = country;
+        this.email =email;
+        this.phoneNumber=phoneNumber;
+        this.dateOfBirth=dateOfBirth;
+        this.Job=Job;
+
+        // ... assign other properties to the object
+    }
+</script>
+
+{% endblock javascripts %}

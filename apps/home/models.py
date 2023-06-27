@@ -1,5 +1,11 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
+
+class LoginDevice(models.Model):
+    device_name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    login_timestamp = models.DateTimeField(auto_now_add=True)
 
 
 class User(models.Model):

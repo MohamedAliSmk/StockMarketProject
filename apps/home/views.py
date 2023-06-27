@@ -202,12 +202,10 @@ def setting(request):
             messages.success(request, 'Website control updated successfully.')
 
         # Update the user's information
-        Firstname = request.POST.get('Firstname')
-        Lastname = request.POST.get('Lastname')
+        fullName = request.POST.get('fullName')
         email = request.POST.get('email')
         if Firstname and Lastname and email:
-            request.user.username = Firstname
-            request.user.username = Lastname
+            request.user.username = fullName
             request.user.email = email
             request.user.save()
             messages.success(request, 'User information updated successfully.')
@@ -238,13 +236,19 @@ def setting(request):
         facebook = request.POST.get('facebook')
         linkedin = request.POST.get('linkedin')
         youtube = request.POST.get('youtube')
-        if twitter or facebook or linkedin:
-            request.user.profile.twitter_username = twitter
-            request.user.profile.facebook_username = facebook
-            request.user.profile.linkedin_username = linkedin
-            request.user.profile.youtube_username = youtube
-            request.user.profile.save()
-            messages.success(request, 'Social media information updated successfully.')
+
+        # Retrieve the UserProfileExtended instance associated with the current user
+        user_profile_extended = models.UserProfileExtended.objects.get(user=request.user)
+
+        # Update the social media information fields
+        user_profile_extended.twitter = twitter
+        user_profile_extended.facebook = facebook
+        user_profile_extended.linkedin = linkedin
+        user_profile_extended.youtube = youtube
+        user_profile_extended.save()
+
+        messages.success(request, 'Social media information updated successfully.')
+
 
         # Control widgets
         show_quick_draft = request.POST.get('show_quick_draft')
@@ -256,7 +260,9 @@ def setting(request):
             request.user.profile.save()
             messages.success(request, 'Quick Draft widget updated successfully.')    
     
-    return render(request, "setting.html")
+        user = request.user
+        devices = LoginDevice.objects.filter(user=user)
+    return render(request, "setting.html",{'devices': None})
 
 @login_required
 def profile(request):

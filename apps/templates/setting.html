@@ -45,14 +45,10 @@
                         <form method="post">
                           {% csrf_token %}
                           <div class="mb-15">
-                            <label class="f-14 c-gray d-block mb-10" for="first">First Name</label>
-                            <input class="b-none border-ccc p-10 w-full rad-6 d-block" type="text" id="first" name="Firstname" value="{{ request.user.username }}" placeholder="First Name">
+                            <label class="f-14 c-gray d-block mb-10" for="first">Full Name</label>
+                            <input class="b-none border-ccc p-10 w-full rad-6 d-block" type="text" id="first" name="fullName" value="{{ request.user.fullName }}" placeholder="Enter your Full Name">
                           </div>
                           
-                          <div class="mb-15">
-                            <label class="f-14 c-gray d-block mb-10" for="last">Last Name</label>
-                            <input class="b-none border-ccc p-10 w-full rad-6 d-block" type="text" id="last" name="Lastname" value="{{ request.user.username }}" placeholder="Last Name">
-                          </div>
                           
                           <label class="f-14 c-gray d-block mb-10" for="email">Email</label>
                           
@@ -104,15 +100,17 @@
                                 </form>
                             {% endif %}
                         </div>
-                    
+                        {% for device in devices %}
                         <div class="sec-box mb-20 between-flex">
                             <div class="">
                                 <span>Devices</span>
-                                <p class="c-gray mt-5 mb-0 fs-14">Check the login devices list</p>
+                                <p class="c-gray mt-5 mb-0 fs-14">Device Name: {{ device.device_name }}</p>
+                                <p class="c-gray mt-5 mb-0 fs-14">Login Timestamp: {{ device.login_timestamp }}</p>
                             </div>
-                            <a class="button-shape bg-eee col-black p-10 rad-6" href="#">Device</a>
+                            <a class="button-shape bg-eee col-black p-10 rad-6" href="{% url 'login_devices' %}">Device</a>
                         </div>
                     </div>
+                        {% endfor %}
                     <!-- end setting box -->
                     
                     <!-- start setting box -->
@@ -120,6 +118,7 @@
                         <h2 class="mt-0 mb-10">Social Info</h2>
                         <p class="mt-0 mb-20 c-gray fs-15">Social media information</p>
                         <!-- twitter -->
+                        <form method="POST" action="{% url 'setting' %}">
                         <div class="sec-box d-flex align-center mb-15">
                             <i class="fa-brands fa-twitter center-flex c-gray"></i>
                             <input class="w-full" type="text" name="twitter" placeholder="Twitter UserName" value="{{ request.user.profile.twitter_username }}">
@@ -142,45 +141,45 @@
                             <i class="fa-brands  fa-youtube  center-flex  c-gray"></i>
                             <input class="w-full" type="text" name="linkedin" placeholder="LinkedIn UserName" value="{{ request.user.profile.youtube_username }}">
                         </div>
-                      
+                      </form>
                     </div>
                     <!-- end setting box  -->
+<!-- 
+<div class="widget-control p-20 rad-10 social-boxes">
+  <h2 class="mt-0 mb-10">Widgets Control</h2>
+  <p class="mt-0 mb-20 c-gray fs-15">Show/Hide Widgets</p>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="control d-flex align-center mb-15">
+      <input type="checkbox" id="one" name="show_quick_draft">
+      <label for="one">Quick Draft</label>
+    </div>
 
-                    <!--   start setting box -->
-                    <div class="widget-control p-20 rad-10 social-boxes">
-                        <h2 class="mt-0 mb-10">Widgets Control</h2>
-                        <p class="mt-0 mb-20 c-gray fs-15">Show/Hide Widgets</p>
-                        <form method="POST">
-                          {% csrf_token %}
-                          <div class="control d-flex align-center mb-15">
-                            <input type="checkbox" id="one" name="show_quick_draft">
-                            <label for="one">Quick Draft</label>
-                          </div>
-                      
-                          <div class="control d-flex align-center mb-15">
-                            <input type="checkbox" id="two" name="show_yearly_targets">
-                            <label for="two">Yearly Targets</label>
-                          </div>
-                      
-                          <div class="control d-flex align-center mb-15">
-                            <input type="checkbox" id="three" name="show_tickets_statistics" checked>
-                            <label for="three">Tickets Statistics</label>
-                          </div>
-                      
-                          <div class="control d-flex align-center mb-15">
-                            <input type="checkbox" id="four" name="show_latest_news" checked>
-                            <label for="four">Latest News</label>
-                          </div>
-                      
-                          <div class="control d-flex align-center mb-15">
-                            <input type="checkbox" id="five" name="show_latest_tasks">
-                            <label for="five">Latest Tasks</label>
-                          </div>
-                      
-                          <div class="control d-flex align-center mb-15">
-                            <input type="checkbox" id="six" name="show_top_search_items" checked>
-                            <label for="six">Top Search Items</label>
-                          </div>
+    <div class="control d-flex align-center mb-15">
+      <input type="checkbox" id="two" name="show_yearly_targets">
+      <label for="two">Yearly Targets</label>
+    </div>
+
+    <div class="control d-flex align-center mb-15">
+      <input type="checkbox" id="three" name="show_tickets_statistics" checked>
+      <label for="three">Tickets Statistics</label>
+    </div>
+
+    <div class="control d-flex align-center mb-15">
+      <input type="checkbox" id="four" name="show_latest_news" checked>
+      <label for="four">Latest News</label>
+    </div>
+
+    <div class="control d-flex align-center mb-15">
+      <input type="checkbox" id="five" name="show_latest_tasks">
+      <label for="five">Latest Tasks</label>
+    </div>
+
+    <div class="control d-flex align-center mb-15">
+      <input type="checkbox" id="six" name="show_top_search_items" checked>
+      <label for="six">Top Search Items</label>
+    </div>
+-->
                       
                           <button type="submit">Save</button>
                         </form>
