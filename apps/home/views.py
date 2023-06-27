@@ -286,8 +286,6 @@ def profile(request):
     else:
         form = models.UserProfileExtended(user=request.user)
 
-
-
     context = {'user_profile': user_profile, 'form': form}
     return render(request, 'profile.html', context)
 
