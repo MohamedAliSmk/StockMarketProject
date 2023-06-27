@@ -94,7 +94,7 @@
               <ul >
                   <li>
                       <div   class="  newsidebar" style="padding: 6px; color:#888;font-size: x-large; font-weight: bold;"  >
-                          Fintec
+                          <a href="/">Fintec</a>
                       </div>
                       <div>
                           <!-- <h2 style="margin-top: 17px;"> <span style="color:yellow;">Fin</span><span style="color:dodgerblue ;">tickers</span> </h2> -->
@@ -125,42 +125,27 @@
               
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                      <!-- <li>
-                          <nav class="navbar navbar-light bg-black ">
-                              <div class="container-fluid">
-                                  <form class="d-flex  w-100">
-                                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                      <button class="btn btn-outline-success" type="submit">Search</button>
-                                  </form>
-                              </div>
-                          </nav>
-                      </li> -->
-                      <!-- <li class="btn btn-primary rounded-pill">
-                          Home
-                      </li>
-                      <li class="btn btn-primary rounded-pill">
-                          profile
-                      </li>
-                      <li class="btn btn-primary rounded-pill">
-                          setting
-                      </li>
-                      <li class="btn btn-primary rounded-pill">
-                          company
-                      </li>
-                      <li class="btn btn-primary rounded-pill">
-                          LastNewes
-                      </li>
-                      <li class="btn btn-primary rounded-pill">
-                          EducationCommunity
-                      </li> -->
-
-
                       <li style="margin-right: 10px; margin-top: 16px;">
                           <a   class=""    data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                               <i  style="color: #bbb;   cursor: pointer; " class="fa-solid fa-magnifying-glass    fs-20">  </i>
                           </a> 
                       </li>
-                      
+                    {% if user.is_authenticated %}
+                      <li>
+                        <div class="mr-10 mt-2">
+                            <div class="dropdown">
+                                <button class="btn btn-primary rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-regular fa-user"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                    <li><a class="dropdown-item between-flex active fs-20" href="/profile">View Profile</a></li>
+                                    <li><a class="dropdown-item d-flex space-around fs-20" href="/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+               
                       <li>
                           <div class="mr-10 mt-2 " >
                               <div class="dropdown ">
@@ -169,9 +154,9 @@
                                   </button>
                                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                       <li > <a class="dropdown-item between-flex active  fs-20" href="/register"> <i class="fa-regular fa-user"></i> <span> Sign up </span> </a> </li>
-                                      <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="#"> 
-                                          <span> MODE </span>
-                                          <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center  " id="toggleDark">   </i> 
+                                      <li><a class="dropdown-item  d-flex  space-around  fs-20 " href="/aboutus"> 
+                                          <span> About us </span>
+                                          <i class=" fs-20   bi bi-brightness-high-fill between-flex align-center" id="">   </i> 
                                           </a>
                                       </li>
                                       <li > <a class="dropdown-item between-flex active  fs-20" href="/login"> </a> </li>
@@ -179,7 +164,7 @@
                               </div>
                           </div>
                       </li>
-                      <li>
+                      <!--<li>
                           <div class="mr-10 mt-2 " >
                               <div class="dropdown ">
                                   <button class="btn  btn-primary  rounded-pill" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -191,22 +176,30 @@
                                   </ul>
                               </div>
                           </div>
-                      </li>
+                      </li>-->
                   
                   
                       <li>
                           <a href="/login" class="btn mr-10 mt-2 btn  btn-primary  rounded-pill"> Login </a>
-
-                      </li>
-                      <li>
-                          <div class="icons  fs-20  d-flex  space-between">
-                          
-                              <div class=" p-relative mt-2  align-items-center   notification ">
-                                  <i class="fa-regular fa-bell fa-lg c-gray ">   </i>
-                              </div>
-                          </div>
-                      </li>
                       
+                      </li>
+                    {% endif %}
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-regular fa-bell fa-lg c-gray"></i>
+                            <span class="notification">5</span>
+                            <p class="d-lg-none d-md-block">notification</p>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Stock XYZ: Analysts predict a strong bullish trend in the coming week.</a>
+                            <a class="dropdown-item" href="#">Tech sector forecast: Experts anticipate a surge in tech stocks due to upcoming product launches.</a>
+                            <a class="dropdown-item" href="#">Market update: Volatility expected as major economic indicators are released this month.</a>
+                            <a class="dropdown-item" href="#">Investment opportunity: Renewable energy stocks projected to experience significant growth.</a>
+                            <a class="dropdown-item" href="#">Financial report: Company ABC exceeds earnings expectations, leading to a positive outlook.</a>
+                            </div>
+                    </li>
+                                          
                   </ul>
                   <span></span>
               </span>
@@ -240,7 +233,7 @@
     <div>
       <ul class="  list-none  ">
           <li>
-              <a  class="   d-flex  align-center  space-between  fs-20     rad-6  p-10 " href="/index" >  
+              <a  class="   d-flex  align-center  space-between  fs-20     rad-6  p-10 " href="/" >  
                   <i class="fa-solid fa-chart-simple  fa-fw"></i>
                   <span class="" > Dashboard </span>
               </a>

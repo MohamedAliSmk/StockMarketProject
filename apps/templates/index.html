@@ -6,6 +6,89 @@
         <div class="content w-full  ">
             <h1 class="p-relative"> Dashboard </h1>
             <!--   start  carousel   -->
+            {% if user.is_authenticated %}
+            <div class="wrapper   d-grid   gap-20">
+                <!-- start  welcome  widget -->   
+                    <div class="welcome      rad-10    text-center-mobile    block-mobile">
+                        <div class="intro   p-20   d-flex   space-between   bg-ccc">
+                            <div>
+                                <h2  class="m-0" > Welcome {{ user.fullName }}  </h2>
+                             </div>
+                            <img src="../static/images/welcome.png" class="hide-mobile " alt="">
+                        </div>
+                        <img src="/media/std_prof_Img.png" class="avatar" alt="">
+                        <div class="body   text-center   d-flex   p-20   mt-20   mb-20    block-mobile">
+                            <div> {{ user.fullName }} <span class="d-block    c-gray    fs-14    mt-10"> Business Man </span> </div>
+                            <div>80 <span class="d-block    c-gray   fs-14    mt-10"> Stocs </span> </div>
+                            <div> $8500 <span class="d-block    c-gray    fs-14    mt-10"> Earned </span> </div>
+                        </div>
+                    </div>
+                    <!-- end  welcome  widget   -->
+    
+                    <!--  start   quick  widget   -->
+                    <div class="quick-draft   p-20     rad-10     ">
+                        <h2  class="mt-0    mb-20   ">  quick News </h2>
+                        <p class="mt-0   mb-20   c-gray   fs-15  "> write adraft for yours ideas.  </p>
+                        <form >
+                            <input type="text" class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6 " placeholder="title">
+                            <textarea class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6  "  placeholder="Your Thought" name="" id="" cols="30" rows="10"></textarea>
+                            <input  class="save   d-block    fs-14    bg-blue   c-white    b-none   w-fit  button-shape " type="submit" value="Save">
+                        </form>
+                    </div>
+                    <!--  end  quick   widget   -->
+    
+                    <!--  start tagets --> 
+                    <div class="targets    p-20     rad-10 ">
+                        <h2  class="mt-0    mb-10"> Yearly Target  </h2>
+                        <p class="mt-0   mb-20   fs-15"> Tagets Of Years   </p>
+                        <div class="targets-row   mb-20      align-center   d-flex ">
+                            <div class="icon   center-flex    blue">
+                                <i class="fa-solid  fa-dollar  fa-lg   c-blue"></i>
+                            </div>
+                            <div class="details">
+                                <span class="fs-14    c-gray"> Money </span>
+                                <span class="d-block   mt-5   mb-10    fw-bold">  $YourMoney </span>
+                                <div class="progress   p-relative  blue">
+                                    <span  class="bg-blue  " style="width:60%">
+                                        <span class="bg-blue  "> 64% </span>   
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="targets-row   mb-20    orange  align-center   d-flex ">
+                            <div class="icon   center-flex    blue">
+                                <i class="fa-solid fa-arrow-trend-up  orange  "></i>
+                            </div>
+                            <div class="details">
+                                <span class="fs-14    c-gray"> My Stocks </span>
+                                <span class="d-block   mt-5   mb-10     col-black  fw-bold">  Stocks Number </span>
+                                <div class="progress   p-relative  blue">
+                                    <span  class="bg-orange    orange " style="width:40%">
+                                        <span class="bg-orange  "> 34% </span>   
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="targets-row   mb-20   green   align-center   d-flex ">
+                            <div class="icon   center-flex    blue">
+                                <i class="fa-solid   fa-user  green     fa-lg   "></i>
+                            </div>
+                            <div class="details">
+                                <span class="fs-14    c-gray"> Teams </span>
+                                <span class="d-block   mt-5   mb-10  col-black   fw-bold">  TeamsNumber  </span>
+                                <div class="progress   p-relative  blue">
+                                    <span  class="bg-green  green " style="width:70%">
+                                        <span class="bg-green  "> 75% </span>   
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            {% else %}        
             <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -47,100 +130,18 @@
         <!--   end   carousel   -->
             <br>
             <br>
+
             <p class="typeEffect"> welcome to Fintechers Application   </p>
             <!--<div class=" space-around  ">
                 <div class="spinner-grow" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>-->
-        
-            <div class="wrapper   d-grid   gap-20">
-                <!--  start  welcome  widget   
-                <div class="welcome      rad-10    text-center-mobile    block-mobile">
-                    <div class="intro   p-20   d-flex   space-between   bg-ccc">
-                        <div>
-                            <h2  class="m-0" > Welcome  </h2>
-                            <p class="c-gray    mt-5">  FINTEC APP.  </p>
-                        </div>
-                        <img src="../static/images/welcome.png" class="hide-mobile " alt="">
-                    </div>
-                    <img src="../static/images/avatar.png" class="avatar" alt="">
-                    <div class="body   text-center   d-flex   p-20   mt-20   mb-20    block-mobile">
-                        <div> mohmed ali <span class="d-block    c-gray    fs-14    mt-10"> Business Man </span> </div>
-                        <div>80 <span class="d-block    c-gray   fs-14    mt-10"> Stocs </span> </div>
-                        <div> $8500 <span class="d-block    c-gray    fs-14    mt-10"> Earned </span> </div>
-                    </div>
-                    <a /profile class="visit   d-block  fs-14    rad-6   bg-blue    w-fit    button-shape"  > profile  </a>
-                </div>
-                end  welcome  widget   -->
-
-                <!--  start   quick  widget   -
-                <div class="quick-draft   p-20     rad-10     ">
-                    <h2  class="mt-0    mb-20   ">  quick News </h2>
-                    <p class="mt-0   mb-20   c-gray   fs-15  "> write adraft for yours ideas.  </p>
-                    <form >
-                        <input type="text" class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6 " placeholder="title">
-                        <textarea class="d-block   mb-20   w-full   p-10   b-none   bg-eee    rad-6  "  placeholder="Your Thought" name="" id="" cols="30" rows="10"></textarea>
-                        <input  class="save   d-block    fs-14    bg-blue   c-white    b-none   w-fit  button-shape " type="submit" value="Save">
-                    </form>
-                </div>
-                <  end  quick   widget   -->
-
-                <!--  start tagets 
-                <div class="targets    p-20     rad-10 ">
-                    <h2  class="mt-0    mb-10"> Yearly Target  </h2>
-                    <p class="mt-0   mb-20   fs-15"> Tagets Of Years   </p>
-                    <div class="targets-row   mb-20      align-center   d-flex ">
-                        <div class="icon   center-flex    blue">
-                            <i class="fa-solid  fa-dollar  fa-lg   c-blue"></i>
-                        </div>
-                        <div class="details">
-                            <span class="fs-14    c-gray"> Money </span>
-                            <span class="d-block   mt-5   mb-10    fw-bold">  $YourMoney </span>
-                            <div class="progress   p-relative  blue">
-                                <span  class="bg-blue  " style="width:60%">
-                                    <span class="bg-blue  "> 64% </span>   
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="targets-row   mb-20    orange  align-center   d-flex ">
-                        <div class="icon   center-flex    blue">
-                            <i class="fa-solid fa-arrow-trend-up  orange  "></i>
-                        </div>
-                        <div class="details">
-                            <span class="fs-14    c-gray"> My Stocs </span>
-                            <span class="d-block   mt-5   mb-10     col-black  fw-bold">  StocsNoumber </span>
-                            <div class="progress   p-relative  blue">
-                                <span  class="bg-orange    orange " style="width:40%">
-                                    <span class="bg-orange  "> 34% </span>   
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="targets-row   mb-20   green   align-center   d-flex ">
-                        <div class="icon   center-flex    blue">
-                            <i class="fa-solid   fa-user  green     fa-lg   "></i>
-                        </div>
-                        <div class="details">
-                            <span class="fs-14    c-gray"> Teams </span>
-                            <span class="d-block   mt-5   mb-10  col-black   fw-bold">  TeamsNumber  </span>
-                            <div class="progress   p-relative  blue">
-                                <span  class="bg-green  green " style="width:70%">
-                                    <span class="bg-green  "> 75% </span>   
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            end  targets  -->
-                <!--  start    carousel  -->
+            {% endif %}
+            <!-- end  targets  -->
             </div>
     <br>
     <br>
-            
             <!--  start  chart  -->
             <h1 class="p-relative"> chart </h1>
             <div class="wrapper   d-grid   gap-20">
@@ -1140,7 +1141,23 @@
             <br>
             <br>
             <h2 style="text-align: center;"> About Us  </h2>
-            <p class="" style="text-align: center; margin: 50px;"> hi welcome we are fintic team we are happy to help you to learn and understand enough about finance general concept and technical an analysis in deep we offer you last data about company we offer some company and bank as sample to test model and technical and financial on it and ablity to acces to company in database we provide you with last newes and event in this company and acoomunity to understand and learn about stocks and financial .    </p>
+            <p class="" style="text-align: center; margin: 50px;">We are a group of passionate students who have undertaken a graduation project focused on stock market prediction. Our project aims to leverage the power of data analysis and machine learning algorithms to predict the future trends and movements in the stock market.
+
+                With the ever-increasing complexity and volatility of the financial markets, accurate and reliable predictions have become essential for investors and traders. Our goal is to develop a robust and efficient system that can assist individuals in making informed investment decisions and maximizing their returns.
+                
+                Through extensive research and analysis, we have gathered a vast amount of historical stock market data, including price movements, trading volumes, and fundamental indicators. This data serves as the foundation for training and fine-tuning our prediction models.
+                
+                We employ various machine learning techniques, such as regression algorithms, time series analysis, and neural networks, to identify patterns and relationships within the data. These models enable us to make predictions based on historical data and incorporate real-time market information to improve accuracy.
+                
+                Furthermore, we continuously refine our models through rigorous testing and validation processes to ensure their reliability and effectiveness. We also consider external factors like economic indicators, news sentiment analysis, and market trends to enhance the predictive capabilities of our system.
+                
+                Our project is driven by a strong commitment to transparency, integrity, and user satisfaction. We understand the importance of providing users with clear explanations and visualizations of our predictions, as well as risk assessment metrics. This empowers investors to make well-informed decisions and manage their portfolios effectively.
+                
+                In addition to the technical aspects of our project, we prioritize user experience and accessibility. We aim to develop a user-friendly web platform that allows investors of all levels of expertise to easily access and interpret the predictions. The platform will provide interactive charts, personalized portfolio management tools, and educational resources to empower users with the knowledge and confidence to navigate the stock market successfully.
+                
+                We are excited about the potential impact of our graduation project on the world of finance and investment. By leveraging cutting-edge technologies and data-driven insights, we aspire to contribute to the development of smarter and more informed investment strategies. Our goal is to empower individuals to achieve their financial goals and navigate the complexities of the stock market with confidence.
+                
+                Disclaimer: It's important to note that while our project utilizes advanced techniques and data analysis, stock market prediction involves inherent uncertainties and risks. Our predictions should be used as an additional tool for decision-making and not as financial advice. Investors should conduct their own research and consult with financial professionals before making any investment decisions.</p>
 
             
             <br>

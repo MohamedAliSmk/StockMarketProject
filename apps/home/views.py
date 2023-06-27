@@ -165,10 +165,8 @@ def plotTicker(Ticker):
         error_message = f"Error retrieving chart data: {str(e)}"
         return {'error_message': error_message}
 
-
-@login_required
+@login_required(login_url='/login/')
 def index(request):   
-    is_logged_in = request.user.is_authenticated
     user = request.user
 
     # Check if a UserProfile object already exists for the user
@@ -184,8 +182,7 @@ def index(request):
 
     language = request.GET.get("lang", "en") # retrieve language preference from GET parameter or default to "en"
     context = {"language": language,
-               'user_profile': user_profile,
-               'is_logged_in': is_logged_in ,
+               'user': user_profile,
         }
     return render(request, 'index.html', context)
 
@@ -288,6 +285,7 @@ def profile(request):
         if form.is_valid():
             form.save()
             return redirect('profile')
+        
 
     else:
         form = models.UserProfileExtended(user=request.user)
@@ -327,7 +325,6 @@ def LastNews(request):
 def Trending(request):
     return render(request, "Trending.html")
 
-#@login_required
 def chart(request, Ticker):
     chart_op = plotTicker(Ticker)
     context = {'chart_op': chart_op}  # Create a dictionary with 'chart_op' as the value

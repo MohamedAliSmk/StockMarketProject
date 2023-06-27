@@ -124,12 +124,12 @@
                                     <!--    end information   rows  4-->
                                 </div>
                             </div>
-               <div class="create-account    d-flex gap-20   ">
-                                <h3 class="">  Dont Have An Account !   </h3>
+                           <div class="create-account    d-flex gap-20   ">
+                                <h3 class=""> Complete your information !   </h3>
                                 <div>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                            Lets create an Account
+                                            Lets update your Account information
                                         </button>
                                         <!-- Modal -->
                                         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -141,7 +141,13 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div>
-                                                        <form id="userProfileForm" action="" class="was-validated">
+                                                        <form id="userProfileForm" action="POST" enctype="multipart/form-data" class="was-validated">
+                                                                {% csrf_token %}
+                                                            <div class="form-group">
+                                                                <input type="file" name="profile_photo">
+                                                                <button type="submit">Upload</button>
+                                                            </div>    
+                                                        
                                                             <div class="form-group">
                                                                 <label for="">  Full Name </label>
                                                                 <p> <input type="text"  class="w-full  form-control p-2"  placeholder="please write Your Name" required> </p>

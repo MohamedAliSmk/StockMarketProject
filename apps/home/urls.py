@@ -8,7 +8,8 @@ app_name = 'home'
 urlpatterns = [
 
     # The home page
-    path('', views.index, name='home'),
+    path('', views.index, name='index'),
+    #path('home/', views.index, name='index'),
     path('setting/',views.setting , name="setting"),
     path('profile/',views.profile , name="profile"),
     path('Companys/',views.Companys , name="Companys"),

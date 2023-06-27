@@ -55,8 +55,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-LOGIN_REDIRECT_URL = "home"  # Route defined in home/urls.py
-LOGOUT_REDIRECT_URL = "home"  # Route defined in home/urls.py
 TEMPLATE_DIR = os.path.join(CORE_DIR, "apps/templates")  # ROOT dir for templates
 MEDIA_ROOT = 'apps\home\data'
 
@@ -178,8 +176,8 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 LOGIN_URL ='apps.authentication:login'
-#LOGIN_REDIRECT_URL='apps.home:index'
-#LOGOUT_REDIRECT_URL='apps.authentication:login'
+LOGIN_REDIRECT_URL='apps.home:index'
+LOGOUT_REDIRECT_URL='/'
 LOGOUT_URL='apps.authentication:logout'
 
 
