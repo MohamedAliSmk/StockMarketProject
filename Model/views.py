@@ -1,5 +1,4 @@
 # Create your views here.
-
 from django.shortcuts import render
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,7 +19,6 @@ import os
 import plotly.graph_objs as go
 import io
 import urllib, base64
-
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -171,7 +169,7 @@ def plot_data(next_days, df, day_step, output, save_path1, save_path2):
     plt.savefig(save_path1, format='png')
     plt.close()
 
-def Prediction_Comp(request,Ticker,next_days):
+"""def Prediction_Comp(request,Ticker,next_days):
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
          pred(Ticker, next_days)         
@@ -179,8 +177,7 @@ def Prediction_Comp(request,Ticker,next_days):
          train(Ticker)
          pred(Ticker, next_days)         
     plotData=plot_data(next_days)
-    return render(request, 'Companys.html', {'plotData': plotData})
-
+ 
     # Plot 2
     plt.figure(figsize=(25, 5))  # Adjust the figure size as needed
     plt.plot(test[['Close', 'Prediction']])
@@ -188,10 +185,10 @@ def Prediction_Comp(request,Ticker,next_days):
     plt.xticks(rotation=45)
     plt.savefig(save_path2, format='png')
     plt.close()
-
-    return save_path1, save_path2
-
-def Prediction_Comp(Ticker, next_days):
+    context={'plotData': plotData,'pred1':save_path1,'pred2':save_path2}
+    return render(request, 'Companys.html', {'plotData': plotData})
+"""
+def Prediction_Comp(request,Ticker, next_days):
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
         # data, train_len, prediction, day_step, _, df, output = pred(Ticker, next_days)
@@ -212,6 +209,6 @@ def Prediction_Comp(Ticker, next_days):
         'imagePath2': save_path2,
     }
 
-    return render('Companys.html', context)
+    return render(request,'Companys.html', context)
 
-Prediction_Comp("GOOG",next_days=30)
+#Prediction_Comp("GOOG",next_days=30)

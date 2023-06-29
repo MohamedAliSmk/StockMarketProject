@@ -40,14 +40,6 @@
                                             <span class="c-gray">  Country: </span>
                                             <span>   {{ user.profile.country }}  </span>
                                         </div>
-                                        <div class="label">
-                                            <label >
-                                                <input type="checkbox" class="togell-checkbox" checked  >
-                                                <div class="togell-switch">
-                                                    <span class="one"></span>
-                                                </div>
-                                            </label>
-                                        </div>
                                     </div>
                                     <!--    end information   rows    1 -->
                                     <!--    start  information rows    2 -->
@@ -67,14 +59,7 @@
                                             <span class="c-gray">  Date Of Birth:  </span>
                                             <span>     {{ user.profile.dateOfBirth }}  </span>
                                         </div>
-                                        <div class="label">
-                                            <label >
-                                                <input type="checkbox" class="togell-checkbox" checked  >
-                                                <div class="togell-switch">
-                                                    <span class="one"></span>
-                                                </div>
-                                            </label>
-                                        </div>
+                                         
                                     </div>
                                     <!--    end information   rows    2 -->
             
@@ -91,14 +76,7 @@
                                             <span class="c-gray">  Years Of Experience: </span>
                                             <span>  {{ user.profile.yearsOfExperience }}   </span>
                                         </div>
-                                        <div class="label">
-                                            <label >
-                                                <input type="checkbox" class="togell-checkbox" checked  >
-                                                <div class="togell-switch">
-                                                    <span class="one"></span>
-                                                </div>
-                                            </label>
-                                        </div>
+                                         
                                     </div>
                                     <!--    end information   rows  3-->
                                     <!--    start  information rows 4 -->
@@ -112,18 +90,13 @@
                                             <span class="c-gray">  Subscription </span>
                                             <span>   {{ user.profile.subscription }}  </span>
                                         </div>
-                                        <div class="label">
-                                            <label >
-                                                <input type="checkbox" class="togell-checkbox" checked  >
-                                                <div class="togell-switch">
-                                                    <span class="one"></span>
-                                                </div>
-                                            </label>
-                                        </div>
+                                         
                                     </div>
                                     <!--    end information   rows  4-->
                                 </div>
                             </div>
+                            {% if request.user.username == user_profile.user.username %}
+
                            <div class="create-account    d-flex gap-20   ">
                                 <h3 class=""> Complete your information !   </h3>
                                 <div>
@@ -141,62 +114,53 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div>
-                                                        <form id="userProfileForm" action="POST" enctype="multipart/form-data" class="was-validated">
-                                                                {% csrf_token %}
+                                                        <form id="userProfileForm" method="post" action="/profile" enctype="multipart/form-data" class="was-validated">
+                                                            {% csrf_token %}
+                                                            {{ form.non_field_errors }}
                                                             <div class="form-group">
                                                                 <input type="file" name="profile_photo">
                                                                 <button type="submit">Upload</button>
-                                                            </div>    
-                                                        
-                                                            <div class="form-group">
-                                                                <label for="">  Full Name </label>
-                                                                <p> <input type="text"  class="w-full  form-control p-2"  placeholder="please write Your Name" required> </p>
-                                                            </div>
-                                                            
-
-                                                            <div class="form-group">
-                                                                <label for="">  Gender </label>
-                                                                <p> <input type="text"  class="w-full form-control   p-2"   placeholder="please write Your Gender" required> </p>
-                                                            </div>
-                                                        
-                                                            <div class="form-group">
-                                                                <label for="">  Country </label>
-                                                                <p> <input type="text"  class="w-full form-control  p-2"   placeholder=" please write your  Country" required> </p>
-
-                                                            </div>
-                                                        
-                                                            <div class="form-group">
-                                                                <label for="">  Email </label>
-                                                            <p> <input type="email"  class="w-full  form-control  p-2"   placeholder="please write your Email" required> </p>
-
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="">  Phone </label>
-                                                                <p> <input type="number"  class="w-full  form-control   p-2"   placeholder="please write your  Phone" required> </p>
+                                                                <label for="{{ form.lastName.id_for_label }}">Full Name</label>
+                                                                <p><input type="text" name="lastName" class="w-full form-control p-2" placeholder="Please write your Name" required></p>
                                                             </div>
-                                                            
                                                             <div class="form-group">
-                                                                <label for="">  
-                                                                    Date Of Birth </label>
-                                                                <p> <input type="date"  class="w-full   form-control  p-2"   placeholder="please write your Date Of Birth" required> </p>
+                                                                <label for="{{ form.gender.id_for_label }}">Gender</label>
+                                                                <p><input type="text" name="gender" class="w-full form-control p-2" placeholder="Please write your Gender" required></p>
                                                             </div>
-                                                            
-
                                                             <div class="form-group">
-                                                                <label for="">  jop </label>
-                                                                <p> <input type="text"  class="w-full  form-control   p-2"   placeholder="please write your jop" required> </p>
+                                                                <label for="{{ form.country.id_for_label }}">Country</label>
+                                                                <p><input type="text" name="country" class="w-full form-control p-2" placeholder="Please write your Country" required></p>
                                                             </div>
-
-                                                                <div class="form-check pb-2">
+                                                            <div class="form-group">
+                                                                <label for="{{ form.email.id_for_label }}">Email</label>
+                                                                <p><input type="email" name="email" class="w-full form-control p-2" placeholder="Please write your Email" required></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="{{ form.phoneNumber.id_for_label }}">Phone</label>
+                                                                <p><input type="number" name="phoneNumber" class="w-full form-control p-2" placeholder="Please write your Phone" required></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="{{ form.dateOfBirth.id_for_label }}">Date Of Birth</label>
+                                                                <p><input type="date" name="dateOfBirth" class="w-full form-control p-2" placeholder="Please write your Date Of Birth" required></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="{{ form.jobTitle.id_for_label }}">Job</label>
+                                                                <p><input type="text" name="jobTitle" class="w-full form-control p-2" placeholder="Please write your Job" required></p>
+                                                            </div>
+                                                            <div class="form-check pb-2">
                                                                 <label class="form-check-label">
-                                                                    <input  class="form-check-input" type="checkbox">
-                                                                Remember Me</label>
+                                                                    <input class="form-check-input" type="checkbox" name="remember_me">
+                                                                    Remember Me
+                                                                </label>
                                                             </div>
-                                                            <input type="submit"  class="btn btn-primary" value="submit">
-                                                            </form>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
+                                                        </form>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
-
+                                                                                   
                             <!--   end   overview -->
                         {% else %}   
                             <div class="create-account    d-flex gap-20   ">
@@ -252,8 +216,8 @@
                                                             
 
                                                             <div class="form-group">
-                                                                <label for="">  jop </label>
-                                                                <p> <input type="text"  class="w-full  form-control   p-2"   placeholder="please write your jop" required> </p>
+                                                                <label for="">   job </label>
+                                                                <p> <input type="text"  class="w-full  form-control   p-2"   placeholder="please write your  job" required> </p>
                                                             </div>
 
                                                                 <div class="form-check pb-2">

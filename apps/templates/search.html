@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Search Results</h1>
+  
+  {% if companies %}
+    <ul>
+      {% for company in companies %}
+        <li>
+          <a href="/Companys/{{ company.ticker }}">{{ company.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+{% endblock %}

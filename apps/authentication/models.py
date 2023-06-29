@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     
 class UserProfileExtended(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    lastName = models.CharField(max_length=255, blank=True)
+    fullName = models.CharField(max_length=255, blank=True)
     gender = models.CharField(max_length=255, blank=True)
     country = models.CharField(max_length=255, blank=True)
     dateOfBirth = models.DateField(blank=True, null=True)

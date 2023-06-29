@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stocks Screener</title>
+</head>
+<body>
+    <h1>Stocks Screener</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="query" placeholder="Search for a company">
+        <button type="submit">Search</button>
+    </form>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    {% if companies %}
+        <h2>Search Results:</h2>
+        <ul>
+            {% for company in companies %}
+                <li>{{ company.name }} ({{ company.symbol }}) - {{ company.exchange }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+
+
+{% endblock %}

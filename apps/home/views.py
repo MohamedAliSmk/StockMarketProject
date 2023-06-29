@@ -1,5 +1,3 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render ,HttpResponse
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -8,121 +6,162 @@ from plotly.offline import plot
 import plotly.graph_objects as go
 import json
 import requests
-from django.utils.translation import gettext as _
+import os
 import matplotlib.pyplot as plt
 import io
 import urllib, base64 
-from django.urls import reverse
-from django.http import JsonResponse
 from TrandingViewClasses import *
 from stocknews import StockNews
 from sklearn.linear_model import LinearRegression
 from sklearn import preprocessing, model_selection, svm
-from django.shortcuts import render, redirect
+from django.utils.translation import gettext as _
+from django.urls import reverse
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 from django.conf import settings
 from TrandingViewClasses import ScrapeTrendingView 
-from ..authentication import models
+from ..authentication import models,forms
 from Model.views import Prediction_Comp 
-from ..authentication import forms
+from .models import LoginDevice
 
+
+
+def search_company(query):
+    # Search for the company using the query
+    search_results = yf.search(query)
+
+    if len(search_results) > 0:
+        # Get the first search result (most relevant)
+        first_result = search_results[0]
+
+        # Extract relevant information from the search result
+        symbol = first_result['symbol']
+        name = first_result['longName']
+        exchange = first_result['exchange']
+
+        # Return the company information
+        return {
+            'symbol': symbol,
+            'name': name,
+            'exchange': exchange
+        }
+    else:
+        # No search results found
+        return None
 def yf_Scraper(symbol):
-    data = yf.Ticker(symbol)
-    info = data.info
-    #print(info)
+    directory = "../Data/" 
+    if not os.path.exists(directory): 
+        os.makedirs(directory)
+
+    file_path = f"{directory}{symbol}_info.json"
+
+    if not os.path.exists(file_path):
+        data = yf.Ticker(symbol)
+        info = data.info
+
+        # Replace null values with "--"
+        info = {key: value if value is not None else "--" for key, value in info.items()}
+
+        # Save the data as JSON
+        with open(file_path, "w") as file:
+            json.dump(info, file, indent=4)
+        print(f"Successfully downloaded info of {symbol}")
+
+    # Read the JSON file
+    with open(file_path, "r") as file:
+        info = json.load(file)
+
     # Get stock price and change
-    current_price = info['currentPrice']
-    previous_close = info['regularMarketPreviousClose']
+    current_price = info.get('currentPrice', "--")
+    previous_close = info.get('regularMarketPreviousClose', "--")
     price_change = round((current_price - previous_close) / previous_close * 100, 2)
     if price_change > 0:
         price_change = f'+{price_change}%'
     else:
         price_change = f'{price_change}%'
-        
+
     # Get company data
-    company_name = info['shortName']
-    company_exchange = info['exchange']
-    currency = info['financialCurrency']
-    industry = info['industry']
-    website = info['website']
-    description = info['longBusinessSummary']
-    
+    company_name = info.get('shortName', "--")
+    company_exchange = info.get('exchange', "--")
+    currency = info.get('financialCurrency', "--")
+    industry = info.get('industry', "--")
+    website = info.get('website', "--")
+    description = info.get('longBusinessSummary', "--")
+
     # Accessing specific financial factors
-    market_cap = info['marketCap']
-    price_to_sales = info['priceToSalesTrailing12Months']
-    trailing_pe = info['trailingPE']
-    forward_pe = info['forwardPE']
-    profit_margins = info['profitMargins']
-    fifty_day_average = info['fiftyDayAverage']
-    two_hundred_day_average = info['twoHundredDayAverage']
-    book_value = info['bookValue']
-    earnings_quarterly_growth = info['earningsQuarterlyGrowth']
-    net_income_to_common = info['netIncomeToCommon']
-    trailing_eps = info['trailingEps']
-    forward_eps = info['forwardEps']
-    peg_ratio = info['pegRatio']
-    total_cash = info['totalCash']
-    total_debt = info['totalDebt']
-    total_revenue = info['totalRevenue']
-    gross_profits = info['grossProfits']
-    free_cashflow = info['freeCashflow']
-    operating_cashflow = info['operatingCashflow']
-    earnings_growth = info['earningsGrowth']
-    revenue_growth = info['revenueGrowth']
-    gross_margins = info['grossMargins']
-    ebitda_margins = info['ebitdaMargins']
-    operating_margins = info['operatingMargins']
-    return_on_assets = info['returnOnAssets']
-    return_on_equity = info['returnOnEquity']
+    market_cap = info.get('marketCap', "--")
+    price_to_sales = info.get('priceToSalesTrailing12Months', "--")
+    trailing_pe = info.get('trailingPE', "--")
+    forward_pe = info.get('forwardPE', "--")
+    profit_margins = info.get('profitMargins', "--")
+    fifty_day_average = info.get('fiftyDayAverage', "--")
+    two_hundred_day_average = info.get('twoHundredDayAverage', "--")
+    book_value = info.get('bookValue', "--")
+    earnings_quarterly_growth = info.get('earningsQuarterlyGrowth', "--")
+    net_income_to_common = info.get('netIncomeToCommon', "--")
+    trailing_eps = info.get('trailingEps', "--")
+    forward_eps = info.get('forwardEps', "--")
+    peg_ratio = info.get('pegRatio', "--")
+    total_cash = info.get('totalCash', "--")
+    total_debt = info.get('totalDebt', "--")
+    total_revenue = info.get('totalRevenue', "--")
+    gross_profits = info.get('grossProfits', "--")
+    free_cashflow = info.get('freeCashflow', "--")
+    operating_cashflow = info.get('operatingCashflow', "--")
+    earnings_growth = info.get('earningsGrowth', "--")
+    revenue_growth = info.get('revenueGrowth', "--")
+    gross_margins = info.get('grossMargins', "--")
+    ebitda_margins = info.get('ebitdaMargins', "--")
+    operating_margins = info.get('operatingMargins', "--")
+    return_on_assets = info.get('returnOnAssets', "--")
+    return_on_equity = info.get('returnOnEquity', "--")
 
     # Return data as dictionary
     data_dict = {
-    'symbol': symbol,
-    'current_price': current_price,
-    'price_change': price_change,
-    'company_name': company_name,
-    'company_exchange': company_exchange,
-    'currency': currency,
-    'industry': industry,
-    'description': description,
-    'website': website,
-    'market_cap': market_cap,
-    'price_to_sales': price_to_sales,
-    'trailing_pe': trailing_pe,
-    'forward_pe': forward_pe,
-    'profit_margins': profit_margins,
-    'fifty_day_average': fifty_day_average,
-    'two_hundred_day_average': two_hundred_day_average,
-    'book_value': book_value,
-    'earnings_quarterly_growth': earnings_quarterly_growth,
-    'net_income_to_common': net_income_to_common,
-    'trailing_eps': trailing_eps,
-    'forward_eps': forward_eps,
-    'peg_ratio': peg_ratio,
-    'total_cash': total_cash,
-    'total_debt': total_debt,
-    'total_revenue': total_revenue,
-    'gross_profits': gross_profits,
-    'free_cashflow': free_cashflow,
-    'operating_cashflow': operating_cashflow,
-    'earnings_growth': earnings_growth,
-    'revenue_growth': revenue_growth,
-    'gross_margins': gross_margins,
-    'ebitda_margins': ebitda_margins,
-    'operating_margins': operating_margins,
-    'return_on_assets': return_on_assets,
-    'return_on_equity': return_on_equity
-}
-  
-    
-    return data_dict
+        'symbol': symbol,
+        'current_price': current_price,
+        'price_change': price_change,
+        'company_name': company_name,
+        'company_exchange': company_exchange,
+        'currency': currency,
+        'industry': industry,
+        'description': description,
+        'website': website,
+        'market_cap': market_cap,
+        'price_to_sales': price_to_sales,
+        'trailing_pe': trailing_pe,
+        'forward_pe': forward_pe,
+        'profit_margins': profit_margins,
+        'fifty_day_average': fifty_day_average,
+        'two_hundred_day_average': two_hundred_day_average,
+        'book_value': book_value,
+        'earnings_quarterly_growth': earnings_quarterly_growth,
+        'net_income_to_common': net_income_to_common,
+        'trailing_eps': trailing_eps,
+        'forward_eps': forward_eps,
+        'peg_ratio': peg_ratio,
+        'total_cash': total_cash,
+        'total_debt': total_debt,
+        'total_revenue': total_revenue,
+        'gross_profits': gross_profits,
+        'free_cashflow': free_cashflow,
+        'operating_cashflow': operating_cashflow,
+        'earnings_growth': earnings_growth,
+        'revenue_growth': revenue_growth,
+        'gross_margins': gross_margins,
+        'ebitda_margins': ebitda_margins,
+        'operating_margins': operating_margins,
+        'return_on_assets': return_on_assets,
+        'return_on_equity': return_on_equity
+    }
 
-import plotly.graph_objects as go
-from plotly.offline import plot
+    return data_dict
 
 def plotTicker(Ticker):
     try:
@@ -187,6 +226,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 def setting(request):
+    context = {}
     if request.method == 'POST':
         site_control = request.POST.get('site_control')
         if site_control:
@@ -201,7 +241,7 @@ def setting(request):
         # Update the user's information
         fullName = request.POST.get('fullName')
         email = request.POST.get('email')
-        if Firstname and Lastname and email:
+        if fullName  and email:
             request.user.username = fullName
             request.user.email = email
             request.user.save()
@@ -259,44 +299,82 @@ def setting(request):
     
         user = request.user
         devices = LoginDevice.objects.filter(user=user)
-    return render(request, "setting.html",{'devices': None})
+        context={'devices':devices}
+    return render(request, "setting.html",context)
 
-@login_required
-def profile(request):
-    user_profile = None
-    user_profile_extended = None
+def StocksScreener(request):
+    if request.method == 'POST':
+        # Get the search query from the form
+        query = request.POST.get('query')
+        
+        # Search for the company using the query
+        search_results = yf.Tickers(query)
+
+        if search_results is not None:
+            # Get the list of search results
+            results = search_results.tickers
+
+            # Extract relevant information from each search result
+            companies = []
+            for result in results:
+                symbol = result.info['symbol']
+                name = result.info['longName']
+                exchange = result.info['exchange']
+                companies.append({
+                    'symbol': symbol,
+                    'name': name,
+                    'exchange': exchange
+                })
+
+            # Render the search results in the template
+            return render(request, 'stocks_screener.html', {'companies': companies})
+        else:
+            # No search results found
+            return render(request, 'stocks_screener.html', {'error': 'No results found.'})
+    else:
+        # Render the initial form
+        return render(request, 'stocks_screener.html')
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            result = search_company(query)
+            if result:
+                return render(request, 'companys.html', {'Ticker': result})
+            else:
+                return render(request, 'page-500.html')
+    return render(request, 'search.html')
+
+def profile(request, username=None):
+    if username is None:
+        # If no username is specified, show the profile of the logged-in user
+        user = request.user
+    else:
+        # If a username is specified, show the profile of that user
+        user = get_object_or_404(User, username=username)
 
     try:
-        user_profile = models.UserProfile.objects.get(user=request.user)
-
-        # Check if a UserProfileExtended object already exists for the user
-        user_profile_extended = models.UserProfileExtended.objects.filter(user=request.user).first()
-
-        # If a UserProfileExtended object doesn't exist for the user, create a new one
-        if user_profile_extended is None:
-            user_profile_extended = models.UserProfileExtended(user=request.user)
-            user_profile_extended.save()
-
-    except models.UserProfile.DoesNotExist:
-        pass
+        user_profile = models.UserProfileExtended.objects.get(user=user)
+    except models.UserProfileExtended.DoesNotExist:
+        user_profile = None
 
     if request.method == 'POST':
-        form = models.UserProfileExtended(request.POST, request.FILES, data={'user': request.user.id})
+        form = forms.UserProfileExtendedForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
             return redirect('profile')
-        
-
+        else:
+            print(form.errors)
     else:
-        form = models.UserProfileExtended(user=request.user)
+        form = forms.UserProfileExtendedForm(instance=user_profile)
 
-    context = {'user_profile': user_profile, 'form': form}
+    context = {'form': form, 'user_profile': user_profile}
     return render(request, 'profile.html', context)
-
 def Companys(request, Ticker=None):
     if Ticker is None:
         # Handle the case when Ticker is not provided
-        return render(request, 'Companys.html', {'message': 'No Ticker specified'})
+        return render(request, 'Notcompany.html')
     else:
         try:
             data_dict = yf_Scraper(Ticker)
@@ -325,20 +403,21 @@ def LastNews(request):
 def Trending(request):
     return render(request, "Trending.html")
 
-def chart(request, Ticker):
-    chart_op = plotTicker(Ticker)
-    context = {'chart_op': chart_op}  # Create a dictionary with 'chart_op' as the value
-    return render(request, "chart.html", context=context)
+def chart(request, Ticker=None):
+    if Ticker is None:
+        # Handle the case when Ticker is not provided
+        return render(request, 'Notchart.html')
+    else:
+        chart_op = plotTicker(Ticker)
+        context = {'chart_op': chart_op}  # Create a dictionary with 'chart_op' as the value
+        return render(request, "chart.html", context=context)
 
       
 def Community(request):
     return render(request, "Community.html")
+def aboutus(request):
+    return render(request, "aboutus.html")
 
-#The Predict Function to implement Machine Learning as well as Plotting
-
-"""
-here in error html message we should typing error messages
-"""
 def predict(request, ticker_value, number_of_days):
     try:
         # ticker_value = request.POST.get('ticker')

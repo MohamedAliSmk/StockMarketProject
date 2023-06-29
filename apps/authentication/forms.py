@@ -59,7 +59,7 @@ class Meta:
 class UserProfileExtendedForm(forms.ModelForm):
     class Meta:
         model = UserProfileExtended
-        fields = ('lastName',
+        fields = ('fullName',
                 'country',
                 'dateOfBirth',
                 'jobTitle',

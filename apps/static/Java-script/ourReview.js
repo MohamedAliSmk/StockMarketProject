@@ -32,7 +32,7 @@ const reviews = [{
 /// select items
 const personimg = document.getElementById("personimg");
 const  autor  = document.getElementById("autor");
-const  job    = document.getElementById("jop");
+const  job    = document.getElementById(" job");
 const  info   = document.getElementById("info");
 
 const prevbtn =  document.querySelector(".prev-btn");

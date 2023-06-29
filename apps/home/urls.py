@@ -9,17 +9,19 @@ urlpatterns = [
 
     # The home page
     path('', views.index, name='index'),
-    #path('home/', views.index, name='index'),
+    path('search/', views.search, name='search'),
     path('setting/',views.setting , name="setting"),
     path('profile/',views.profile , name="profile"),
+    path('profile/<str:username>/', views.profile, name='user_profile'),
     path('Companys/',views.Companys , name="Companys"),
     path('Companys/<str:Ticker>',views.Companys , name="Companys"),
     #path('Companys/<str:Ticker>/<int:next_days>',views.Companys , name="Companys"),
     path('LastNews/',views.LastNews , name="LastNews"),
-    path('Trending/',views.Trending , name="Trending"),
+    path('aboutus/',views.aboutus , name="aboutus"),
+    path('chart/',views.chart , name="chart"),
     path('chart/<str:Ticker>',views.chart , name="chart"),
     path('Community/',views.Community , name="Community"),
-    #path('predict/<str:ticker_value>/<str:number_of_days>/', views.predict),
+    path('StocksScreener/', views.StocksScreener , name="StocksScreener"),
     path('i18n/', include(i18n_urlpatterns)),#for translation
 
 ]

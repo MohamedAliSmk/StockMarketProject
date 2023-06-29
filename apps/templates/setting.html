@@ -116,7 +116,7 @@
                         <h2 class="mt-0 mb-10">Social Info</h2>
                         <p class="mt-0 mb-20 c-gray fs-15">Social media information</p>
                         <!-- twitter -->
-                        <form method="POST" action="{% url 'setting' %}">
+                        <form method="POST" action="/setting">
                         <div class="sec-box d-flex align-center mb-15">
                             <i class="fa-brands fa-twitter center-flex c-gray" style="margin-right: 7px;"></i>
                             <input class="w-full" type="text" name="twitter" placeholder="Twitter UserName" value="{{ request.user.profile.twitter_username }}" >

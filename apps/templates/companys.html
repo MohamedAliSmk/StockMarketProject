@@ -220,10 +220,7 @@
                         <br>
                     </div>
                     <div class="Infulance-PeopleContent">
-                        {% block Left_Plot %}
-                        {{ plotData|safe }}
-                        {% endblock Left_Plot %}
-                
+                      <div id="chart-container"></div>
                     </div>
                 </div>
         </div>
@@ -239,7 +236,12 @@
 <script src="../static/Java-script/main.js"></script>
 <script src="../static/js/all.min.js"></script>
 <script src="../static/js/bootstrap.bundle.min.js"></script>
-  
+<script>
+  // Extract the plot_div value from the chart_op variable passed from the view function
+  const plotDiv = '{{ chart_op.plot_div|safe }}';
+  // Render the chart in the chart-container div
+  document.getElementById('chart-container').innerHTML = plotDiv;
+</script>
 {% endblock javascripts %}
 
 {% endblock %}
