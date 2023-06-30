@@ -47,8 +47,8 @@ def train(Ticker):
     global scaler
     global date_today
 
-    day_step = 150
-    data = yf.download(tickers=Ticker, period='1y', interval='1d')
+    day_step = 60
+    data = yf.download(tickers=Ticker, period='4y', interval='1d')
     df = data.filter(['Close'])
     df = df.values
     # get the lengh of training set
@@ -83,7 +83,7 @@ def train(Ticker):
     model.add(Dense(units=60))
     model.add(Dense(units=1))
     model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(x_train, y_train, batch_size=1, epochs=4)
+    model.fit(x_train, y_train, batch_size=1, epochs=9)
     # save_model
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     model.save(
@@ -198,8 +198,8 @@ def Prediction_Comp(request,Ticker, next_days):
         train(Ticker)
         data, train_len, prediction, day_step, _, df, output = pred(Ticker, next_days)
     
-    save_path1 = "apps/Data/plot1.png"
-    save_path2 = "apps/Data/plot2.png"
+    save_path1 = f"apps/Data/plot1-{Ticker}.png"
+    save_path2 = f"apps/Data/plot2-{Ticker}.png"
     plotData1, plotData2 = plot_data(next_days, df, day_step, output, save_path1, save_path2)
 
     context = {
@@ -211,4 +211,4 @@ def Prediction_Comp(request,Ticker, next_days):
 
     return render(request,'Companys.html', context)
 
-#Prediction_Comp("GOOG",next_days=30)
+#Prediction_Comp("GOOG",next_days=10)
