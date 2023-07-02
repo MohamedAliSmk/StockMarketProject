@@ -19,21 +19,13 @@ import os
 import plotly.graph_objs as go
 import io
 import urllib, base64
+
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 
 
-day_step = None
-prediction = None
-data = None
-train_len = None
-model = None
-scaled_df = None
-df = None
-scaler = None
-date_today = None
 
 def train(Ticker):
     
@@ -47,7 +39,7 @@ def train(Ticker):
     global scaler
     global date_today
 
-    day_step = 150
+    day_step = 60
     data = yf.download(tickers=Ticker, period='1y', interval='1d')
     df = data.filter(['Close'])
     df = df.values
@@ -83,7 +75,7 @@ def train(Ticker):
     model.add(Dense(units=60))
     model.add(Dense(units=1))
     model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(x_train, y_train, batch_size=1, epochs=4)
+    model.fit(x_train, y_train, batch_size=1, epochs=3)
     # save_model
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     model.save(
@@ -169,15 +161,6 @@ def plot_data(next_days, df, day_step, output, save_path1, save_path2):
     plt.savefig(save_path1, format='png')
     plt.close()
 
-"""def Prediction_Comp(request,Ticker,next_days):
-    date_today = dt.datetime.now().strftime("%Y-%m-%d")
-    if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
-         pred(Ticker, next_days)         
-    else:
-         train(Ticker)
-         pred(Ticker, next_days)         
-    plotData=plot_data(next_days)
- 
     # Plot 2
     plt.figure(figsize=(25, 5))  # Adjust the figure size as needed
     plt.plot(test[['Close', 'Prediction']])
@@ -185,21 +168,21 @@ def plot_data(next_days, df, day_step, output, save_path1, save_path2):
     plt.xticks(rotation=45)
     plt.savefig(save_path2, format='png')
     plt.close()
-    context={'plotData': plotData,'pred1':save_path1,'pred2':save_path2}
-    return render(request, 'Companys.html', {'plotData': plotData})
-"""
-def Prediction_Comp(request,Ticker, next_days):
+
+    return save_path1, save_path2
+
+def Prediction_Comp(Ticker, next_days=10):
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     if f"saved_{Ticker}-{date_today}.h5py" in os.listdir("Model/saved_data"):
         # data, train_len, prediction, day_step, _, df, output = pred(Ticker, next_days)
-        return
-        
+        context={'Ticker': Ticker}
+        return context
     else:
         train(Ticker)
         data, train_len, prediction, day_step, _, df, output = pred(Ticker, next_days)
     
-    save_path1 = "apps/Data/plot1.png"
-    save_path2 = "apps/Data/plot2.png"
+    save_path1 = f"apps/Data/plot1-{Ticker}.png"
+    save_path2 = f"apps/Data/plot2-{Ticker}.png"
     plotData1, plotData2 = plot_data(next_days, df, day_step, output, save_path1, save_path2)
 
     context = {
@@ -207,8 +190,9 @@ def Prediction_Comp(request,Ticker, next_days):
         'plotData2': plotData2,
         'imagePath1': save_path1,
         'imagePath2': save_path2,
+        'Ticker': Ticker,
     }
 
-    return render(request,'Companys.html', context)
+    return render('Comp.html', context)
 
-#Prediction_Comp("GOOG",next_days=30)
+#Prediction_Comp("AAPL",next_days=10)
