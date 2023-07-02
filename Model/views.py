@@ -39,7 +39,7 @@ def train(Ticker):
     global scaler
     global date_today
 
-    day_step = 60
+    day_step = 150
     data = yf.download(tickers=Ticker, period='1y', interval='1d')
     df = data.filter(['Close'])
     df = df.values
@@ -75,7 +75,7 @@ def train(Ticker):
     model.add(Dense(units=60))
     model.add(Dense(units=1))
     model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(x_train, y_train, batch_size=1, epochs=3)
+    model.fit(x_train, y_train, batch_size=1, epochs=4)
     # save_model
     date_today = dt.datetime.now().strftime("%Y-%m-%d")
     model.save(
@@ -195,4 +195,4 @@ def Prediction_Comp(Ticker, next_days=10):
 
     return render('Comp.html', context)
 
-#Prediction_Comp("AAPL",next_days=10)
+#Prediction_Comp("GOOG",next_days=30)
